@@ -9,7 +9,7 @@ import API_BASE_URL
 import data.ENDPOINT_AUTHENTICATE
 import data.ENDPOINT_LOGIN
 import data.ENDPOINT_REGISTER
-import data.request.AuthRequest
+import data.request.LoginRequest
 import data.response.TokenResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -33,7 +33,7 @@ class UserRepository(
     suspend fun register(email: String, password: String): Result<Unit, Throwable> {
         return runCatching {
             client.post(API_BASE_URL + ENDPOINT_REGISTER) {
-                setBody(AuthRequest(email, password))
+                setBody(LoginRequest(email, password))
             }
         }
     }
@@ -41,7 +41,7 @@ class UserRepository(
     suspend fun login(email: String, password: String): Result<Unit, Throwable> {
         return runCatching {
             val response = client.post(API_BASE_URL + ENDPOINT_LOGIN) {
-                setBody(AuthRequest(email, password))
+                setBody(LoginRequest(email, password))
             }.body<TokenResponse>()
 
             database.userQueries.insertUser(
