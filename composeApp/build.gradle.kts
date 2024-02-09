@@ -79,6 +79,10 @@ kotlin {
             implementation(libs.voyager.tabNavigator)
             implementation(libs.voyager.transitions)
             implementation(libs.voyager.koin)
+
+            // Logging
+            implementation(libs.kermit)
+            implementation(libs.kermit.crashlytics)
         }
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
