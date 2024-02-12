@@ -15,13 +15,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.homato.oddspot.MR
 import dev.icerock.moko.resources.compose.stringResource
+import ui.screen.login.LoginScreen
+import ui.screen.register.RegisterScreen
 
 class WelcomeScreen : Screen {
 
     @Composable
     override fun Content() {
+        val navigator = LocalNavigator.currentOrThrow
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -35,7 +40,7 @@ class WelcomeScreen : Screen {
             )
 
             Button(
-                onClick = {},
+                onClick = { navigator.push(RegisterScreen()) },
                 modifier = Modifier.padding(top = 24.dp)
             ) {
                 Text(text = stringResource(MR.strings.welcome_signup_button))
@@ -46,7 +51,7 @@ class WelcomeScreen : Screen {
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .padding(top = 24.dp)
-                    .clickable { }
+                    .clickable { navigator.push(LoginScreen()) }
             )
         }
     }

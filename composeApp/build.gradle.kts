@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.serialization)
     alias(libs.plugins.sqldelight)
     alias(libs.plugins.ksp)
+//    id("com.google.devtools.ksp")
     id("dev.icerock.mobile.multiplatform-resources") // For some reason alias() doesn't work here
 }
 
@@ -132,13 +133,13 @@ android {
         implementation(libs.koin.core)
         implementation(libs.koin.android)
         implementation(libs.koin.annotations)
+//        ksp(libs.koin.ksp.compiler) // It generated duplicate modules for some reason
     }
 }
 
 // KSP workaround
 
 dependencies {
-    libs.versions.ksp.toString()
     add("kspCommonMainMetadata", "io.insert-koin:koin-ksp-compiler:1.3.0")
     // Add if there is a need for koin annotations in other that commonMain
 //    add("kspAndroid", "io.insert-koin:koin-ksp-compiler:1.3.0")

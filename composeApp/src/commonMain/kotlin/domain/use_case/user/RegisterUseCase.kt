@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.onStart
 import org.koin.core.annotation.Factory
 
 @Factory
-class CreateAccountUseCase(
+class RegisterUseCase(
     private val userRepository: UserRepository
 ) {
 

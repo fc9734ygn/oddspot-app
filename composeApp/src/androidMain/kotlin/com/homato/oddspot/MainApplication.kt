@@ -3,7 +3,9 @@ package com.homato.oddspot
 import DriverFactory
 import android.app.Application
 import createDatabase
-import di.SharedModule
+import di.DataModule
+import di.DomainModule
+import di.UiModule
 import di.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -20,7 +22,9 @@ class MainApplication : Application() {
             androidLogger()
 
             modules(
-                SharedModule().module,
+                UiModule().module,
+                DomainModule().module,
+                DataModule().module,
                 networkModule,
                 module {
                     single { DriverFactory(androidContext()) }

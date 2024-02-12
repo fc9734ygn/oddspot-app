@@ -1,14 +1,33 @@
 package util
 
+import domain.util.DomainError
+import domain.util.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 
 fun <T> Flow<T>.collectInScope(scope: CoroutineScope, action: suspend (T) -> Unit): Job {
     return scope.launch { collect { action(it) } }
+}
+
+fun <T> Flow<Resource<T>>.collectResource(
+    scope: CoroutineScope,
+    onError: (DomainError) -> Unit = {},
+    onLoading: () -> Unit = {},
+    onSuccess: (T) -> Unit = {},
+) {
+    onEach { resource ->
+        when (resource) {
+            is Resource.Success -> onSuccess(resource.data)
+            is Resource.Error -> onError(resource.error)
+            is Resource.Loading -> onLoading()
+        }
+    }.launchIn(scope)
 }
 
 fun <T> Flow<T>.collectInScopeAtLimitedRate(
