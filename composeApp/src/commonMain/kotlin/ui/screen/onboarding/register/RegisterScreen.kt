@@ -1,4 +1,4 @@
-package ui.screen.register
+package ui.screen.onboarding.register
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable

@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="red">#EF476F</color>
-    <color name="yellow">#FFD166</color>
-    <color name="green">#06D6A0</color>
-    <color name="blue_light">#118AB2</color>
-    <color name="blue_dark">#073B4C</color>
+    <color name="red">#FF3939</color>
     <color name="black">#000000</color>
+    <color name="dark_grey">#141414</color>
+    <color name="grey">#DFD8D8</color>
     <color name="white">#FFFFFF</color>
-    <color name="grey_dark">#323232</color>
-    <color name="grey_light">#505050</color>
 </resources>

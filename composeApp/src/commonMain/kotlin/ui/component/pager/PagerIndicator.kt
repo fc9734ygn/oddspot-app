@@ -2,7 +2,11 @@ package ui.component.pager
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.PagerState
@@ -31,8 +35,8 @@ fun PagerIndicator(
     indicatorSize: Dp = 16.dp,
     indicatorShape: Shape = CircleShape,
     space: Dp = 8.dp,
-    activeColor: ColorResource = MR.colors.green,
-    inactiveColor: ColorResource = MR.colors.grey_light,
+    activeColor: ColorResource = MR.colors.grey,
+    inactiveColor: ColorResource = MR.colors.grey,
     itemCount: Int,
 ) {
 

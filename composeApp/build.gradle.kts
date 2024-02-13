@@ -86,7 +86,6 @@ kotlin {
             implementation(libs.kermit.crashlytics)
         }
         androidMain.dependencies {
-            implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.sqlDelightAndroidDriver)

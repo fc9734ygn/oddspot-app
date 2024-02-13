@@ -1,4 +1,4 @@
-package ui.screen.register
+package ui.screen.onboarding.register
 
 import androidx.compose.runtime.Composable
 import com.homato.oddspot.MR

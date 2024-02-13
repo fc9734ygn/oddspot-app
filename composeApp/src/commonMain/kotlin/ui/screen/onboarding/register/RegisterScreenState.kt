@@ -1,4 +1,4 @@
-package ui.screen.register
+package ui.screen.onboarding.register
 
 import androidx.compose.runtime.Immutable
 import domain.use_case.user.model.EmailError

@@ -1,4 +1,4 @@
-package ui.screen.login
+package ui.screen.onboarding.login
 
 import domain.use_case.user.LoginUseCase
 import kotlinx.coroutines.flow.update

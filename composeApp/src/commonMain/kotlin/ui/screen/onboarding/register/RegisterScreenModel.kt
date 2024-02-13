@@ -1,4 +1,4 @@
-package ui.screen.register
+package ui.screen.onboarding.register
 
 import domain.use_case.user.RegisterUseCase
 import kotlinx.coroutines.flow.update

@@ -1,4 +1,4 @@
-package ui.screen.welcome
+package ui.screen.onboarding.get_started
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,10 +19,10 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.homato.oddspot.MR
 import dev.icerock.moko.resources.compose.stringResource
-import ui.screen.login.LoginScreen
-import ui.screen.register.RegisterScreen
+import ui.screen.onboarding.login.LoginScreen
+import ui.screen.onboarding.register.RegisterScreen
 
-class WelcomeScreen : Screen {
+class GetStartedScreen : Screen {
 
     @Composable
     override fun Content() {

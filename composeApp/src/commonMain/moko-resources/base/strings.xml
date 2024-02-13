@@ -13,17 +13,31 @@
     <string name="create_account_confirm_password_hint">Re-enter password</string>
     <string name="create_account_continue">Continue</string>
     <string name="create_account_error_email">Incorrect email</string>
-    <string name="create_account_error_password_too_short">Password must be at least 8 characters long</string>
-    <string name="create_account_error_password_too_long">Password must be shorter than 100 characters</string>
+    <string name="create_account_error_password_too_short">Password must be at least 8 characters
+        long
+    </string>
+    <string name="create_account_error_password_too_long">Password must be shorter than 100
+        characters
+    </string>
     <string name="create_account_error_password_common">Password is too common</string>
-    <string name="create_account_error_password_no_uppercase">Password must contain at least one uppercase letter</string>
-    <string name="create_account_error_password_no_lowercase">Password must contain at least one lowercase letter</string>
-    <string name="create_account_error_password_no_number">Password must contain at least one number</string>
-    <string name="create_account_error_password_passwords_not_matching">Passwords don\'t match</string>
+    <string name="create_account_error_password_no_uppercase">Password must contain at least one
+        uppercase letter
+    </string>
+    <string name="create_account_error_password_no_lowercase">Password must contain at least one
+        lowercase letter
+    </string>
+    <string name="create_account_error_password_no_number">Password must contain at least one
+        number
+    </string>
+    <string name="create_account_error_password_passwords_not_matching">Passwords don\'t match
+    </string>
 
     <!-- Welcome -->
     <string name="welcome_signup_button">Sign-up</string>
     <string name="welcome_login_button">Already have an account?</string>
+    <string name="welcome_title">Welcome to OddSpot!</string>
+    <string name="welcome_subtitle">Your adventure begins here...</string>
+    <string name="welcome_button">GET STARTED</string>
 
     <!-- Login -->
     <string name="login_topbar">Login to your account</string>
@@ -32,15 +46,76 @@
     <!-- Tutorial-->
     <string name="tutorial_finished_button">Agree</string>
     <string name="tutorial_page_find_title">Welcome to OddSpot!</string>
-    <string name="tutorial_page_find_description">Your adventure begins here. Use the map to identify and navigate to intriguing spots nearby. Once you\'re at the location in real life, simply click on the marker in the app to unlock more details about the spot and earn points! You can also discover new and exciting locations by searching for spots based on their distance from you or by using tags. Prepare yourself to explore and uncover hidden gems around you!</string>
+    <string name="tutorial_page_find_description">Your adventure begins here. Use the map to
+        identify and navigate to intriguing spots nearby. Once you\'re at the location in real life,
+        simply click on the marker in the app to unlock more details about the spot and earn points!
+        You can also discover new and exciting locations by searching for spots based on their
+        distance from you or by using tags. Prepare yourself to explore and uncover hidden gems
+        around you!
+    </string>
     <string name="tutorial_page_submit_title">Ready to share your own discoveries?</string>
-    <string name="tutorial_page_submit_description">Capture a photo of the fascinating location or object, add an engaging title, and provide a concise description to help other users appreciate its uniqueness. You can also include additional details like tags to make your spot more discoverable. Once you\'re finished, hit submit, and after our validation process, your spot will be added to the map for everyone to enjoy!</string>
+    <string name="tutorial_page_submit_description">Capture a photo of the fascinating location or
+        object, add an engaging title, and provide a concise description to help other users
+        appreciate its uniqueness. You can also include additional details like tags to make your
+        spot more discoverable. Once you\'re finished, hit submit, and after our validation process,
+        your spot will be added to the map for everyone to enjoy!
+    </string>
     <string name="tutorial_page_profile_title">Explore Your Profile &amp; Progress</string>
-    <string name="tutorial_page_profile_description">There, you\'ll find your personal info, as well as the spots you\'ve created and visited. Remember to explore the settings section to personalize your app experience and update your account details.</string>
+    <string name="tutorial_page_profile_description">There, you\'ll find your personal info, as well
+        as the spots you\'ve created and visited. Remember to explore the settings section to
+        personalize your app experience and update your account details.
+    </string>
     <string name="tutorial_page_warning_title">Safety first!</string>
-    <string name="tutorial_page_warning_description">When exploring new spots, always be mindful of your surroundings and follow local laws and regulations. Remember that some locations may be on private property or restricted areas, so always respect the boundaries and exercise caution. We encourage you to be responsible adventurers and leave the places you visit as you found them, so others can enjoy them too. Happy exploring!</string>
+    <string name="tutorial_page_warning_description">When exploring new spots, always be mindful of
+        your surroundings and follow local laws and regulations. Remember that some locations may be
+        on private property or restricted areas, so always respect the boundaries and exercise
+        caution. We encourage you to be responsible adventurers and leave the places you visit as
+        you found them, so others can enjoy them too. Happy exploring!
+    </string>
     <string name="tutorial_page_gdpr_title">Your privacy is important to us!</string>
-    <string name="tutorial_page_gdpr_description">In accordance with the General Data Protection Regulation (GDPR), we are committed to protecting your personal information and being transparent about how we collect, use, and store it. Rest assured that your data is used solely to enhance your app experience and is never shared with third parties without your explicit consent. For more information on our privacy practices, please refer to our Privacy Policy and Terms of Service.</string>
+    <string name="tutorial_page_gdpr_description">In accordance with the General Data Protection
+        Regulation (GDPR), we are committed to protecting your personal information and being
+        transparent about how we collect, use, and store it. Rest assured that your data is used
+        solely to enhance your app experience and is never shared with third parties without your
+        explicit consent. For more information on our privacy practices, please refer to our Privacy
+        Policy and Terms of Service.
+    </string>
+
+    <string name="tutorial_button">NEXT</string>
+    <string name="tutorial_explore_title">Ready to share your own discoveries?</string>
+    <string name="tutorial_explore_subtitle">Explore the map</string>
+    <string name="tutorial_explore_description">Identify and navigate to intriguing spots nearby.
+        Once you\'re at the location in real life, simply click on the marker in the app to unlock
+        more details about the spot and earn points! Prepare yourself to explore and uncover hidden
+        gems around you!
+    </string>
+    <string name="tutorial_submit_title">Upload your own spots</string>
+    <string name="tutorial_submit_description">Capture a photo of the fascinating location or
+        object, add an engaging title, and provide a concise description to help other users
+        appreciate its uniqueness.
+    </string>
+    <string name="tutorial_safety_title">Safety first!</string>
+    <string name="tutorial_safety_subtitle">Happy exploring!</string>
+    <string name="tutorial_safety_description">When exploring new spots, always be mindful of your
+        surroundings and follow local laws and regulations. Remember that some locations may be on
+        private property or restricted areas, so always respect the boundaries and exercise caution.
+        We encourage you to be responsible adventurers and leave the places you visit as you found
+        them, so others can enjoy them too.
+    </string>
+    <string name="tutorial_privacy_title">Your privacy is important to us!</string>
+    <string name="tutorial_privacy_description">In accordance with the General Data Protection
+        Regulation (GDPR), we are committed to protecting your personal information and being
+        transparent about how we collect, use, and store it. Rest assured that your data is used
+        solely to enhance your app experience and is never shared with third parties without your
+        explicit consent.
+    </string>
+    <string name="tutorial_privacy_terms_description">For more information on our privacy practices,
+        please refer to our Privacy Policy and Terms of Service.
+    </string>
+    <string name="tutorial_privacy_checkbox">I have read and agree to the Privacy Policy and Terms
+        of Service.
+    </string>
+
 
     <!-- Explore-->
     <string name="explore_bottom_navigation">Explore</string>
@@ -49,15 +124,23 @@
     <string name="profile_bottom_navigation">Profile</string>
     <string name="profile_topbar_title">Profile</string>
     <string name="profile_settings_item_title_submitted_spots">Submitted spots</string>
-    <string name="profile_settings_item_subtitle_submitted_spots">Spots that you\'ve submitted</string>
+    <string name="profile_settings_item_subtitle_submitted_spots">Spots that you\'ve submitted
+    </string>
     <string name="profile_settings_item_title_visited_spots">Visited spots</string>
-    <string name="profile_settings_item_subtitle_visited_spots">Spots that you\'ve visited and unlocked</string>
+    <string name="profile_settings_item_subtitle_visited_spots">Spots that you\'ve visited and
+        unlocked
+    </string>
     <string name="profile_settings_item_title_preferences">Preferences</string>
-    <string name="profile_settings_item_subtitle_preferences">Personalize your app experience</string>
+    <string name="profile_settings_item_subtitle_preferences">Personalize your app experience
+    </string>
     <string name="profile_settings_item_title_submit_feedback">Submit feedback</string>
-    <string name="profile_settings_item_subtitle_submit_feedback">Share your thoughts or report a bug</string>
+    <string name="profile_settings_item_subtitle_submit_feedback">Share your thoughts or report a
+        bug
+    </string>
     <string name="profile_settings_item_title_privacy_and_terms">Privacy Policy</string>
-    <string name="profile_settings_item_subtitle_privacy_and_terms">Learn more about our privacy practices</string>
+    <string name="profile_settings_item_subtitle_privacy_and_terms">Learn more about our privacy
+        practices
+    </string>
     <string name="profile_settings_item_title_about">About</string>
     <string name="profile_settings_item_subtitle_about">Learn more about OddSpot</string>
     <string name="profile_settings_button_logout">Logout</string>
@@ -96,7 +179,9 @@
     <string name="permission_dialog_title">Missing permission</string>
     <string name="permission_dialog_button_allow">Allow</string>
     <string name="permission_dialog_button_ok">Not now</string>
-    <string name="permission_fine_location_rationale">Our app functionality requires us to access your precise location</string>
+    <string name="permission_fine_location_rationale">Our app functionality requires us to access
+        your precise location
+    </string>
 
     <!-- Explore -->
     <string name="explore_toolbar_title">Explore</string>
@@ -114,8 +199,12 @@
     <string name="create_spot_title_hint">Title</string>
     <string name="create_spot_description_hint">Description</string>
     <string name="create_spot_button_submit">SUBMIT FOR APPROVAL</string>
-    <string name="create_spot_title_error_too_long_or_too_short">Title has to be between 3 and 20 characters</string>
-    <string name="create_spot_description_error_too_long_or_too_short">Description has to be between 20 and 50 characters</string>
+    <string name="create_spot_title_error_too_long_or_too_short">Title has to be between 3 and 20
+        characters
+    </string>
+    <string name="create_spot_description_error_too_long_or_too_short">Description has to be between
+        20 and 50 characters
+    </string>
     <string name="create_spot_location_picker_topbar_title">Refine the location</string>
     <string name="create_spot_difficulty_title">Difficulty</string>
     <string-array name="create_spot_difficulties">

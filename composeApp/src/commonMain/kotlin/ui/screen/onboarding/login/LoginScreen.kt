@@ -1,4 +1,4 @@
-package ui.screen.login
+package ui.screen.onboarding.login
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
