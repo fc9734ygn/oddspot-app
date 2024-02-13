@@ -12,3 +12,10 @@ This is a Kotlin Multiplatform project targeting Android, iOS.
 
 
 Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+
+
+Add 
+/composeApp/src/commonMain/kotlin/Secrets.kt
+
+with content :
+const val API_BASE_URL = "your-api-url"
