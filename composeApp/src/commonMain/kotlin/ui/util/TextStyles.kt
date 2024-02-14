@@ -44,6 +44,15 @@ fun button() : TextStyle {
 }
 
 @Composable
+fun input() : TextStyle {
+    return TextStyle(
+        fontFamily = fontFamilyResource(MR.fonts.inter_regular),
+        fontSize = 16.sp,
+        textAlign = TextAlign.Center,
+    )
+}
+
+@Composable
 fun footnote() : TextStyle {
    return TextStyle(
        fontFamily = fontFamilyResource(MR.fonts.inter_regular),

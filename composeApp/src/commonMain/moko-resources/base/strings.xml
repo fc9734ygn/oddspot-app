@@ -33,11 +33,15 @@
     </string>
 
     <!-- Welcome -->
-    <string name="welcome_signup_button">Sign-up</string>
-    <string name="welcome_login_button">Already have an account?</string>
     <string name="welcome_title">Welcome to OddSpot!</string>
     <string name="welcome_subtitle">Your adventure begins here...</string>
     <string name="welcome_button">GET STARTED</string>
+
+    <!-- Get Started -->
+    <string name="get_started_title">Let’s get started!</string>
+    <string name="get_started_signup_button">Sign up via email</string>
+    <string name="get_started_login_prefix">Already have an account?</string>
+    <string name="get_started_login_suffix">Log in.</string>
 
     <!-- Login -->
     <string name="login_topbar">Login to your account</string>
