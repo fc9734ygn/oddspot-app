@@ -10,3 +10,7 @@ updateTutorialSeen:
 UPDATE LocalFlag
 SET tutorialSeen = ?
 WHERE id = 1;
+
+insertDefault:
+INSERT OR IGNORE INTO LocalFlag (id, tutorialSeen)
+VALUES (1, 0);

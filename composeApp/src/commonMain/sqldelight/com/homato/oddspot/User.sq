@@ -1,4 +1,4 @@
-CREATE TABLE user (
+CREATE TABLE User (
     id TEXT PRIMARY KEY,
     name TEXT NOT NULL,
     imageUrl TEXT,
@@ -7,11 +7,11 @@ CREATE TABLE user (
 );
 
 insertUser:
-INSERT OR REPLACE INTO user(id, name, imageUrl, email, jwt)
+INSERT OR REPLACE INTO User(id, name, imageUrl, email, jwt)
 VALUES (?,?, ?, ?, ?);
 
 selectUser:
-SELECT * FROM user;
+SELECT * FROM User;
 
 deleteUser:
-DELETE FROM user;
+DELETE FROM User;

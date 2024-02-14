@@ -13,6 +13,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
+import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -29,18 +30,18 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import com.homato.oddspot.MR
 import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
+import ui.base.BaseScreen
 import ui.component.SimpleTextInput
 import ui.util.InitialFocusRequester
 
-class LoginScreen : Screen {
+class LoginScreen : BaseScreen() {
 
     @Composable
-    override fun Content() {
+    override fun ScreenContent(snackbarHostState: SnackbarHostState) {
         val screenModel = getScreenModel<LoginScreenModel>()
         val state by screenModel.state.collectAsState()
         val focusManager = LocalFocusManager.current

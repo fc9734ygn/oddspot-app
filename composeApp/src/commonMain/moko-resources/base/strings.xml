@@ -44,43 +44,6 @@
     <string name="login_button">Continue</string>
 
     <!-- Tutorial-->
-    <string name="tutorial_finished_button">Agree</string>
-    <string name="tutorial_page_find_title">Welcome to OddSpot!</string>
-    <string name="tutorial_page_find_description">Your adventure begins here. Use the map to
-        identify and navigate to intriguing spots nearby. Once you\'re at the location in real life,
-        simply click on the marker in the app to unlock more details about the spot and earn points!
-        You can also discover new and exciting locations by searching for spots based on their
-        distance from you or by using tags. Prepare yourself to explore and uncover hidden gems
-        around you!
-    </string>
-    <string name="tutorial_page_submit_title">Ready to share your own discoveries?</string>
-    <string name="tutorial_page_submit_description">Capture a photo of the fascinating location or
-        object, add an engaging title, and provide a concise description to help other users
-        appreciate its uniqueness. You can also include additional details like tags to make your
-        spot more discoverable. Once you\'re finished, hit submit, and after our validation process,
-        your spot will be added to the map for everyone to enjoy!
-    </string>
-    <string name="tutorial_page_profile_title">Explore Your Profile &amp; Progress</string>
-    <string name="tutorial_page_profile_description">There, you\'ll find your personal info, as well
-        as the spots you\'ve created and visited. Remember to explore the settings section to
-        personalize your app experience and update your account details.
-    </string>
-    <string name="tutorial_page_warning_title">Safety first!</string>
-    <string name="tutorial_page_warning_description">When exploring new spots, always be mindful of
-        your surroundings and follow local laws and regulations. Remember that some locations may be
-        on private property or restricted areas, so always respect the boundaries and exercise
-        caution. We encourage you to be responsible adventurers and leave the places you visit as
-        you found them, so others can enjoy them too. Happy exploring!
-    </string>
-    <string name="tutorial_page_gdpr_title">Your privacy is important to us!</string>
-    <string name="tutorial_page_gdpr_description">In accordance with the General Data Protection
-        Regulation (GDPR), we are committed to protecting your personal information and being
-        transparent about how we collect, use, and store it. Rest assured that your data is used
-        solely to enhance your app experience and is never shared with third parties without your
-        explicit consent. For more information on our privacy practices, please refer to our Privacy
-        Policy and Terms of Service.
-    </string>
-
     <string name="tutorial_button">NEXT</string>
     <string name="tutorial_explore_title">Ready to share your own discoveries?</string>
     <string name="tutorial_explore_subtitle">Explore the map</string>
@@ -123,6 +86,7 @@
     <string name="privacy_policy_and_terms_title">Privacy Policy and Terms of Service</string>
     <string name="privacy_policy_title">Privacy Policy</string>
     <string name="terms_of_service_title">Terms of Service</string>
+
     <!-- Explore-->
     <string name="explore_bottom_navigation">Explore</string>
 
