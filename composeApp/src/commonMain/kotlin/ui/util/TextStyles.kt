@@ -11,7 +11,7 @@ import dev.icerock.moko.resources.compose.fontFamilyResource
 fun h1() : TextStyle {
    return TextStyle(
        fontFamily = fontFamilyResource(MR.fonts.passionone_regular),
-       fontSize = 50.sp,
+       fontSize = 48.sp,
        textAlign = TextAlign.Center
    )
 }
@@ -29,7 +29,7 @@ fun h3() : TextStyle {
 fun body() : TextStyle {
    return TextStyle(
        fontFamily = fontFamilyResource(MR.fonts.inter_regular),
-       fontSize = 12.sp,
+       fontSize = 14.sp,
        textAlign = TextAlign.Center
    )
 }
@@ -40,5 +40,14 @@ fun button() : TextStyle {
        fontFamily = fontFamilyResource(MR.fonts.inter_semibold),
        fontSize = 24.sp,
        textAlign = TextAlign.Center,
+   )
+}
+
+@Composable
+fun footnote() : TextStyle {
+   return TextStyle(
+       fontFamily = fontFamilyResource(MR.fonts.inter_regular),
+       fontSize = 12.sp,
+       textAlign = TextAlign.Center
    )
 }

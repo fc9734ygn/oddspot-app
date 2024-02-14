@@ -109,14 +109,20 @@
         solely to enhance your app experience and is never shared with third parties without your
         explicit consent.
     </string>
-    <string name="tutorial_privacy_terms_description">For more information on our privacy practices,
-        please refer to our Privacy Policy and Terms of Service.
+    <string name="tutorial_privacy_terms_description_prefix">For more information on our privacy
+        practices,
+        please refer to our
     </string>
-    <string name="tutorial_privacy_checkbox">I have read and agree to the Privacy Policy and Terms
-        of Service.
-    </string>
+    <string name="tutorial_privacy_checkbox_prefix">I have read and agree to the</string>
+    <string name="tutorial_privacy_policy">Privacy Policy</string>
+    <string name="tutorial_privacy_and">and</string>
+    <string name="tutorial_privacy_terms">Terms of Service</string>
+    <string name="tutorial_privacy_suffix">.</string>
 
-
+    <!--Privacy Policy and Terms of Service-->
+    <string name="privacy_policy_and_terms_title">Privacy Policy and Terms of Service</string>
+    <string name="privacy_policy_title">Privacy Policy</string>
+    <string name="terms_of_service_title">Terms of Service</string>
     <!-- Explore-->
     <string name="explore_bottom_navigation">Explore</string>
 

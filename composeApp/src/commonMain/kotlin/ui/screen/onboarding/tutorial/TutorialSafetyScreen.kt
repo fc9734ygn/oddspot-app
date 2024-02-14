@@ -36,39 +36,18 @@ class TutorialSafetyScreen : Screen {
 
         Box(
             modifier = Modifier
-                .background(color = colorResource(MR.colors.dark_grey))
+                .background(color = colorResource(MR.colors.background))
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(32.dp),
+                .verticalScroll(rememberScrollState()),
         ) {
             Box(
                 modifier = Modifier
+                    .padding(top = 64.dp)
                     .height(300.dp)
                     .width(200.dp)
                     .align(Alignment.TopCenter)
-                    .padding(top = 32.dp)
                     .background(color = colorResource(MR.colors.red))
             )
-            Column(
-                modifier = Modifier
-                    .align(Alignment.Center),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    modifier = Modifier.padding(horizontal = 48.dp),
-                    text = stringResource(MR.strings.tutorial_safety_title),
-                    color = colorResource(MR.colors.white),
-                    style = h1()
-                )
-                Spacer(modifier = Modifier.height(32.dp))
-                Text(
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                    text = stringResource(MR.strings.tutorial_safety_description),
-                    color = colorResource(MR.colors.white),
-                    style = body()
-                )
-            }
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomCenter),
@@ -76,7 +55,21 @@ class TutorialSafetyScreen : Screen {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    modifier = Modifier.padding(horizontal = 16.dp),
+                    modifier = Modifier.padding(horizontal = 128.dp),
+                    text = stringResource(MR.strings.tutorial_safety_title),
+                    color = colorResource(MR.colors.white),
+                    style = h1()
+                )
+                Spacer(modifier = Modifier.height(32.dp))
+                Text(
+                    modifier = Modifier.padding(horizontal = 48.dp),
+                    text = stringResource(MR.strings.tutorial_safety_description),
+                    color = colorResource(MR.colors.white),
+                    style = body()
+                )
+                Spacer(modifier = Modifier.height(24.dp))
+                Text(
+                    modifier = Modifier.padding(horizontal = 80.dp),
                     text = stringResource(MR.strings.tutorial_safety_subtitle),
                     color = colorResource(MR.colors.white),
                     style = h3()
@@ -84,11 +77,11 @@ class TutorialSafetyScreen : Screen {
                 Spacer(modifier = Modifier.height(40.dp))
                 PrimaryButton(
                     modifier = Modifier
-                        .padding(horizontal = 32.dp)
-                        .padding(bottom = 24.dp)
+                        .padding(horizontal = 48.dp)
+                        .padding(bottom = 48.dp)
                         .fillMaxWidth(),
                     text = stringResource(MR.strings.tutorial_button),
-                    onClick = { navigator.push(TutorialExploreScreen()) }
+                    onClick = { navigator.push(TutorialPrivacyScreen()) }
                 )
             }
         }

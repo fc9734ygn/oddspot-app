@@ -35,8 +35,8 @@ fun PagerIndicator(
     indicatorSize: Dp = 16.dp,
     indicatorShape: Shape = CircleShape,
     space: Dp = 8.dp,
-    activeColor: ColorResource = MR.colors.grey,
-    inactiveColor: ColorResource = MR.colors.grey,
+    activeColor: ColorResource = MR.colors.light_grey,
+    inactiveColor: ColorResource = MR.colors.light_grey,
     itemCount: Int,
 ) {
 

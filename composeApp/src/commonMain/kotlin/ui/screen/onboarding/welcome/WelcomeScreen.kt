@@ -35,10 +35,9 @@ class WelcomeScreen : Screen {
 
         Box(
             modifier = Modifier
-                .background(color = colorResource(MR.colors.dark_grey))
+                .background(color = colorResource(MR.colors.background))
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(32.dp),
+                .verticalScroll(rememberScrollState()),
         ) {
             Column(
                 modifier = Modifier.align(Alignment.Center),
@@ -46,12 +45,14 @@ class WelcomeScreen : Screen {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
+                    modifier = Modifier.padding(horizontal = 64.dp),
                     text = stringResource(MR.strings.welcome_title),
                     color = colorResource(MR.colors.white),
                     style = h1()
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 Text(
+                    modifier = Modifier.padding(horizontal = 48.dp),
                     text = stringResource(MR.strings.welcome_subtitle),
                     color = colorResource(MR.colors.white),
                     style = h3()
@@ -59,8 +60,8 @@ class WelcomeScreen : Screen {
             }
             PrimaryButton(
                 modifier = Modifier
-                    .padding(horizontal = 32.dp)
-                    .padding(bottom = 24.dp)
+                    .padding(horizontal = 48.dp)
+                    .padding(bottom = 48.dp)
                     .align(Alignment.BottomCenter)
                     .fillMaxWidth(),
                 text = stringResource(MR.strings.welcome_button),

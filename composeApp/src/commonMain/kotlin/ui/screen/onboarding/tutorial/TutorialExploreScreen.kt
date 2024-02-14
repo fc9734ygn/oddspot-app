@@ -36,20 +36,19 @@ class TutorialExploreScreen : Screen {
 
         Box(
             modifier = Modifier
-                .background(color = colorResource(MR.colors.dark_grey))
+                .background(color = colorResource(MR.colors.background))
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(32.dp),
+                .verticalScroll(rememberScrollState()),
         ) {
             Column(
                 modifier = Modifier
                     .align(Alignment.TopCenter)
-                    .padding(top = 32.dp),
+                    .padding(top = 64.dp),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    modifier = Modifier.padding(horizontal = 16.dp),
+                    modifier = Modifier.padding(horizontal = 24.dp),
                     text = stringResource(MR.strings.tutorial_explore_title),
                     color = colorResource(MR.colors.white),
                     style = h1()
@@ -66,12 +65,14 @@ class TutorialExploreScreen : Screen {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
+                    modifier = Modifier.padding(horizontal = 32.dp),
                     text = stringResource(MR.strings.tutorial_explore_subtitle),
                     color = colorResource(MR.colors.white),
                     style = h3()
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
+                    modifier = Modifier.padding(horizontal = 32.dp),
                     text = stringResource(MR.strings.tutorial_explore_description),
                     color = colorResource(MR.colors.white),
                     style = body()
@@ -79,8 +80,8 @@ class TutorialExploreScreen : Screen {
                 Spacer(modifier = Modifier.height(32.dp))
                 PrimaryButton(
                     modifier = Modifier
-                        .padding(horizontal = 32.dp)
-                        .padding(bottom = 24.dp)
+                        .padding(horizontal = 48.dp)
+                        .padding(bottom = 48.dp)
                         .fillMaxWidth(),
                     text = stringResource(MR.strings.tutorial_button),
                     onClick = { navigator.push(TutorialSubmitScreen()) }

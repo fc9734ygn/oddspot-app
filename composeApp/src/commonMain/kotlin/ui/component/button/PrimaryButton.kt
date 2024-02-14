@@ -17,7 +17,8 @@ import ui.util.button
 fun PrimaryButton(
     modifier: Modifier = Modifier,
     text: String,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    enabled: Boolean = true
 ) {
     Button(
         modifier = modifier.height(56.dp),
@@ -27,6 +28,7 @@ fun PrimaryButton(
         ),
         shape = RoundedCornerShape(32.dp),
         onClick = onClick,
+        enabled = enabled
     ) {
         Text(
             text = text,
