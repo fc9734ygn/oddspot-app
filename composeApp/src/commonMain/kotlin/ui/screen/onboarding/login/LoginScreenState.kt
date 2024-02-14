@@ -8,10 +8,11 @@ data class LoginScreenState(
     val email: String = "",
     val password: String = "",
     val isLoading: Boolean = false,
-    val event: Event<LoginEventType>? = null
+    val event: Event<LoginEventType>? = null,
+    val passwordPreview: Boolean = false
 )
 
 sealed class LoginEventType {
-    object Success : LoginEventType()
+    data object Success : LoginEventType()
     class Error(val message: String?) : LoginEventType()
 }

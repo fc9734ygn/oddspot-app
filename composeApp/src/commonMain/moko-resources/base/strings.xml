@@ -6,32 +6,6 @@
     <string name="lorem_impsum">Lorem Ipsum</string>
     <string name="error_generic">Oops! Something went wrong.</string>
 
-    <!-- Create Account -->
-    <string name="create_account_topbar">Create account</string>
-    <string name="create_account_email_hint">Enter email</string>
-    <string name="create_account_password_hint">Enter password</string>
-    <string name="create_account_confirm_password_hint">Re-enter password</string>
-    <string name="create_account_continue">Continue</string>
-    <string name="create_account_error_email">Incorrect email</string>
-    <string name="create_account_error_password_too_short">Password must be at least 8 characters
-        long
-    </string>
-    <string name="create_account_error_password_too_long">Password must be shorter than 100
-        characters
-    </string>
-    <string name="create_account_error_password_common">Password is too common</string>
-    <string name="create_account_error_password_no_uppercase">Password must contain at least one
-        uppercase letter
-    </string>
-    <string name="create_account_error_password_no_lowercase">Password must contain at least one
-        lowercase letter
-    </string>
-    <string name="create_account_error_password_no_number">Password must contain at least one
-        number
-    </string>
-    <string name="create_account_error_password_passwords_not_matching">Passwords don\'t match
-    </string>
-
     <!-- Welcome -->
     <string name="welcome_title">Welcome to OddSpot!</string>
     <string name="welcome_subtitle">Your adventure begins here...</string>
@@ -45,7 +19,36 @@
 
     <!-- Login -->
     <string name="login_topbar">Login to your account</string>
-    <string name="login_button">Continue</string>
+    <string name="login_button">CONTINUE</string>
+    <string name="login_title">Log in</string>
+
+    <!-- Register -->
+    <string name="register_title">Sign up</string>
+    <string name="register_button">CONTINUE</string>
+    <string name="register_email_label">Email</string>
+    <string name="register_password_label">Password</string>
+    <string name="register_confirm_password_label">Re-enter password</string>
+
+
+    <string name="register_error_email">Incorrect email</string>
+    <string name="register_error_password_too_short">Password must be at least 8 characters
+        long
+    </string>
+    <string name="register_error_password_too_long">Password must be shorter than 100
+        characters
+    </string>
+    <string name="register_error_password_common">Password is too common</string>
+    <string name="register_error_password_no_uppercase">Password must contain at least one
+        uppercase letter
+    </string>
+    <string name="register_error_password_no_lowercase">Password must contain at least one
+        lowercase letter
+    </string>
+    <string name="register_error_password_no_number">Password must contain at least one
+        number
+    </string>
+    <string name="register_error_password_passwords_not_matching">Passwords don\'t match
+    </string>
 
     <!-- Tutorial-->
     <string name="tutorial_button">NEXT</string>

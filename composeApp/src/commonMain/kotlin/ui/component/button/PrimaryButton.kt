@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,7 +19,8 @@ fun PrimaryButton(
     modifier: Modifier = Modifier,
     text: String,
     onClick: () -> Unit,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    isLoading: Boolean = false
 ) {
     Button(
         modifier = modifier.height(56.dp),
@@ -32,10 +34,16 @@ fun PrimaryButton(
         onClick = onClick,
         enabled = enabled
     ) {
+        if (isLoading){
+            CircularProgressIndicator(
+                color = colorResource(MR.colors.black)
+            )
+            return@Button
+        }
         Text(
             text = text,
             modifier = Modifier.padding(vertical = 4.dp),
-            style = button()
+            style = button(),
         )
     }
 }

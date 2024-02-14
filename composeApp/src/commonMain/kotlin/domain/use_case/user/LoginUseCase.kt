@@ -2,6 +2,7 @@ package domain.use_case.user
 
 import com.github.michaelbull.result.mapError
 import data.repository.UserRepository
+import domain.util.DomainError
 import domain.util.Resource
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
@@ -13,7 +14,7 @@ class LoginUseCase(
 ) {
     operator fun invoke(email: String, password: String) = flow {
         userRepository.login(email, password).mapError {
-            emit(Resource.Error())
+            emit(Resource.Error(DomainError.Network(throwable = it)))
             return@flow
         }
 

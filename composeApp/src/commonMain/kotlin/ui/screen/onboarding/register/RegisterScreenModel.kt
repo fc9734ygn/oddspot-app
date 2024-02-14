@@ -78,4 +78,8 @@ class RegisterScreenModel(
     fun onConfirmPasswordChange(input: String) {
         mutableState.update { it.copy(confirmPassword = input) }
     }
+
+    fun onPasswordPreviewClick() {
+        mutableState.update { it.copy(passwordPreview = !mutableState.value.passwordPreview) }
+    }
 }

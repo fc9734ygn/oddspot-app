@@ -1,15 +1,16 @@
 package data.repository
 
+import API_BASE_URL
 import app.cash.sqldelight.coroutines.asFlow
 import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.runCatching
 import com.homato.oddspot.Database
 import com.homato.oddspot.User
-import API_BASE_URL
 import data.ENDPOINT_AUTHENTICATE
 import data.ENDPOINT_LOGIN
 import data.ENDPOINT_REGISTER
 import data.request.LoginRequest
+import data.request.RegisterRequest
 import data.response.TokenResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -33,7 +34,7 @@ class UserRepository(
     suspend fun register(email: String, password: String): Result<Unit, Throwable> {
         return runCatching {
             client.post(API_BASE_URL + ENDPOINT_REGISTER) {
-                setBody(LoginRequest(email, password))
+                setBody(RegisterRequest(email, password))
             }
         }
     }
@@ -72,6 +73,15 @@ class UserRepository(
             .selectUser()
             .asFlow()
             .map { it.executeAsOneOrNull() }
+    }
+
+    suspend fun getUser(): Result<User?, Throwable> = withContext(Dispatchers.IO) {
+        runCatching {
+            database
+                .userQueries
+                .selectUser()
+                .executeAsOneOrNull()
+        }
     }
 
 }

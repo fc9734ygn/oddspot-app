@@ -10,27 +10,27 @@ import domain.use_case.user.model.PasswordError
 fun getPasswordErrorMessage(error: PasswordError?) : String {
     return when (error) {
         PasswordError.TOO_SHORT -> {
-            stringResource(MR.strings.create_account_error_password_too_short)
+            stringResource(MR.strings.register_error_password_too_short)
         }
 
         PasswordError.TOO_LONG -> {
-            stringResource(MR.strings.create_account_error_password_too_long)
+            stringResource(MR.strings.register_error_password_too_long)
         }
 
         PasswordError.COMMON -> {
-            stringResource(MR.strings.create_account_error_password_common)
+            stringResource(MR.strings.register_error_password_common)
         }
 
         PasswordError.NO_UPPERCASE -> {
-            stringResource(MR.strings.create_account_error_password_no_uppercase)
+            stringResource(MR.strings.register_error_password_no_uppercase)
         }
 
         PasswordError.NO_LOWERCASE -> {
-            stringResource(MR.strings.create_account_error_password_no_lowercase)
+            stringResource(MR.strings.register_error_password_no_lowercase)
         }
 
         PasswordError.NO_NUMBER -> {
-            stringResource(MR.strings.create_account_error_password_no_number)
+            stringResource(MR.strings.register_error_password_no_number)
         }
 
         else -> ""

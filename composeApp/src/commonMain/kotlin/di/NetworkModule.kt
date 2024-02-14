@@ -1,8 +1,6 @@
 package di
 
-import co.touchlab.kermit.ExperimentalKermitApi
 import co.touchlab.kermit.Logger
-import co.touchlab.kermit.crashlytics.CrashlyticsLogWriter
 import data.getUserAgent
 import domain.holder.UserHolder
 import io.ktor.client.HttpClient
@@ -15,24 +13,24 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.header
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 
 const val NETWORK_REQUEST_TIMEOUT = 15000L
 const val NETWORK_REQUEST_RETRY_ATTEMPTS = 5
 
-@OptIn(ExperimentalKermitApi::class)
 val networkModule = module {
     single {
         HttpClient {
             expectSuccess = true
             install(ContentNegotiation) {
-//                json(
+                json(
                     Json {
                         ignoreUnknownKeys = true
                         prettyPrint = true
                     }
-//                )
+                )
             }
             install(Logging) {
                 logger = object : io.ktor.client.plugins.logging.Logger {

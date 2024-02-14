@@ -46,4 +46,8 @@ class LoginScreenModel (
             }
         )
     }
+
+    fun onPasswordPreviewClick() {
+        mutableState.update { it.copy(passwordPreview = !mutableState.value.passwordPreview) }
+    }
 }

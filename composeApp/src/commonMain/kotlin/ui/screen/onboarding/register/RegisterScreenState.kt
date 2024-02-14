@@ -15,6 +15,7 @@ data class RegisterScreenState(
     val passwordError: PasswordError?,
     val isLoading: Boolean,
     val event: Event<RegisterEventType>?,
+    val passwordPreview: Boolean,
 ) {
     companion object {
         val Initial = RegisterScreenState(
@@ -25,6 +26,7 @@ data class RegisterScreenState(
             passwordError = null,
             isLoading = false,
             event = null,
+            passwordPreview = false
         )
     }
 }
