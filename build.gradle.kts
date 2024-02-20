@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.serialization) apply false
     alias(libs.plugins.detekt)
+    kotlin("native.cocoapods") version "1.9.21" apply false
 }
 
 allprojects {

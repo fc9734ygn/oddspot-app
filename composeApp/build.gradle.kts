@@ -44,34 +44,12 @@ kotlin {
         summary = "Some description for a Kotlin/Native module"
         homepage = "Link to a Kotlin/Native module homepage"
 
-        ios.deploymentTarget = "14.0"
+        ios.deploymentTarget = "15.4"
 
         pod("GoogleMaps") {
-            version = "8.2.0"
+            version = libs.versions.pods.google.maps.get()
+            extraOpts += listOf("-compiler-option", "-fmodules")
         }
-//
-//        // Optional properties
-//        // Configure the Pod name here instead of changing the Gradle project name
-//        name = "MyCocoaPod"
-//
-//        framework {
-//            // Required properties
-//            // Framework name configuration. Use this property instead of deprecated 'frameworkName'
-//            baseName = "MyFramework"
-//
-//            // Optional properties
-//            // Specify the framework linking type. It's dynamic by default.
-//            isStatic = false
-//            // Dependency export
-//            export(project(":anotherKMMModule"))
-//            transitiveExport = false // This is default.
-//            // Bitcode embedding
-//            embedBitcode(BITCODE)
-//        }
-//
-//        // Maps custom Xcode configuration to NativeBuildType
-//        xcodeConfigurationToNativeBuildType["CUSTOM_DEBUG"] = NativeBuildType.DEBUG
-//        xcodeConfigurationToNativeBuildType["CUSTOM_RELEASE"] = NativeBuildType.RELEASE
     }
 
     sourceSets {
@@ -124,10 +102,6 @@ kotlin {
             implementation(libs.kermit)
             implementation(libs.kermit.crashlytics)
 
-            // Google Maps
-            implementation("com.google.maps.android:maps-compose:2.11.4")
-            implementation("com.google.android.gms:play-services-maps:18.2.0")
-            implementation("com.google.android.gms:play-services-location:21.0.1")
         }
         androidMain.dependencies {
             // UI
@@ -151,7 +125,6 @@ kotlin {
             implementation(libs.ktor.client.darwin)
             implementation(libs.sqlDelightiOSDriver)
             implementation(libs.google.play.services.maps)
-            implementation(libs.google.maps.ios)
             implementation("co.touchlab:stately-common:2.0.5") // https://github.com/cashapp/sqldelight/issues/4357
         }
     }

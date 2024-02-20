@@ -3,11 +3,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.interop.UIKitView
+import cocoapods.GoogleMaps.GMSCameraPosition
+import cocoapods.GoogleMaps.GMSCameraUpdate
+import cocoapods.GoogleMaps.GMSCameraUpdate.Companion.fitBounds
+import cocoapods.GoogleMaps.GMSCoordinateBounds
+import cocoapods.GoogleMaps.GMSMapView
+import cocoapods.GoogleMaps.GMSMarker
+import cocoapods.GoogleMaps.animateWithCameraUpdate
 import kotlinx.cinterop.ExperimentalForeignApi
+import platform.CoreLocation.CLLocationCoordinate2DMake
 import ui.screen.explore.ExploreMarker
 import ui.util.CameraLocationBounds
 import ui.util.CameraPosition
-import ui.util.LatLong
 
 @OptIn(ExperimentalForeignApi::class)
 @Composable
@@ -31,14 +38,14 @@ actual fun GoogleMaps(
             cameraPosition?.let {
                 view.setCamera(
                     GMSCameraPosition.cameraWithLatitude(
-                        it.latLong.latitude,
-                        it.latLong.longitude,
+                        it.target.latitude,
+                        it.target.longitude,
                         it.zoom
                     )
                 )
             }
 
-            cameraPositionLatLongBounds?.let {
+            cameraLocationBounds?.let {
 
                 val bounds = GMSCoordinateBounds()
                 it.coordinates.forEach {
@@ -58,27 +65,10 @@ actual fun GoogleMaps(
             markers?.forEach { marker ->
                 GMSMarker().apply {
                     position = CLLocationCoordinate2DMake(
-                        marker.position.latitude,
-                        marker.position.longitude
+                        marker.coordinates.first,
+                        marker.coordinates.second
                     )
-                    title = marker.title
                     map = view
-                }
-            }
-
-            polyLine?.let { polyLine ->
-                val points = polyLine.map {
-                    CLLocationCoordinate2DMake(it.latitude, it.longitude)
-                }
-                val path = GMSMutablePath().apply {
-                    points.forEach { point ->
-                        addCoordinate(point)
-                    }
-                }
-
-                GMSPolyline().apply {
-                    this.path = path
-                    this.map = view
                 }
             }
         }

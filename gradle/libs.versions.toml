@@ -114,8 +114,6 @@ google-play-services-android-location = { module = "com.google.android.gms:play-
 google-play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "google-maps" }
 google-maps-android-compose = { module = "com.google.maps.android:maps-compose", version.ref = "android-maps-compose" }
 google-maps-android-compose-utils = { module = "com.google.maps.android:maps-compose-utils", version.ref = "android-maps-compose" }
-google-maps-ios = { module = "com.google.maps:google-maps-ios", version.ref = "maps-ios" }
-
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
