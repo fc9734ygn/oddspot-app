@@ -13,6 +13,7 @@ androidx-test-junit = "1.1.5"
 compose = "1.6.1"
 compose-compiler = "1.5.8"
 compose-plugin = "1.5.11"
+googleMapsIos = "5.3.0"
 junit = "4.13.2"
 kotlin = "1.9.21"
 koin = "3.5.3"
@@ -30,6 +31,13 @@ kotlinx-datetime = "0.5.0"
 detekt = "1.23.4"
 voyager = "1.0.0"
 kermit = "2.0.3"
+android-maps-compose = "3.1.0"
+android-location = "21.1.0"
+google-maps = "18.2.0"
+maps-ios = "5.3.0"
+pods-google-maps = "8.3.1"
+pods-google-mapsUtils = "4.2.2"
+
 
 [libraries]
 
@@ -100,6 +108,14 @@ voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voy
 # Logging
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 kermit-crashlytics = { module = "co.touchlab:kermit-crashlytics", version.ref = "kermit" }
+
+# Google Maps
+google-play-services-android-location = { module = "com.google.android.gms:play-services-location", version.ref = "android-location" }
+google-play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "google-maps" }
+google-maps-android-compose = { module = "com.google.maps.android:maps-compose", version.ref = "android-maps-compose" }
+google-maps-android-compose-utils = { module = "com.google.maps.android:maps-compose-utils", version.ref = "android-maps-compose" }
+google-maps-ios = { module = "com.google.maps:google-maps-ios", version.ref = "maps-ios" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

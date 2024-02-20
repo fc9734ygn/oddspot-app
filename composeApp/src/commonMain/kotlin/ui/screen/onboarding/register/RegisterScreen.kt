@@ -44,7 +44,7 @@ import ui.base.BaseScreen
 import ui.component.SimpleTextInput
 import ui.component.button.PrimaryButton
 import ui.component.snackbar.GenericErrorSnackbar
-import ui.screen.explore.MapScreen
+import ui.screen.explore.ExploreScreen
 import ui.util.Consume
 import ui.util.InitialFocusRequester
 import ui.util.footnote
@@ -62,7 +62,7 @@ class RegisterScreen : BaseScreen() {
         state.event?.Consume {
             when (it) {
                 is RegisterEventType.AccountCreatedEvent -> {
-                    navigator.replaceAll(MapScreen())
+                    navigator.replaceAll(ExploreScreen())
                 }
                 is RegisterEventType.RegistrationError -> GenericErrorSnackbar(snackbarHostState)
             }

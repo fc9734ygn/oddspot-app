@@ -41,7 +41,7 @@ import ui.base.BaseScreen
 import ui.component.SimpleTextInput
 import ui.component.button.PrimaryButton
 import ui.component.snackbar.GenericErrorSnackbar
-import ui.screen.explore.MapScreen
+import ui.screen.explore.ExploreScreen
 import ui.util.Consume
 import ui.util.InitialFocusRequester
 import ui.util.h1
@@ -58,7 +58,7 @@ class LoginScreen : BaseScreen() {
         state.event?.Consume {
             when (it) {
                 is LoginEventType.Success -> {
-                    navigator.replaceAll(MapScreen())
+                    navigator.replaceAll(ExploreScreen())
                 }
 
                 is LoginEventType.Error -> GenericErrorSnackbar(snackbarHostState)

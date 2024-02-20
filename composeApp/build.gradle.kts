@@ -8,7 +8,7 @@ plugins {
     alias(libs.plugins.serialization)
     alias(libs.plugins.sqldelight)
     alias(libs.plugins.ksp)
-//    id("com.google.devtools.ksp")
+    kotlin("native.cocoapods")
     id("dev.icerock.mobile.multiplatform-resources") // For some reason alias() doesn't work here
 }
 
@@ -35,6 +35,43 @@ kotlin {
             export(libs.moko.resources)
             export(libs.moko.graphics)
         }
+    }
+
+    cocoapods {
+        // Required properties
+        // Specify the required Pod version here. Otherwise, the Gradle project version is used.
+        version = "1.0"
+        summary = "Some description for a Kotlin/Native module"
+        homepage = "Link to a Kotlin/Native module homepage"
+
+        ios.deploymentTarget = "14.0"
+
+        pod("GoogleMaps") {
+            version = "8.2.0"
+        }
+//
+//        // Optional properties
+//        // Configure the Pod name here instead of changing the Gradle project name
+//        name = "MyCocoaPod"
+//
+//        framework {
+//            // Required properties
+//            // Framework name configuration. Use this property instead of deprecated 'frameworkName'
+//            baseName = "MyFramework"
+//
+//            // Optional properties
+//            // Specify the framework linking type. It's dynamic by default.
+//            isStatic = false
+//            // Dependency export
+//            export(project(":anotherKMMModule"))
+//            transitiveExport = false // This is default.
+//            // Bitcode embedding
+//            embedBitcode(BITCODE)
+//        }
+//
+//        // Maps custom Xcode configuration to NativeBuildType
+//        xcodeConfigurationToNativeBuildType["CUSTOM_DEBUG"] = NativeBuildType.DEBUG
+//        xcodeConfigurationToNativeBuildType["CUSTOM_RELEASE"] = NativeBuildType.RELEASE
     }
 
     sourceSets {
@@ -86,15 +123,35 @@ kotlin {
             // Logging
             implementation(libs.kermit)
             implementation(libs.kermit.crashlytics)
+
+            // Google Maps
+            implementation("com.google.maps.android:maps-compose:2.11.4")
+            implementation("com.google.android.gms:play-services-maps:18.2.0")
+            implementation("com.google.android.gms:play-services-location:21.0.1")
         }
         androidMain.dependencies {
+            // UI
             implementation(libs.androidx.activity.compose)
+            implementation(libs.compose.ui.tooling.preview)
+            implementation(libs.compose.ui.tooling)
+
+            // Data
             implementation(libs.ktor.client.okhttp)
             implementation(libs.sqlDelightAndroidDriver)
+
+            // Google Maps
+            implementation(libs.google.play.services.android.location)
+            api(libs.google.play.services.maps)  // api means its exposed to the pure-android app (for init)
+            // Google maps for Compose for Android
+            implementation(libs.google.maps.android.compose)
+            // Clustering
+            implementation(libs.google.maps.android.compose.utils)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
             implementation(libs.sqlDelightiOSDriver)
+            implementation(libs.google.play.services.maps)
+            implementation(libs.google.maps.ios)
             implementation("co.touchlab:stately-common:2.0.5") // https://github.com/cashapp/sqldelight/issues/4357
         }
     }

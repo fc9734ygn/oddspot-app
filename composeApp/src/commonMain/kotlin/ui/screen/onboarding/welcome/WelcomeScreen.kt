@@ -27,7 +27,7 @@ import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
 import ui.base.BaseScreen
 import ui.component.button.PrimaryButton
-import ui.screen.explore.MapScreen
+import ui.screen.explore.ExploreScreen
 import ui.screen.onboarding.get_started.GetStartedScreen
 import ui.screen.onboarding.tutorial.TutorialExploreScreen
 import ui.util.Consume
@@ -48,7 +48,7 @@ class WelcomeScreen : BaseScreen() {
                     navigator.push(GetStartedScreen())
                 }
                 WelcomeScreenEvent.NavigateToMap -> {
-                    navigator.replaceAll(MapScreen())
+                    navigator.replaceAll(ExploreScreen())
                 }
             }
         }
