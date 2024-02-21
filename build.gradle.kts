@@ -27,5 +27,7 @@ allprojects {
 buildscript {
     dependencies {
         classpath(libs.moko.resources.generator)
+//        classpath(libs.plugins.secrets.gradle)
+        classpath(libs.secrets.gradle.plugin)
     }
 }

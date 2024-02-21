@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.sqldelight)
     alias(libs.plugins.ksp)
     kotlin("native.cocoapods")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("dev.icerock.mobile.multiplatform-resources") // For some reason alias() doesn't work here
 }
 
@@ -204,4 +205,13 @@ sqldelight {
 // MOKO config
 multiplatformResources {
     resourcesPackage.set("com.homato.oddspot")
+}
+
+secrets {
+    // The plugin defaults to "local.properties"
+    propertiesFileName = "secrets.properties"
+
+    // A properties file containing default secret values. This file can be
+    // checked in version control.
+    defaultPropertiesFileName = "local.properties"
 }
