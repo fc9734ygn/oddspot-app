@@ -23,6 +23,8 @@ actual fun GoogleMaps(
     markers: List<ExploreMarker>?,
     cameraPosition: CameraPosition?,
     cameraLocationBounds: CameraLocationBounds?,
+    userCurrentLocation: Pair<Double, Double>?,
+    onPermissionsGranted: () -> Unit
 ) {
     val mapsView = remember {
         GMSMapView()

@@ -1,3 +1,4 @@
+import android.content.Context
 import android.os.Build
 
 class AndroidPlatform : Platform {
@@ -5,3 +6,5 @@ class AndroidPlatform : Platform {
 }
 
 actual fun getPlatform(): Platform = AndroidPlatform()
+
+lateinit var appContext: Context

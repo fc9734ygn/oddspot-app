@@ -16,6 +16,7 @@ fun initKoin() {
             module {
                 single { DriverFactory() }
                 single { createDatabase(get()) }
+                single { LocationProvider() }
             }
         )
     }

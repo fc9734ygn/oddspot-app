@@ -121,6 +121,10 @@ kotlin {
             implementation(libs.google.maps.android.compose)
             // Clustering
             implementation(libs.google.maps.android.compose.utils)
+            //Voyager
+            implementation(libs.voyager.navigator)
+            implementation(libs.voyager.koin)
+            implementation(libs.voyager.screenModel)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

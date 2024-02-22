@@ -1,6 +1,6 @@
 package domain.use_case.user
 
-import data.repository.LocationProvider
+import LocationProvider
 import domain.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -11,12 +11,12 @@ class GetUserLocationUseCase(
     private val locationProvider: LocationProvider
 ){
     operator fun invoke() : Flow<Resource<Pair<Double, Double>>> = flow{
-        emit(Resource.Loading())
-        val coordinates = locationProvider.getCurrentLocation()
-        if (coordinates == null){
-            emit(Resource.Error())
-            return@flow
-        }
-        emit(Resource.Success(coordinates))
+//        emit(Resource.Loading())
+//        val coordinates = locationProvider.getCurrentLocation()
+//        if (coordinates == null){
+//            emit(Resource.Error())
+//            return@flow
+//        }
+//        emit(Resource.Success(coordinates))
     }
 }

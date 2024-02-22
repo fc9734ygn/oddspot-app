@@ -1,6 +1,7 @@
 package domain.use_case.spot
 
-import data.repository.LocationProvider
+import LocationProvider
+import com.github.michaelbull.result.getOrElse
 import data.repository.SpotRepository
 import domain.use_case.spot.model.ExploreModel
 import domain.util.Resource
@@ -19,16 +20,27 @@ class GetExploreUseCase(
     operator fun invoke(): Flow<Resource<ExploreModel>> = flow {
         emit(Resource.Loading())
 
-        val currentUserLocation = locationProvider.getCurrentLocation()
-        if (currentUserLocation == null) {
-            emit(Resource.Error())
+        val currentUserLocation = locationProvider.getUserLocation().getOrElse {
             return@flow
         }
 
-        val spots = spotRepository.getUnknownSpots(currentUserLocation)
-        val sortedSpots = spots.sortedBy { it.coordinates.distanceInMetersTo(currentUserLocation) }
+        val spots = spotRepository.getUnknownSpots(
+            Pair(currentUserLocation.latitude, currentUserLocation.longitude)
+        )
+        val sortedSpots = spots.sortedBy {
+            it.coordinates.distanceInMetersTo(
+                Pair(currentUserLocation.latitude, currentUserLocation.longitude)
+            )
+        }
 
-        emit(Resource.Success(ExploreModel(sortedSpots, currentUserLocation)))
+        emit(
+            Resource.Success(
+                ExploreModel(
+                    sortedSpots,
+                    Pair(currentUserLocation.latitude, currentUserLocation.longitude)
+                )
+            )
+        )
     }
 
 }
