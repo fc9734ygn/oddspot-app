@@ -43,10 +43,10 @@ class ExploreScreen : BaseScreen() {
                 modifier = Modifier.fillMaxSize().background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
-                            colorResource(MR.colors.black).copy(alpha = 0.9f),
+                            colorResource(MR.colors.black),
                             Color.Transparent
                         ),
-                        endY = 400f
+                        endY = 300f
                     )
                 )
             )
@@ -54,7 +54,7 @@ class ExploreScreen : BaseScreen() {
                 modifier = Modifier.fillMaxSize().background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
-                            colorResource(MR.colors.black).copy(alpha = 0.9f),
+                            colorResource(MR.colors.black),
                             Color.Transparent
                         ),
                         endY = 2000f,

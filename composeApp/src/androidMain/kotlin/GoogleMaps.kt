@@ -48,17 +48,16 @@ actual fun GoogleMaps(
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 stringResource(MR.strings.permission_fine_location_rationale)
             ),
-        )
+        ),
+        onPermissionsGranted = onPermissionsGranted
     )
     val allPermissionsGranted =
         context.hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION) && context.hasPermission(
             Manifest.permission.ACCESS_FINE_LOCATION
         )
 
-    LaunchedEffect(key1 = allPermissionsGranted) {
-        if (allPermissionsGranted) {
-           onPermissionsGranted()
-        }
+    if (!allPermissionsGranted){
+        return
     }
 
     val cameraPositionState = rememberCameraPositionState()
@@ -91,20 +90,6 @@ actual fun GoogleMaps(
         }
     }
 
-//    GoogleMap(
-//        cameraPositionState = cameraPositionState,
-//        modifier = modifier
-//    ) {
-//        markers?.forEach { marker ->
-//            Marker(
-//                state = rememberMarkerState(
-//                    key = marker.id,
-//                    position = LatLng(marker.coordinates.first, marker.coordinates.second)
-//                ),
-//            )
-//        }
-//    }
-
     Column(
         Modifier
             .fillMaxSize(),
@@ -120,9 +105,6 @@ actual fun GoogleMaps(
             )
         }
 
-//        val cameraPositionState = rememberCameraPositionState {
-//            position = CameraPosition.fromLatLngZoom(currentLatLng, DEFAULT_ZOOM)
-//        }
         val uiSettings = remember {
             mutableStateOf(
                 MapUiSettings(

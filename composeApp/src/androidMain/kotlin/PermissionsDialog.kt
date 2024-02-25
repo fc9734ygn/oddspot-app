@@ -1,4 +1,3 @@
-
 import android.app.Activity
 import android.content.Context
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -13,6 +12,7 @@ import ui.component.SimpleDialog
 @Composable
 fun PermissionDialog(
     permissions: Map<String, String>,
+    onPermissionsGranted: () -> Unit
 ) {
     val screenModel = remember { PermissionViewModel() }
     val context: Context = LocalContext.current
@@ -20,15 +20,17 @@ fun PermissionDialog(
     val permissionResultLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
         onResult = { isGranted ->
+            if (isGranted) onPermissionsGranted()
             screenModel.onPermissionResult(
                 permission = permissions.keys.first(),
-                isGranted = isGranted
+                isGranted = isGranted,
             )
         }
     )
     val multiplePermissionResultLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestMultiplePermissions(),
         onResult = { results ->
+            if (results.values.all { it }) onPermissionsGranted()
             results.forEach { (permission, isGranted) ->
                 screenModel.onPermissionResult(permission = permission, isGranted = isGranted)
             }

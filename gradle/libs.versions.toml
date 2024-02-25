@@ -36,7 +36,6 @@ kermit = "2.0.3"
 android-maps-compose = "3.1.0"
 android-location = "21.1.0"
 google-maps = "18.2.0"
-maps-ios = "5.3.0"
 pods-google-maps = "8.3.1"
 pods-google-mapsUtils = "4.2.2"
 
