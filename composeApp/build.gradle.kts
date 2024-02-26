@@ -33,6 +33,7 @@ kotlin {
         iosTarget.binaries.framework {
 //            baseName = "ComposeApp"
 //            isStatic = true // https://github.com/JetBrains/compose-multiplatform/issues/3386#issuecomment-1656695188
+//            baseName = "ComposeApp"
             freeCompilerArgs += "-Xbinary=bundleId=com.homato.oddspot"
             export(libs.moko.resources)
             export(libs.moko.graphics)

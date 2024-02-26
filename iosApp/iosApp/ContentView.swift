@@ -1,6 +1,6 @@
 import UIKit
 import SwiftUI
-import ComposeApp
+import composeApp
 //import GoogleMaps
 
 struct ComposeView: UIViewControllerRepresentable {
