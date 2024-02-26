@@ -33,6 +33,7 @@ kotlin {
         iosTarget.binaries.framework {
 //            baseName = "ComposeApp"
 //            isStatic = true // https://github.com/JetBrains/compose-multiplatform/issues/3386#issuecomment-1656695188
+            freeCompilerArgs += "-Xbinary=bundleId=com.homato.oddspot"
             export(libs.moko.resources)
             export(libs.moko.graphics)
         }
@@ -51,10 +52,10 @@ kotlin {
             isStatic = true
         }
 
-        pod("GoogleMaps") {
-            version = libs.versions.pods.google.maps.get()
-            extraOpts += listOf("-compiler-option", "-fmodules")
-        }
+//        pod("GoogleMaps") {
+//            version = libs.versions.pods.google.maps.get()
+//            extraOpts += listOf("-compiler-option", "-fmodules")
+//        }
     }
 
     sourceSets {

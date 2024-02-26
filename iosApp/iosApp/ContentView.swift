@@ -1,16 +1,16 @@
 import UIKit
 import SwiftUI
 import ComposeApp
-import GoogleMaps
+//import GoogleMaps
 
 struct ComposeView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
             // Load the Google maps API key from the AppSecrets.plist file
-            let filePath = Bundle.main.path(forResource: "AppSecrets", ofType: "plist")!
-            let plist = NSDictionary(contentsOfFile: filePath)!
-            let googleMapsApiKey = plist["GOOGLE_MAPS_API_KEY"] as! String
-
-            GMSServices.provideAPIKey(googleMapsApiKey)
+//            let filePath = Bundle.main.path(forResource: "AppSecrets", ofType: "plist")!
+//            let plist = NSDictionary(contentsOfFile: filePath)!
+//            let googleMapsApiKey = plist["GOOGLE_MAPS_API_KEY"] as! String
+//
+//            GMSServices.provideAPIKey(googleMapsApiKey)
 
         return MainViewControllerKt.MainController()
     }

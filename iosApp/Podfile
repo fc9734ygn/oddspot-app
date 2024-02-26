@@ -2,5 +2,5 @@ target 'iosApp' do
   use_frameworks!
   platform :ios, '15.4'  # ios.deploymentTarget
   pod 'composeApp', :path => '../composeApp'
-  pod 'GoogleMaps', '8.3.1'
+  # pod 'GoogleMaps', '8.3.1'
 end
