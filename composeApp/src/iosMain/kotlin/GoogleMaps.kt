@@ -1,17 +1,9 @@
-import androidx.compose.foundation.layout.fillMaxSize
+
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.interop.UIKitView
-//import cocoapods.GoogleMaps.GMSCameraPosition
-//import cocoapods.GoogleMaps.GMSCameraUpdate
-//import cocoapods.GoogleMaps.GMSCameraUpdate.Companion.fitBounds
-//import cocoapods.GoogleMaps.GMSCoordinateBounds
-//import cocoapods.GoogleMaps.GMSMapView
-//import cocoapods.GoogleMaps.GMSMarker
-//import cocoapods.GoogleMaps.animateWithCameraUpdate
+import cocoapods.GoogleMaps.GMSMapView
 import kotlinx.cinterop.ExperimentalForeignApi
-import platform.CoreLocation.CLLocationCoordinate2DMake
 import ui.screen.explore.ExploreMarker
 import ui.util.CameraLocationBounds
 import ui.util.CameraPosition
@@ -26,8 +18,27 @@ actual fun GoogleMaps(
     userCurrentLocation: Pair<Double, Double>?,
     onPermissionsGranted: () -> Unit
 ) {
+    UIKitView(
+        factory = {
+            val mapView =  GMSMapView()
+            mapView.settings.zoomGestures = true
+            mapView.settings.consumesGesturesInView = true
+            mapView
+        },
+        modifier = modifier,
+        onRelease = {
+            it.removeFromSuperview()
+        }
+    )
 //    val mapsView = remember {
-//        GMSMapView()
+//        GMSMapView().apply {
+//            setMyLocationEnabled(true)
+//            settings.myLocationButton = true
+//            settings.setMyLocationButton(true)
+//            settings.setScrollGestures(true)
+//            settings.setZoomGestures(true)
+//            settings.setCompassButton(true)
+//        }
 //    }
 //
 //    UIKitView(

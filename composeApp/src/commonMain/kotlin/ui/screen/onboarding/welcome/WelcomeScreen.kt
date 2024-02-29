@@ -23,6 +23,7 @@ import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.homato.oddspot.MR
+import com.homato.oddspot.MR.colors.background
 import dev.icerock.moko.resources.compose.colorResource
 import dev.icerock.moko.resources.compose.stringResource
 import ui.base.BaseScreen
@@ -54,7 +55,7 @@ class WelcomeScreen : BaseScreen() {
         }
         Box(
             modifier = Modifier
-                .background(color = colorResource(MR.colors.background))
+                .background(color = colorResource(background))
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
         ) {

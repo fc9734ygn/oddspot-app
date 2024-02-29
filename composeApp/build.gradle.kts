@@ -3,12 +3,12 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.serialization)
     alias(libs.plugins.sqldelight)
     alias(libs.plugins.ksp)
-    kotlin("native.cocoapods")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("dev.icerock.mobile.multiplatform-resources") // For some reason alias() doesn't work here
 }
@@ -25,38 +25,38 @@ kotlin {
         }
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-//            baseName = "ComposeApp"
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+//    listOf(
+//        iosX64(),
+//        iosArm64(),
+//        iosSimulatorArm64()
+//    )
+//        .forEach { iosTarget ->
+//        iosTarget.binaries.framework {
 //            isStatic = true // https://github.com/JetBrains/compose-multiplatform/issues/3386#issuecomment-1656695188
 //            baseName = "ComposeApp"
-            freeCompilerArgs += "-Xbinary=bundleId=com.homato.oddspot"
-            export(libs.moko.resources)
-            export(libs.moko.graphics)
-        }
-    }
+//            freeCompilerArgs += "-Xbinary=bundleId=com.homato.oddspot"
+//            export(libs.moko.resources)
+//            export(libs.moko.graphics)
+//        }
+//    }
 
     cocoapods {
-        // Required properties
-        // Specify the required Pod version here. Otherwise, the Gradle project version is used.
+        summary = "Some description for the Shared Module"
+        homepage = "Link to the Shared Module homepage"
         version = "1.0"
-        summary = "Some description for a Kotlin/Native module"
-        homepage = "Link to a Kotlin/Native module homepage"
-        ios.deploymentTarget = "15.4"
+        ios.deploymentTarget = "17.0"
         podfile = project.file("../iosApp/Podfile")
         framework {
-            baseName = "ComposeApp"
+            baseName = "composeApp"
             isStatic = true
         }
-
-//        pod("GoogleMaps") {
-//            version = libs.versions.pods.google.maps.get()
-//            extraOpts += listOf("-compiler-option", "-fmodules")
-//        }
+        pod("GoogleMaps") {
+            extraOpts += listOf("-compiler-option", "-fmodules")
+        }
     }
 
     sourceSets {
@@ -68,8 +68,7 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(compose.ui)
-            @OptIn(ExperimentalComposeLibrary::class)
-            implementation(compose.components.resources)
+            @OptIn(ExperimentalComposeLibrary::class) implementation(compose.components.resources)
 
             // Koin
             implementation(libs.koin.core)
@@ -110,6 +109,12 @@ kotlin {
             implementation(libs.kermit.crashlytics)
 
         }
+        // MOKO workaround https://github.com/icerockdev/moko-resources/issues/618#issuecomment-1861635765
+        getByName("androidMain").dependsOn(commonMain)
+        getByName("iosArm64Main").dependsOn(commonMain)
+        getByName("iosX64Main").dependsOn(commonMain)
+        getByName("iosSimulatorArm64Main").dependsOn(commonMain)
+
         androidMain.dependencies {
             // UI
             implementation(libs.androidx.activity.compose)
@@ -135,7 +140,6 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
             implementation(libs.sqlDelightiOSDriver)
-            implementation(libs.google.play.services.maps)
             implementation("co.touchlab:stately-common:2.0.5") // https://github.com/cashapp/sqldelight/issues/4357
         }
     }
@@ -213,8 +217,13 @@ sqldelight {
 }
 
 // MOKO config
+//multiplatformResources {
+//    resourcesPackage.set("com.homato.oddspot")
+//    resourcesPackage = "com.homato.oddspot"
+//}
+
 multiplatformResources {
-    resourcesPackage.set("com.homato.oddspot")
+    multiplatformResourcesPackage = "com.homato.oddspot" // required
 }
 
 secrets {

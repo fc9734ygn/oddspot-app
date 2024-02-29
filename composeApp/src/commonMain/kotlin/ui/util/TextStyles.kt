@@ -11,7 +11,7 @@ import dev.icerock.moko.resources.compose.fontFamilyResource
 @Composable
 fun h1() : TextStyle {
    return TextStyle(
-       fontFamily = fontFamilyResource(MR.fonts.passionone_regular),
+       fontFamily = fontFamilyResource(MR.fonts.PassionOne.regular),
        fontSize = 48.sp,
        textAlign = TextAlign.Center,
        color = colorResource(MR.colors.white)
@@ -21,7 +21,7 @@ fun h1() : TextStyle {
 @Composable
 fun h3() : TextStyle {
    return TextStyle(
-       fontFamily = fontFamilyResource(MR.fonts.passionone_regular),
+       fontFamily = fontFamilyResource(MR.fonts.PassionOne.regular),
        fontSize = 24.sp,
        textAlign = TextAlign.Center,
        color = colorResource(MR.colors.white)
@@ -31,7 +31,7 @@ fun h3() : TextStyle {
 @Composable
 fun body() : TextStyle {
    return TextStyle(
-       fontFamily = fontFamilyResource(MR.fonts.inter_regular),
+       fontFamily = fontFamilyResource(MR.fonts.Inter.regular),
        fontSize = 14.sp,
        textAlign = TextAlign.Center,
        color = colorResource(MR.colors.white)
@@ -41,7 +41,7 @@ fun body() : TextStyle {
 @Composable
 fun button() : TextStyle {
    return TextStyle(
-       fontFamily = fontFamilyResource(MR.fonts.inter_semibold),
+       fontFamily = fontFamilyResource(MR.fonts.Inter.semiBold),
        fontSize = 24.sp,
        textAlign = TextAlign.Center,
    )
@@ -50,7 +50,7 @@ fun button() : TextStyle {
 @Composable
 fun input() : TextStyle {
     return TextStyle(
-        fontFamily = fontFamilyResource(MR.fonts.inter_regular),
+        fontFamily = fontFamilyResource(MR.fonts.Inter.regular),
         fontSize = 16.sp,
         textAlign = TextAlign.Start,
         color = colorResource(MR.colors.white)
@@ -60,7 +60,7 @@ fun input() : TextStyle {
 @Composable
 fun footnote() : TextStyle {
    return TextStyle(
-       fontFamily = fontFamilyResource(MR.fonts.inter_regular),
+       fontFamily = fontFamilyResource(MR.fonts.Inter.regular),
        fontSize = 12.sp,
        textAlign = TextAlign.Center,
        color = colorResource(MR.colors.white)

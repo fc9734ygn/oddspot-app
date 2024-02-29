@@ -1,16 +1,16 @@
 import UIKit
 import SwiftUI
 import composeApp
-//import GoogleMaps
+import GoogleMaps
 
 struct ComposeView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
-            // Load the Google maps API key from the AppSecrets.plist file
+            //Load the Google maps API key from the AppSecrets.plist file
 //            let filePath = Bundle.main.path(forResource: "AppSecrets", ofType: "plist")!
 //            let plist = NSDictionary(contentsOfFile: filePath)!
 //            let googleMapsApiKey = plist["GOOGLE_MAPS_API_KEY"] as! String
-//
-//            GMSServices.provideAPIKey(googleMapsApiKey)
+
+            GMSServices.provideAPIKey("AIzaSyAyivhS1rZoWawuW6Ko9JMbYnTcs5uyzfs")
 
         return MainViewControllerKt.MainController()
     }
@@ -24,6 +24,3 @@ struct ContentView: View {
                 .ignoresSafeArea(.keyboard) // Compose has own keyboard handler
     }
 }
-
-
-
