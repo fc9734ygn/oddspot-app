@@ -20,23 +20,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.homato.oddspot.MR
-import dev.icerock.moko.resources.compose.colorResource
-import dev.icerock.moko.resources.compose.stringResource
+import oddspot_app.composeapp.generated.resources.Res
+import oddspot_app.composeapp.generated.resources.tutorial_button
+import oddspot_app.composeapp.generated.resources.tutorial_submit_description
+import oddspot_app.composeapp.generated.resources.tutorial_submit_title
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import ui.base.BaseScreen
 import ui.component.button.PrimaryButton
+import ui.util.Colors
 import ui.util.body
 import ui.util.h1
 
 class TutorialSubmitScreen : BaseScreen() {
 
+    @OptIn(ExperimentalResourceApi::class)
     @Composable
     override fun ScreenContent(snackbarHostState: SnackbarHostState) {
         val navigator = LocalNavigator.currentOrThrow
 
         Box(
             modifier = Modifier
-                .background(color = colorResource(MR.colors.background))
+                .background(color = Colors.background)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
         ) {
@@ -44,7 +49,7 @@ class TutorialSubmitScreen : BaseScreen() {
                 modifier = Modifier.height(300.dp).width(200.dp)
                     .align(Alignment.TopCenter)
                     .padding(top = 64.dp)
-                    .background(color = colorResource(MR.colors.red))
+                    .background(color = Colors.red)
             )
             Column(
                 modifier = Modifier
@@ -54,15 +59,15 @@ class TutorialSubmitScreen : BaseScreen() {
             ) {
                 Text(
                     modifier = Modifier.padding(horizontal = 64.dp),
-                    text = stringResource(MR.strings.tutorial_submit_title),
-                    color = colorResource(MR.colors.white),
+                    text = stringResource(Res.string.tutorial_submit_title),
+                    color = Colors.white,
                     style = h1()
                 )
                 Spacer(modifier = Modifier.height(32.dp))
                 Text(
                     modifier = Modifier.padding(horizontal = 48.dp),
-                    text = stringResource(MR.strings.tutorial_submit_description),
-                    color = colorResource(MR.colors.white),
+                    text = stringResource(Res.string.tutorial_submit_description),
+                    color = Colors.white,
                     style = body()
                 )
                 Spacer(modifier = Modifier.height(32.dp))
@@ -70,7 +75,7 @@ class TutorialSubmitScreen : BaseScreen() {
                     modifier = Modifier
                         .height(100.dp)
                         .width(200.dp)
-                        .background(color = colorResource(MR.colors.red))
+                        .background(color = Colors.red)
                 )
                 Spacer(modifier = Modifier.height(32.dp))
                 PrimaryButton(
@@ -78,7 +83,7 @@ class TutorialSubmitScreen : BaseScreen() {
                         .padding(horizontal = 48.dp)
                         .padding(bottom = 48.dp)
                         .fillMaxWidth(),
-                    text = stringResource(MR.strings.tutorial_button),
+                    text = stringResource(Res.string.tutorial_button),
                     onClick = { navigator.push(TutorialSafetyScreen()) }
                 )
             }

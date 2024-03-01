@@ -34,17 +34,27 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.homato.oddspot.MR
-import dev.icerock.moko.resources.compose.colorResource
-import dev.icerock.moko.resources.compose.painterResource
-import dev.icerock.moko.resources.compose.stringResource
 import domain.use_case.user.model.EmailError
 import domain.use_case.user.model.PasswordError
+import oddspot_app.composeapp.generated.resources.Res
+import oddspot_app.composeapp.generated.resources.eye
+import oddspot_app.composeapp.generated.resources.eye_slash
+import oddspot_app.composeapp.generated.resources.register_button
+import oddspot_app.composeapp.generated.resources.register_confirm_password_label
+import oddspot_app.composeapp.generated.resources.register_email_label
+import oddspot_app.composeapp.generated.resources.register_error_email
+import oddspot_app.composeapp.generated.resources.register_error_password_passwords_not_matching
+import oddspot_app.composeapp.generated.resources.register_password_label
+import oddspot_app.composeapp.generated.resources.register_title
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import ui.base.BaseScreen
 import ui.component.SimpleTextInput
 import ui.component.button.PrimaryButton
 import ui.component.snackbar.GenericErrorSnackbar
-import ui.screen.explore.MapScreen
+import ui.screen.explore.ExploreScreen
+import ui.util.Colors
 import ui.util.Consume
 import ui.util.InitialFocusRequester
 import ui.util.footnote
@@ -52,6 +62,7 @@ import ui.util.h1
 
 class RegisterScreen : BaseScreen() {
 
+    @OptIn(ExperimentalResourceApi::class)
     @Composable
     override fun ScreenContent(snackbarHostState: SnackbarHostState) {
         val screenModel = getScreenModel<RegisterScreenModel>()
@@ -62,8 +73,9 @@ class RegisterScreen : BaseScreen() {
         state.event?.Consume {
             when (it) {
                 is RegisterEventType.AccountCreatedEvent -> {
-                    navigator.replaceAll(MapScreen())
+                    navigator.replaceAll(ExploreScreen())
                 }
+
                 is RegisterEventType.RegistrationError -> GenericErrorSnackbar(snackbarHostState)
             }
         }
@@ -71,15 +83,15 @@ class RegisterScreen : BaseScreen() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(colorResource(MR.colors.background))
+                .background(Colors.background)
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(MR.strings.register_title),
+                text = stringResource(Res.string.register_title),
                 style = h1(),
-                color = colorResource(MR.colors.white),
+                color = Colors.white,
                 modifier = Modifier.padding(horizontal = 96.dp)
             )
             Spacer(modifier = Modifier.height(32.dp))
@@ -87,7 +99,7 @@ class RegisterScreen : BaseScreen() {
                 SimpleTextInput(
                     value = state.email,
                     onValueChange = screenModel::onEmailInputChange,
-                    label = stringResource(MR.strings.register_email_label),
+                    label = stringResource(Res.string.register_email_label),
                     modifier = Modifier
                         .fillMaxWidth()
                         .focusRequester(it)
@@ -102,9 +114,13 @@ class RegisterScreen : BaseScreen() {
             }
             AnimatedVisibility(visible = state.emailError == EmailError.PATTERN_ERROR) {
                 Text(
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 48.dp).padding(start = 16.dp).padding(top = 4.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 48.dp)
+                        .padding(start = 16.dp)
+                        .padding(top = 4.dp),
                     text = when (state.emailError) {
-                        EmailError.PATTERN_ERROR -> stringResource(MR.strings.register_error_email)
+                        EmailError.PATTERN_ERROR -> stringResource(Res.string.register_error_email)
                         else -> ""
                     },
                     style = footnote().copy(textAlign = TextAlign.Start),
@@ -116,7 +132,7 @@ class RegisterScreen : BaseScreen() {
             SimpleTextInput(
                 value = state.password,
                 onValueChange = screenModel::onPasswordInputChange,
-                label = stringResource(MR.strings.register_password_label),
+                label = stringResource(Res.string.register_password_label),
                 modifier = Modifier
                     .padding(horizontal = 48.dp)
                     .fillMaxWidth(),
@@ -133,9 +149,12 @@ class RegisterScreen : BaseScreen() {
                 },
                 trailingIcon = {
                     Icon(
-                        painter = painterResource(if (state.passwordPreview) MR.images.eye_slash else MR.images.eye),
+                        painter = painterResource(
+                            if (state.passwordPreview) Res.drawable.eye_slash
+                            else Res.drawable.eye
+                        ),
                         contentDescription = null,
-                        tint = colorResource(MR.colors.red),
+                        tint = Colors.red,
                         modifier = Modifier
                             .size(24.dp)
                             .clickable {
@@ -146,7 +165,8 @@ class RegisterScreen : BaseScreen() {
             )
             AnimatedVisibility(visible = passwordFieldError) {
                 Text(
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 48.dp).padding(start = 16.dp).padding(top = 4.dp),
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 48.dp)
+                        .padding(start = 16.dp).padding(top = 4.dp),
                     text = getPasswordErrorMessage(state.passwordError),
                     style = footnote().copy(textAlign = TextAlign.Start),
                 )
@@ -155,7 +175,7 @@ class RegisterScreen : BaseScreen() {
             SimpleTextInput(
                 value = state.confirmPassword,
                 onValueChange = screenModel::onConfirmPasswordChange,
-                label = stringResource(MR.strings.register_confirm_password_label),
+                label = stringResource(Res.string.register_confirm_password_label),
                 modifier = Modifier
                     .padding(horizontal = 48.dp)
                     .fillMaxWidth(),
@@ -172,9 +192,12 @@ class RegisterScreen : BaseScreen() {
                 },
                 trailingIcon = {
                     Icon(
-                        painter = painterResource(if (state.passwordPreview) MR.images.eye_slash else MR.images.eye),
+                        painter = painterResource(
+                            if (state.passwordPreview) Res.drawable.eye_slash
+                            else Res.drawable.eye
+                        ),
                         contentDescription = null,
-                        tint = colorResource(MR.colors.red),
+                        tint = Colors.red,
                         modifier = Modifier
                             .size(24.dp)
                             .clickable { screenModel.onPasswordPreviewClick() }
@@ -183,10 +206,13 @@ class RegisterScreen : BaseScreen() {
             )
             AnimatedVisibility(visible = state.passwordError == PasswordError.PASSWORDS_NOT_MATCHING) {
                 Text(
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 48.dp).padding(start = 16.dp).padding(top = 4.dp),
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(horizontal = 48.dp)
+                        .padding(start = 16.dp)
+                        .padding(top = 4.dp),
                     text = when (state.passwordError) {
                         PasswordError.PASSWORDS_NOT_MATCHING -> {
-                            stringResource(MR.strings.register_error_password_passwords_not_matching)
+                            stringResource(Res.string.register_error_password_passwords_not_matching)
                         }
 
                         else -> ""
@@ -197,7 +223,7 @@ class RegisterScreen : BaseScreen() {
             Spacer(modifier = Modifier.height(48.dp))
             PrimaryButton(
                 onClick = screenModel::onContinueClick,
-                text = stringResource(MR.strings.register_button),
+                text = stringResource(Res.string.register_button),
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 48.dp),
                 isLoading = state.isLoading
             )

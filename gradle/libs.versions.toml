@@ -10,26 +10,31 @@ androidx-core-ktx = "1.12.0"
 androidx-espresso-core = "3.5.1"
 androidx-material = "1.11.0"
 androidx-test-junit = "1.1.5"
-compose = "1.6.1"
+compose = "1.6.2"
 compose-compiler = "1.5.8"
-compose-plugin = "1.5.11"
+compose-plugin = "1.6.0-rc03"
 junit = "4.13.2"
-kotlin = "1.9.21"
+kotlin = "1.9.22"
 koin = "3.5.3"
 ktor = "2.3.7"
 koin-annotations = "1.3.0"
 koin-compose = "1.1.2"
-moko-resources = "0.24.0-alpha-3"
-moko-generator = "0.23.0"
-moko-graphics = "0.9.0"
+#secrets-gradle-plugin = "2.0.1"
+secretsGradlePlugin = "2.0.1"
 serialization = "1.6.2"
 result = "1.1.18"
 sqldelight = "2.0.1"
-ksp = "1.9.21-1.0.16"
+ksp = "1.9.22-1.0.17"
 kotlinx-datetime = "0.5.0"
 detekt = "1.23.4"
 voyager = "1.0.0"
 kermit = "2.0.3"
+android-maps-compose = "4.3.0"
+android-location = "21.1.0"
+google-maps = "18.2.0"
+pods-google-maps = "8.3.1"
+pods-google-mapsUtils = "4.2.2"
+
 
 [libraries]
 
@@ -78,16 +83,11 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 result = { module = "com.michael-bull.kotlin-result:kotlin-result", version.ref = "result" }
 
 # SQLDelight
+secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
 sqlDelightAndroidDriver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
 sqlDelightiOSDriver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
 sqlDelightCoroutinesExtensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
-
-# MOKO
-moko-resources-generator = { module = "dev.icerock.moko:resources-generator", version.ref = "moko-resources" }
-moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko-resources" }
-moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "moko-resources" }
-moko-graphics = { module = "dev.icerock.moko:graphics", version.ref = "moko-graphics" }
 
 # Voyager
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
@@ -101,6 +101,12 @@ voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voy
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 kermit-crashlytics = { module = "co.touchlab:kermit-crashlytics", version.ref = "kermit" }
 
+# Google Maps
+google-play-services-android-location = { module = "com.google.android.gms:play-services-location", version.ref = "android-location" }
+google-play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "google-maps" }
+google-maps-android-compose = { module = "com.google.maps.android:maps-compose", version.ref = "android-maps-compose" }
+google-maps-android-compose-utils = { module = "com.google.maps.android:maps-compose-utils", version.ref = "android-maps-compose" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -110,3 +116,4 @@ serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref 
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }

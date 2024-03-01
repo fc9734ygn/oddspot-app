@@ -1,7 +1,9 @@
 package com.homato.oddspot
 
 import DriverFactory
+import LocationProvider
 import android.app.Application
+import appContext
 import createDatabase
 import di.DataModule
 import di.DomainModule
@@ -29,8 +31,10 @@ class MainApplication : Application() {
                 module {
                     single { DriverFactory(androidContext()) }
                     single { createDatabase(get()) }
+                    single { LocationProvider() }
                 }
             )
         }
+        appContext = applicationContext
     }
 }

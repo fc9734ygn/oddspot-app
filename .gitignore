@@ -4,6 +4,7 @@
 xcuserdata
 !src/**/build/
 local.properties
+secrets.properties
 .idea
 .DS_Store
 captures
@@ -16,3 +17,5 @@ captures
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 /composeApp/src/commonMain/kotlin/Secrets.kt
+/iosApp/Pods/
+/iosApp/iosApp/AppSecrets.plist

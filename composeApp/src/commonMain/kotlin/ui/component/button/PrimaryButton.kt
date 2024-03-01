@@ -10,8 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.homato.oddspot.MR
-import dev.icerock.moko.resources.compose.colorResource
+import ui.util.Colors
 import ui.util.button
 
 @Composable
@@ -25,10 +24,10 @@ fun PrimaryButton(
     Button(
         modifier = modifier.height(56.dp),
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = colorResource(MR.colors.red),
-            contentColor = colorResource(MR.colors.black),
-            disabledBackgroundColor = colorResource(MR.colors.light_grey),
-            disabledContentColor = colorResource(MR.colors.dark_grey)
+            backgroundColor = Colors.red,
+            contentColor = Colors.black,
+            disabledBackgroundColor = Colors.lightGrey,
+            disabledContentColor = Colors.darkGrey
         ),
         shape = RoundedCornerShape(32.dp),
         onClick = onClick,
@@ -36,7 +35,7 @@ fun PrimaryButton(
     ) {
         if (isLoading){
             CircularProgressIndicator(
-                color = colorResource(MR.colors.black)
+                color = Colors.black
             )
             return@Button
         }

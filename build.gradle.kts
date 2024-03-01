@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.serialization) apply false
     alias(libs.plugins.detekt)
+    alias(libs.plugins.kotlinCocoapods) apply false
 }
 
 allprojects {
@@ -25,6 +26,6 @@ allprojects {
 
 buildscript {
     dependencies {
-        classpath(libs.moko.resources.generator)
+        classpath(libs.secrets.gradle.plugin)
     }
 }

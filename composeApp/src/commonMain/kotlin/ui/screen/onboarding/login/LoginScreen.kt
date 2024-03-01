@@ -33,21 +33,29 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.homato.oddspot.MR
-import dev.icerock.moko.resources.compose.colorResource
-import dev.icerock.moko.resources.compose.painterResource
-import dev.icerock.moko.resources.compose.stringResource
+import oddspot_app.composeapp.generated.resources.Res
+import oddspot_app.composeapp.generated.resources.eye
+import oddspot_app.composeapp.generated.resources.eye_slash
+import oddspot_app.composeapp.generated.resources.login_button
+import oddspot_app.composeapp.generated.resources.login_title
+import oddspot_app.composeapp.generated.resources.register_email_label
+import oddspot_app.composeapp.generated.resources.register_password_label
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import ui.base.BaseScreen
 import ui.component.SimpleTextInput
 import ui.component.button.PrimaryButton
 import ui.component.snackbar.GenericErrorSnackbar
-import ui.screen.explore.MapScreen
+import ui.screen.explore.ExploreScreen
+import ui.util.Colors
 import ui.util.Consume
 import ui.util.InitialFocusRequester
 import ui.util.h1
 
 class LoginScreen : BaseScreen() {
 
+    @OptIn(ExperimentalResourceApi::class)
     @Composable
     override fun ScreenContent(snackbarHostState: SnackbarHostState) {
         val screenModel = getScreenModel<LoginScreenModel>()
@@ -58,7 +66,7 @@ class LoginScreen : BaseScreen() {
         state.event?.Consume {
             when (it) {
                 is LoginEventType.Success -> {
-                    navigator.replaceAll(MapScreen())
+                    navigator.replaceAll(ExploreScreen())
                 }
 
                 is LoginEventType.Error -> GenericErrorSnackbar(snackbarHostState)
@@ -66,24 +74,24 @@ class LoginScreen : BaseScreen() {
         }
         Column(
             modifier = Modifier
-                .background(colorResource(MR.colors.background))
+                .background(Colors.background)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(MR.strings.login_title),
+                text = stringResource(Res.string.login_title),
                 style = h1(),
                 modifier = Modifier.padding(horizontal = 96.dp),
-                color = colorResource(MR.colors.white)
+                color = Colors.white
             )
             Spacer(modifier = Modifier.height(24.dp))
             InitialFocusRequester {
                 SimpleTextInput(
                     value = state.email,
                     onValueChange = screenModel::onEmailInputChange,
-                    label = stringResource(MR.strings.register_email_label),
+                    label = stringResource(Res.string.register_email_label),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 48.dp)
@@ -100,7 +108,7 @@ class LoginScreen : BaseScreen() {
             SimpleTextInput(
                 value = state.password,
                 onValueChange = screenModel::onPasswordInputChange,
-                label = stringResource(MR.strings.register_password_label),
+                label = stringResource(Res.string.register_password_label),
                 modifier = Modifier
                     .padding(horizontal = 48.dp)
                     .fillMaxWidth(),
@@ -116,19 +124,23 @@ class LoginScreen : BaseScreen() {
                     PasswordVisualTransformation()
                 },
                 trailingIcon = {
-                    Icon(painter = painterResource(if (state.passwordPreview) MR.images.eye_slash else MR.images.eye),
+                    Icon(
+                        painter = painterResource(
+                            if (state.passwordPreview) Res.drawable.eye_slash
+                            else Res.drawable.eye
+                        ),
                         contentDescription = null,
                         modifier = Modifier.size(24.dp).clickable {
                             screenModel.onPasswordPreviewClick()
                         },
-                        tint = colorResource(MR.colors.red)
+                        tint = Colors.red
                     )
                 },
             )
             Spacer(modifier = Modifier.height(48.dp))
             PrimaryButton(
                 onClick = { screenModel.onContinueClick() },
-                text = stringResource(MR.strings.login_button),
+                text = stringResource(Res.string.login_button),
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 48.dp),
                 isLoading = state.isLoading
             )

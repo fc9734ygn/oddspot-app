@@ -57,11 +57,7 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
                currentUserCoordinates.second + 0.0005
             ),
             imageUrl = "https://media.istockphoto.com/id/1290233518/photo/ginger-cat-portrait.jpg?b=1&s=170667a&w=0&k=20&c=D2ObzKSLDeuKyD5as2m_4UcdaPimE_uosgqWhVdt5n0=",
-            likes = 45,
-            dislikes = 65,
-            isLiked = false,
-            isDisliked = false,
-            hashtags = listOf()
+            inWishlist = false,
         ),
         Spot(
             id = "SPOT02",
@@ -72,11 +68,7 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
                 currentUserCoordinates.second + 0.003
             ),
             imageUrl = "https://media.istockphoto.com/id/1290233518/photo/ginger-cat-portrait.jpg?b=1&s=170667a&w=0&k=20&c=D2ObzKSLDeuKyD5as2m_4UcdaPimE_uosgqWhVdt5n0=",
-            likes = 94,
-            dislikes = 35,
-            isLiked = false,
-            isDisliked = false,
-            hashtags = listOf()
+            inWishlist = false,
         ),
         Spot(
             id = "SPOT03",
@@ -87,11 +79,7 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
                 currentUserCoordinates.second + 0.001
             ),
             imageUrl = "https://media.istockphoto.com/id/1290233518/photo/ginger-cat-portrait.jpg?b=1&s=170667a&w=0&k=20&c=D2ObzKSLDeuKyD5as2m_4UcdaPimE_uosgqWhVdt5n0=",
-            likes = 94,
-            dislikes = 35,
-            isLiked = false,
-            isDisliked = false,
-            hashtags = listOf()
+            inWishlist = false,
         ),
         Spot(
             id = "SPOT04",
@@ -102,11 +90,7 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
                 currentUserCoordinates.second + 0.004532
             ),
             imageUrl = "https://media.istockphoto.com/id/1290233518/photo/ginger-cat-portrait.jpg?b=1&s=170667a&w=0&k=20&c=D2ObzKSLDeuKyD5as2m_4UcdaPimE_uosgqWhVdt5n0=",
-            likes = 94,
-            dislikes = 65,
-            isLiked = false,
-            isDisliked = false,
-            hashtags = listOf()
+            inWishlist = false,
         ),
         Spot(
             id = "SPOT05",
@@ -117,11 +101,7 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
                 currentUserCoordinates.second + 0.00455
             ),
             imageUrl = "https://media.istockphoto.com/id/1290233518/photo/ginger-cat-portrait.jpg?b=1&s=170667a&w=0&k=20&c=D2ObzKSLDeuKyD5as2m_4UcdaPimE_uosgqWhVdt5n0=",
-            likes = 94,
-            dislikes = 65,
-            isLiked = false,
-            isDisliked = false,
-            hashtags = listOf()
+            inWishlist = false,
         ),
         Spot(
             id = "SPOT06",
@@ -132,11 +112,7 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
                 currentUserCoordinates.second + 0.00845
             ),
             imageUrl = "https://media.istockphoto.com/id/1290233518/photo/ginger-cat-portrait.jpg?b=1&s=170667a&w=0&k=20&c=D2ObzKSLDeuKyD5as2m_4UcdaPimE_uosgqWhVdt5n0=",
-            likes = 94,
-            dislikes = 65,
-            isLiked = false,
-            isDisliked = false,
-            hashtags = listOf()
+            inWishlist = false,
         ),
         Spot(
             id = "SPOT07",
@@ -147,11 +123,7 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
                 currentUserCoordinates.second + 0.00145
             ),
             imageUrl = "https://media.istockphoto.com/id/1290233518/photo/ginger-cat-portrait.jpg?b=1&s=170667a&w=0&k=20&c=D2ObzKSLDeuKyD5as2m_4UcdaPimE_uosgqWhVdt5n0=",
-            likes = 94,
-            dislikes = 65,
-            isLiked = false,
-            isDisliked = false,
-            hashtags = listOf()
+            inWishlist = false,
         ),
         Spot(
             id = "SPOT08",
@@ -162,11 +134,7 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
                 currentUserCoordinates.second + 0.00745
             ),
             imageUrl = "https://media.istockphoto.com/id/1290233518/photo/ginger-cat-portrait.jpg?b=1&s=170667a&w=0&k=20&c=D2ObzKSLDeuKyD5as2m_4UcdaPimE_uosgqWhVdt5n0=",
-            likes = 94,
-            dislikes = 65,
-            isLiked = false,
-            isDisliked = false,
-            hashtags = listOf()
+            inWishlist = false,
         ),
         Spot(
             id = "SPOT09",
@@ -177,11 +145,7 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
                 currentUserCoordinates.second + 0.00645
             ),
             imageUrl = "https://media.istockphoto.com/id/1290233518/photo/ginger-cat-portrait.jpg?b=1&s=170667a&w=0&k=20&c=D2ObzKSLDeuKyD5as2m_4UcdaPimE_uosgqWhVdt5n0=",
-            likes = 94,
-            dislikes = 65,
-            isLiked = false,
-            isDisliked = false,
-            hashtags = listOf()
+            inWishlist = false,
         ),
         Spot(
             id = "SPOT10",
@@ -192,11 +156,7 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
                 currentUserCoordinates.second + 0.00245
             ),
             imageUrl = "https://media.istockphoto.com/id/1290233518/photo/ginger-cat-portrait.jpg?b=1&s=170667a&w=0&k=20&c=D2ObzKSLDeuKyD5as2m_4UcdaPimE_uosgqWhVdt5n0=",
-            likes = 94,
-            dislikes = 65,
-            isLiked = false,
-            isDisliked = false,
-            hashtags = listOf()
+            inWishlist = false,
         ),
         Spot(
             id = "SPOT11",
@@ -207,11 +167,7 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
                 currentUserCoordinates.second + 0.00145
             ),
             imageUrl = "https://media.istockphoto.com/id/1290233518/photo/ginger-cat-portrait.jpg?b=1&s=170667a&w=0&k=20&c=D2ObzKSLDeuKyD5as2m_4UcdaPimE_uosgqWhVdt5n0=",
-            likes = 94,
-            dislikes = 65,
-            isLiked = false,
-            isDisliked = false,
-            hashtags = listOf()
+            inWishlist = false,
         ),
         Spot(
             id = "SPOT12",
@@ -222,11 +178,7 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
                 currentUserCoordinates.second + 0.00945
             ),
             imageUrl = "https://media.istockphoto.com/id/1290233518/photo/ginger-cat-portrait.jpg?b=1&s=170667a&w=0&k=20&c=D2ObzKSLDeuKyD5as2m_4UcdaPimE_uosgqWhVdt5n0=",
-            likes = 94,
-            dislikes = 65,
-            isLiked = false,
-            isDisliked = false,
-            hashtags = listOf()
+            inWishlist = false,
         ),
         Spot(
             id = "SPOT13",
@@ -237,11 +189,7 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
                 currentUserCoordinates.second + 0.00645
             ),
             imageUrl = "https://media.istockphoto.com/id/1290233518/photo/ginger-cat-portrait.jpg?b=1&s=170667a&w=0&k=20&c=D2ObzKSLDeuKyD5as2m_4UcdaPimE_uosgqWhVdt5n0=",
-            likes = 94,
-            dislikes = 65,
-            isLiked = false,
-            isDisliked = false,
-            hashtags = listOf()
+            inWishlist = false,
         ),
         Spot(
             id = "SPOT14",
@@ -252,11 +200,7 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
                 currentUserCoordinates.second + 0.00945
             ),
             imageUrl = "https://media.istockphoto.com/id/1290233518/photo/ginger-cat-portrait.jpg?b=1&s=170667a&w=0&k=20&c=D2ObzKSLDeuKyD5as2m_4UcdaPimE_uosgqWhVdt5n0=",
-            likes = 94,
-            dislikes = 65,
-            isLiked = false,
-            isDisliked = false,
-            hashtags = listOf()
+            inWishlist = false,
         ),
         Spot(
             id = "SPOT15",
@@ -267,11 +211,7 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
                 currentUserCoordinates.second + 0.00445
             ),
             imageUrl = "https://media.istockphoto.com/id/1290233518/photo/ginger-cat-portrait.jpg?b=1&s=170667a&w=0&k=20&c=D2ObzKSLDeuKyD5as2m_4UcdaPimE_uosgqWhVdt5n0=",
-            likes = 94,
-            dislikes = 65,
-            isLiked = false,
-            isDisliked = false,
-            hashtags = listOf()
+            inWishlist = false,
         ),
         Spot(
             id = "SPOT16",
@@ -282,11 +222,7 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
                 currentUserCoordinates.second + 0.00452
             ),
             imageUrl = "https://media.istockphoto.com/id/1290233518/photo/ginger-cat-portrait.jpg?b=1&s=170667a&w=0&k=20&c=D2ObzKSLDeuKyD5as2m_4UcdaPimE_uosgqWhVdt5n0=",
-            likes = 94,
-            dislikes = 65,
-            isLiked = false,
-            isDisliked = false,
-            hashtags = listOf()
+            inWishlist = false,
         ),
         Spot(
             id = "SPOT17",
@@ -297,11 +233,7 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
                 currentUserCoordinates.second + 0.03645
             ),
             imageUrl = "https://media.istockphoto.com/id/1290233518/photo/ginger-cat-portrait.jpg?b=1&s=170667a&w=0&k=20&c=D2ObzKSLDeuKyD5as2m_4UcdaPimE_uosgqWhVdt5n0=",
-            likes = 94,
-            dislikes = 65,
-            isLiked = false,
-            isDisliked = false,
-            hashtags = listOf()
+            inWishlist = false,
         )
     )
 }

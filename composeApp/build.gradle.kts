@@ -1,15 +1,14 @@
-import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.serialization)
     alias(libs.plugins.sqldelight)
     alias(libs.plugins.ksp)
-//    id("com.google.devtools.ksp")
-    id("dev.icerock.mobile.multiplatform-resources") // For some reason alias() doesn't work here
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 kotlin {
@@ -24,16 +23,22 @@ kotlin {
         }
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "ComposeApp"
-//            isStatic = true // https://github.com/JetBrains/compose-multiplatform/issues/3386#issuecomment-1656695188
-            export(libs.moko.resources)
-            export(libs.moko.graphics)
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    cocoapods {
+        summary = "Some description for the Shared Module"
+        homepage = "Link to the Shared Module homepage"
+        version = "1.0"
+        ios.deploymentTarget = "17.0"
+        podfile = project.file("../iosApp/Podfile")
+        framework {
+            baseName = "composeApp"
+            isStatic = true
+        }
+        pod("GoogleMaps") {
+            extraOpts += listOf("-compiler-option", "-fmodules")
         }
     }
 
@@ -46,7 +51,6 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(compose.ui)
-            @OptIn(ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
 
             // Koin
@@ -71,10 +75,6 @@ kotlin {
             // Datetime
             implementation(libs.kotlinx.datetime)
 
-            // MOKO
-            api(libs.moko.resources)
-            api(libs.moko.resources.compose)
-
             // Voyager
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.screenModel)
@@ -86,11 +86,29 @@ kotlin {
             // Logging
             implementation(libs.kermit)
             implementation(libs.kermit.crashlytics)
+
         }
+
         androidMain.dependencies {
+            // UI
             implementation(libs.androidx.activity.compose)
+            implementation(libs.compose.ui.tooling.preview)
+            implementation(libs.compose.ui.tooling)
+
+            // Data
             implementation(libs.ktor.client.okhttp)
             implementation(libs.sqlDelightAndroidDriver)
+
+            // Google Maps
+            implementation(libs.google.play.services.android.location)
+            api(libs.google.play.services.maps)  // api means its exposed to the pure-android app (for init)
+            implementation(libs.google.maps.android.compose)
+            implementation(libs.google.maps.android.compose.utils) // Clustering
+
+            //Voyager
+            implementation(libs.voyager.navigator)
+            implementation(libs.voyager.koin)
+            implementation(libs.voyager.screenModel)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -106,7 +124,6 @@ android {
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
-    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
         applicationId = "com.homato.oddspot"
@@ -171,7 +188,11 @@ sqldelight {
     }
 }
 
-// MOKO config
-multiplatformResources {
-    resourcesPackage.set("com.homato.oddspot")
+secrets {
+    // The plugin defaults to "local.properties"
+    propertiesFileName = "secrets.properties"
+
+    // A properties file containing default secret values. This file can be
+    // checked in version control.
+    defaultPropertiesFileName = "local.properties"
 }

@@ -22,53 +22,59 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.homato.oddspot.MR
-import dev.icerock.moko.resources.compose.colorResource
-import dev.icerock.moko.resources.compose.stringResource
+import oddspot_app.composeapp.generated.resources.Res
+import oddspot_app.composeapp.generated.resources.get_started_login_prefix
+import oddspot_app.composeapp.generated.resources.get_started_login_suffix
+import oddspot_app.composeapp.generated.resources.get_started_signup_button
+import oddspot_app.composeapp.generated.resources.get_started_title
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import ui.base.BaseScreen
 import ui.component.button.OutlineButton
 import ui.screen.onboarding.login.LoginScreen
 import ui.screen.onboarding.register.RegisterScreen
+import ui.util.Colors
 import ui.util.body
 import ui.util.h1
 
 class GetStartedScreen : BaseScreen() {
 
+    @OptIn(ExperimentalResourceApi::class)
     @Composable
     override fun ScreenContent(snackbarHostState: SnackbarHostState) {
         val navigator = LocalNavigator.currentOrThrow
         Column(
             modifier = Modifier
-                .background(colorResource(MR.colors.background))
+                .background(Colors.background)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(MR.strings.get_started_title),
+                text = stringResource(Res.string.get_started_title),
                 style = h1(),
-                color = colorResource(MR.colors.white),
+                color = Colors.white,
                 modifier = Modifier.padding(horizontal = 96.dp)
             )
             Spacer(modifier = Modifier.height(24.dp))
             OutlineButton(
                 onClick = { navigator.push(RegisterScreen()) },
-                text = stringResource(MR.strings.get_started_signup_button),
+                text = stringResource(Res.string.get_started_signup_button),
                 modifier = Modifier.padding(horizontal = 48.dp)
             )
             Spacer(modifier = Modifier.height(16.dp))
             val loginText = buildAnnotatedString {
-                append(stringResource(MR.strings.get_started_login_prefix))
+                append(stringResource(Res.string.get_started_login_prefix))
                 append(" ")
                 withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                    append(stringResource(MR.strings.get_started_login_suffix))
+                    append(stringResource(Res.string.get_started_login_suffix))
                 }
             }
             Text(
                 text = loginText,
                 style = body(),
-                color = colorResource(MR.colors.white),
+                color = Colors.white,
                 modifier = Modifier
                     .clickable { navigator.push(LoginScreen()) }
                     .padding(horizontal = 48.dp)

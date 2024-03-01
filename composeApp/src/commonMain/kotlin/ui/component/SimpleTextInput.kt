@@ -12,8 +12,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.homato.oddspot.MR
-import dev.icerock.moko.resources.compose.colorResource
+import ui.util.Colors
 import ui.util.footnote
 import ui.util.input
 
@@ -45,22 +44,22 @@ fun SimpleTextInput(
             Text(
                 label,
                 style = footnote(),
-                color = colorResource(MR.colors.red)
+                color = Colors.black
             )
         },
         visualTransformation = visualTransformation,
         trailingIcon = trailingIcon,
         shape = RoundedCornerShape(32.dp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = colorResource(MR.colors.red),
-            unfocusedBorderColor = colorResource(MR.colors.red),
-            textColor = colorResource(MR.colors.white),
-            cursorColor = colorResource(MR.colors.red),
-            errorCursorColor = colorResource(MR.colors.red),
-            errorLeadingIconColor = colorResource(MR.colors.red),
-            errorTrailingIconColor = colorResource(MR.colors.red),
-            errorLabelColor = colorResource(MR.colors.red),
-            placeholderColor = colorResource(MR.colors.red)
+            focusedBorderColor = Colors.red,
+            unfocusedBorderColor = Colors.red,
+            textColor = Colors.white,
+            cursorColor = Colors.red,
+            errorCursorColor = Colors.red,
+            errorLeadingIconColor = Colors.red,
+            errorTrailingIconColor = Colors.red,
+            errorLabelColor = Colors.red,
+            placeholderColor = Colors.red
         )
     )
 }

@@ -20,24 +20,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.homato.oddspot.MR
-import dev.icerock.moko.resources.compose.colorResource
-import dev.icerock.moko.resources.compose.stringResource
+import oddspot_app.composeapp.generated.resources.Res
+import oddspot_app.composeapp.generated.resources.tutorial_button
+import oddspot_app.composeapp.generated.resources.tutorial_safety_description
+import oddspot_app.composeapp.generated.resources.tutorial_safety_subtitle
+import oddspot_app.composeapp.generated.resources.tutorial_safety_title
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import ui.base.BaseScreen
 import ui.component.button.PrimaryButton
+import ui.util.Colors
 import ui.util.body
 import ui.util.h1
 import ui.util.h3
 
 class TutorialSafetyScreen : BaseScreen() {
 
+    @OptIn(ExperimentalResourceApi::class)
     @Composable
     override fun ScreenContent(snackbarHostState: SnackbarHostState) {
         val navigator = LocalNavigator.currentOrThrow
 
         Box(
             modifier = Modifier
-                .background(color = colorResource(MR.colors.background))
+                .background(color = Colors.background)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
         ) {
@@ -47,7 +53,7 @@ class TutorialSafetyScreen : BaseScreen() {
                     .height(300.dp)
                     .width(200.dp)
                     .align(Alignment.TopCenter)
-                    .background(color = colorResource(MR.colors.red))
+                    .background(color = Colors.red)
             )
             Column(
                 modifier = Modifier
@@ -57,22 +63,22 @@ class TutorialSafetyScreen : BaseScreen() {
             ) {
                 Text(
                     modifier = Modifier.padding(horizontal = 128.dp),
-                    text = stringResource(MR.strings.tutorial_safety_title),
-                    color = colorResource(MR.colors.white),
+                    text = stringResource(Res.string.tutorial_safety_title),
+                    color = Colors.white,
                     style = h1()
                 )
                 Spacer(modifier = Modifier.height(32.dp))
                 Text(
                     modifier = Modifier.padding(horizontal = 48.dp),
-                    text = stringResource(MR.strings.tutorial_safety_description),
-                    color = colorResource(MR.colors.white),
+                    text = stringResource(Res.string.tutorial_safety_description),
+                    color = Colors.white,
                     style = body()
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 Text(
                     modifier = Modifier.padding(horizontal = 80.dp),
-                    text = stringResource(MR.strings.tutorial_safety_subtitle),
-                    color = colorResource(MR.colors.white),
+                    text = stringResource(Res.string.tutorial_safety_subtitle),
+                    color = Colors.white,
                     style = h3()
                 )
                 Spacer(modifier = Modifier.height(40.dp))
@@ -81,7 +87,7 @@ class TutorialSafetyScreen : BaseScreen() {
                         .padding(horizontal = 48.dp)
                         .padding(bottom = 48.dp)
                         .fillMaxWidth(),
-                    text = stringResource(MR.strings.tutorial_button),
+                    text = stringResource(Res.string.tutorial_button),
                     onClick = { navigator.push(TutorialPrivacyScreen()) }
                 )
             }
