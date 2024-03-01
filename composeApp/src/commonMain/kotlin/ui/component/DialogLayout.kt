@@ -15,9 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
-import com.homato.oddspot.MR
-import dev.icerock.moko.resources.compose.painterResource
+import oddspot_app.composeapp.generated.resources.Res
+import oddspot_app.composeapp.generated.resources.eye_slash
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun DialogLayout(
     iconId: Int? = null,
@@ -46,7 +49,7 @@ fun DialogLayout(
                 ) {
                     Icon(
                         modifier = Modifier.size(38.dp),
-                        painter = painterResource(MR.images.eye_slash),
+                        painter = painterResource(Res.drawable.eye_slash),
                         contentDescription = null,
                     )
                 }

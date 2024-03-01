@@ -12,10 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import cafe.adriel.voyager.koin.getScreenModel
-import com.homato.oddspot.MR
-import dev.icerock.moko.resources.compose.colorResource
 import ui.base.BaseScreen
 import ui.util.CameraPosition
+import ui.util.Colors
 import ui.util.LatLong
 
 class ExploreScreen : BaseScreen() {
@@ -43,7 +42,7 @@ class ExploreScreen : BaseScreen() {
                 modifier = Modifier.fillMaxSize().background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
-                            colorResource(MR.colors.black),
+                            Colors.black,
                             Color.Transparent
                         ),
                         endY = 300f
@@ -54,7 +53,7 @@ class ExploreScreen : BaseScreen() {
                 modifier = Modifier.fillMaxSize().background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
-                            colorResource(MR.colors.black),
+                            Colors.black,
                             Color.Transparent
                         ),
                         endY = 2000f,

@@ -1,4 +1,3 @@
-import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 
 plugins {
@@ -10,7 +9,6 @@ plugins {
     alias(libs.plugins.sqldelight)
     alias(libs.plugins.ksp)
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
-    id("dev.icerock.mobile.multiplatform-resources") // For some reason alias() doesn't work here
 }
 
 kotlin {
@@ -28,21 +26,6 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-
-//    listOf(
-//        iosX64(),
-//        iosArm64(),
-//        iosSimulatorArm64()
-//    )
-//        .forEach { iosTarget ->
-//        iosTarget.binaries.framework {
-//            isStatic = true // https://github.com/JetBrains/compose-multiplatform/issues/3386#issuecomment-1656695188
-//            baseName = "ComposeApp"
-//            freeCompilerArgs += "-Xbinary=bundleId=com.homato.oddspot"
-//            export(libs.moko.resources)
-//            export(libs.moko.graphics)
-//        }
-//    }
 
     cocoapods {
         summary = "Some description for the Shared Module"
@@ -68,7 +51,7 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(compose.ui)
-            @OptIn(ExperimentalComposeLibrary::class) implementation(compose.components.resources)
+            implementation(compose.components.resources)
 
             // Koin
             implementation(libs.koin.core)
@@ -92,10 +75,6 @@ kotlin {
             // Datetime
             implementation(libs.kotlinx.datetime)
 
-            // MOKO
-            api(libs.moko.resources)
-            api(libs.moko.resources.compose)
-
             // Voyager
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.screenModel)
@@ -109,11 +88,6 @@ kotlin {
             implementation(libs.kermit.crashlytics)
 
         }
-        // MOKO workaround https://github.com/icerockdev/moko-resources/issues/618#issuecomment-1861635765
-        getByName("androidMain").dependsOn(commonMain)
-        getByName("iosArm64Main").dependsOn(commonMain)
-        getByName("iosX64Main").dependsOn(commonMain)
-        getByName("iosSimulatorArm64Main").dependsOn(commonMain)
 
         androidMain.dependencies {
             // UI
@@ -151,7 +125,7 @@ android {
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
-    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
+//    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
         applicationId = "com.homato.oddspot"
@@ -214,16 +188,6 @@ sqldelight {
             packageName.set("com.homato.oddspot")
         }
     }
-}
-
-// MOKO config
-//multiplatformResources {
-//    resourcesPackage.set("com.homato.oddspot")
-//    resourcesPackage = "com.homato.oddspot"
-//}
-
-multiplatformResources {
-    multiplatformResourcesPackage = "com.homato.oddspot" // required
 }
 
 secrets {

@@ -1,4 +1,5 @@
 
+
 import android.Manifest
 import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
@@ -21,12 +22,15 @@ import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
-import com.homato.oddspot.MR
-import dev.icerock.moko.resources.compose.stringResource
+import oddspot_app.composeapp.generated.resources.Res
+import oddspot_app.composeapp.generated.resources.permission_fine_location_rationale
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import ui.screen.explore.ExploreMarker
 import ui.util.CameraLocationBounds
 import ui.util.CameraPosition
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 actual fun GoogleMaps(
     modifier: Modifier,
@@ -42,11 +46,11 @@ actual fun GoogleMaps(
         permissions = mapOf(
             Pair(
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                stringResource(MR.strings.permission_fine_location_rationale)
+                stringResource(Res.string.permission_fine_location_rationale)
             ),
             Pair(
                 Manifest.permission.ACCESS_COARSE_LOCATION,
-                stringResource(MR.strings.permission_fine_location_rationale)
+                stringResource(Res.string.permission_fine_location_rationale)
             ),
         ),
         onPermissionsGranted = onPermissionsGranted

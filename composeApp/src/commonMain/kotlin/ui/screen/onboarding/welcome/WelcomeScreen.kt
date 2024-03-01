@@ -22,21 +22,25 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.homato.oddspot.MR
-import com.homato.oddspot.MR.colors.background
-import dev.icerock.moko.resources.compose.colorResource
-import dev.icerock.moko.resources.compose.stringResource
+import oddspot_app.composeapp.generated.resources.Res
+import oddspot_app.composeapp.generated.resources.welcome_button
+import oddspot_app.composeapp.generated.resources.welcome_subtitle
+import oddspot_app.composeapp.generated.resources.welcome_title
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import ui.base.BaseScreen
 import ui.component.button.PrimaryButton
 import ui.screen.explore.ExploreScreen
 import ui.screen.onboarding.get_started.GetStartedScreen
 import ui.screen.onboarding.tutorial.TutorialExploreScreen
+import ui.util.Colors
 import ui.util.Consume
 import ui.util.h1
 import ui.util.h3
 
 class WelcomeScreen : BaseScreen() {
 
+    @OptIn(ExperimentalResourceApi::class)
     @Composable
     override fun ScreenContent(snackbarHostState: SnackbarHostState) {
         val navigator = LocalNavigator.currentOrThrow
@@ -55,12 +59,12 @@ class WelcomeScreen : BaseScreen() {
         }
         Box(
             modifier = Modifier
-                .background(color = colorResource(background))
+                .background(color = Colors.background)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
         ) {
             if (state.isLoading) {
-//                CircularProgressIndicator(color = colorResource(MR.colors.red))
+//                CircularProgressIndicator(color = Colors.red)
 //                LinearProgressIndicator()
                 return@Box
             }
@@ -71,15 +75,15 @@ class WelcomeScreen : BaseScreen() {
             ) {
                 Text(
                     modifier = Modifier.padding(horizontal = 64.dp),
-                    text = stringResource(MR.strings.welcome_title),
-                    color = colorResource(MR.colors.white),
+                    text = stringResource(Res.string.welcome_title),
+                    color = Colors.white,
                     style = h1()
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 Text(
                     modifier = Modifier.padding(horizontal = 48.dp),
-                    text = stringResource(MR.strings.welcome_subtitle),
-                    color = colorResource(MR.colors.white),
+                    text = stringResource(Res.string.welcome_subtitle),
+                    color = Colors.white,
                     style = h3()
                 )
             }
@@ -89,7 +93,7 @@ class WelcomeScreen : BaseScreen() {
                     .padding(bottom = 48.dp)
                     .align(Alignment.BottomCenter)
                     .fillMaxWidth(),
-                text = stringResource(MR.strings.welcome_button),
+                text = stringResource(Res.string.welcome_button),
                 onClick = { navigator.push(TutorialExploreScreen()) }
             )
         }
