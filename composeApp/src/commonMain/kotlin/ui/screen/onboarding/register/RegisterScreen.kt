@@ -75,6 +75,7 @@ class RegisterScreen : BaseScreen() {
                 is RegisterEventType.AccountCreatedEvent -> {
                     navigator.replaceAll(ExploreScreen())
                 }
+
                 is RegisterEventType.RegistrationError -> GenericErrorSnackbar(snackbarHostState)
             }
         }
@@ -113,7 +114,11 @@ class RegisterScreen : BaseScreen() {
             }
             AnimatedVisibility(visible = state.emailError == EmailError.PATTERN_ERROR) {
                 Text(
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 48.dp).padding(start = 16.dp).padding(top = 4.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 48.dp)
+                        .padding(start = 16.dp)
+                        .padding(top = 4.dp),
                     text = when (state.emailError) {
                         EmailError.PATTERN_ERROR -> stringResource(Res.string.register_error_email)
                         else -> ""
@@ -144,7 +149,10 @@ class RegisterScreen : BaseScreen() {
                 },
                 trailingIcon = {
                     Icon(
-                        painter = painterResource(if (state.passwordPreview) Res.drawable.eye_slash else Res.drawable.eye),
+                        painter = painterResource(
+                            if (state.passwordPreview) Res.drawable.eye_slash
+                            else Res.drawable.eye
+                        ),
                         contentDescription = null,
                         tint = Colors.red,
                         modifier = Modifier
@@ -157,7 +165,8 @@ class RegisterScreen : BaseScreen() {
             )
             AnimatedVisibility(visible = passwordFieldError) {
                 Text(
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 48.dp).padding(start = 16.dp).padding(top = 4.dp),
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 48.dp)
+                        .padding(start = 16.dp).padding(top = 4.dp),
                     text = getPasswordErrorMessage(state.passwordError),
                     style = footnote().copy(textAlign = TextAlign.Start),
                 )
@@ -183,7 +192,10 @@ class RegisterScreen : BaseScreen() {
                 },
                 trailingIcon = {
                     Icon(
-                        painter = painterResource(if (state.passwordPreview) Res.drawable.eye_slash else Res.drawable.eye),
+                        painter = painterResource(
+                            if (state.passwordPreview) Res.drawable.eye_slash
+                            else Res.drawable.eye
+                        ),
                         contentDescription = null,
                         tint = Colors.red,
                         modifier = Modifier
@@ -194,7 +206,10 @@ class RegisterScreen : BaseScreen() {
             )
             AnimatedVisibility(visible = state.passwordError == PasswordError.PASSWORDS_NOT_MATCHING) {
                 Text(
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 48.dp).padding(start = 16.dp).padding(top = 4.dp),
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(horizontal = 48.dp)
+                        .padding(start = 16.dp)
+                        .padding(top = 4.dp),
                     text = when (state.passwordError) {
                         PasswordError.PASSWORDS_NOT_MATCHING -> {
                             stringResource(Res.string.register_error_password_passwords_not_matching)

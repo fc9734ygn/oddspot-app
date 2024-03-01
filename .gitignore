@@ -18,3 +18,4 @@ captures
 **/xcshareddata/WorkspaceSettings.xcsettings
 /composeApp/src/commonMain/kotlin/Secrets.kt
 /iosApp/Pods/
+/iosApp/iosApp/AppSecrets.plist

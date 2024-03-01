@@ -102,10 +102,9 @@ kotlin {
             // Google Maps
             implementation(libs.google.play.services.android.location)
             api(libs.google.play.services.maps)  // api means its exposed to the pure-android app (for init)
-            // Google maps for Compose for Android
             implementation(libs.google.maps.android.compose)
-            // Clustering
-            implementation(libs.google.maps.android.compose.utils)
+            implementation(libs.google.maps.android.compose.utils) // Clustering
+
             //Voyager
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.koin)
@@ -125,7 +124,6 @@ android {
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
-//    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
         applicationId = "com.homato.oddspot"

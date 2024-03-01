@@ -1,6 +1,5 @@
 package ui.screen.onboarding.welcome
 
-import domain.holder.UserHolder
 import domain.use_case.flag.GetTutorialSeenUseCase
 import domain.use_case.user.GetInitialUserState
 import kotlinx.coroutines.flow.update
@@ -11,7 +10,6 @@ import util.Event
 @Factory
 class WelcomeScreenModel(
     private val getTutorialSeenUseCase: GetTutorialSeenUseCase,
-    private val userHolder: UserHolder,
     private val getInitialUserState: GetInitialUserState
 ) : BaseScreenModel<WelcomeScreenState>(WelcomeScreenState.Initial) {
 

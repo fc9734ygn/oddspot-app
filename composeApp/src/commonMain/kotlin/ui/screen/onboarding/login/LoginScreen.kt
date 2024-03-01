@@ -124,7 +124,11 @@ class LoginScreen : BaseScreen() {
                     PasswordVisualTransformation()
                 },
                 trailingIcon = {
-                    Icon(painter = painterResource(if (state.passwordPreview) Res.drawable.eye_slash else Res.drawable.eye),
+                    Icon(
+                        painter = painterResource(
+                            if (state.passwordPreview) Res.drawable.eye_slash
+                            else Res.drawable.eye
+                        ),
                         contentDescription = null,
                         modifier = Modifier.size(24.dp).clickable {
                             screenModel.onPasswordPreviewClick()

@@ -33,7 +33,7 @@ class ExploreScreen : BaseScreen() {
             GoogleMaps(
                 modifier = Modifier.fillMaxSize(),
                 markers = state.markers,
-                cameraPosition = CameraPosition(currentUserLatLong, 13f),
+                cameraPosition = CameraPosition(currentUserLatLong, MAP_ZOOM_DEFAULT),
                 cameraLocationBounds = null,
                 userCurrentLocation = state.userCurrentLocation,
                 onPermissionsGranted = { screenModel.getCurrentUserLocation() }
@@ -62,5 +62,9 @@ class ExploreScreen : BaseScreen() {
                 )
             )
         }
+    }
+
+    companion object {
+        const val MAP_ZOOM_DEFAULT = 13f
     }
 }

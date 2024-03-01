@@ -1,6 +1,7 @@
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.interop.UIKitView
@@ -27,6 +28,9 @@ actual fun GoogleMaps(
     userCurrentLocation: Pair<Double, Double>?,
     onPermissionsGranted: () -> Unit
 ) {
+    LaunchedEffect(Unit) {
+        onPermissionsGranted()
+    }
     val mapsView = remember {
         GMSMapView().apply {
             setMyLocationEnabled(true)

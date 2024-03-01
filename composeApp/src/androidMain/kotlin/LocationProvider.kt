@@ -21,7 +21,9 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import ui.util.Location
 
 actual class LocationProvider() {
-
+    companion object{
+        const val LOCATION_REQUEST_INTERVAL = 10000L
+    }
     @OptIn(ExperimentalCoroutinesApi::class)
     actual suspend fun getUserLocation(): Result<Location, UserLocationError> {
 
@@ -85,7 +87,7 @@ actual class LocationProvider() {
             val fusedLocationProviderClient =
                 LocationServices.getFusedLocationProviderClient(appContext)
 
-            val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 10000)
+            val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, LOCATION_REQUEST_INTERVAL)
                 .build()
 
             val locationCallback = object : LocationCallback() {
@@ -105,7 +107,8 @@ actual class LocationProvider() {
             }
 
             awaitClose {
-                fusedLocationProviderClient.removeLocationUpdates(locationCallback) // Clean up when the flow collector is done
+                // Clean up when the flow collector is done
+                fusedLocationProviderClient.removeLocationUpdates(locationCallback)
             }
         }
 }
