@@ -13,3 +13,8 @@ fun Location.isLocationValid(): Boolean {
 fun LatLong.toLocation(): Location {
     return Location(latitude, longitude)
 }
+
+fun Location.toLatLong(): LatLong {
+    return LatLong(latitude, longitude)
+}
+

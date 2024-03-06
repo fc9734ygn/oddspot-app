@@ -17,15 +17,16 @@ import platform.CoreLocation.CLLocationCoordinate2DMake
 import ui.screen.explore.ExploreMarker
 import ui.util.CameraLocationBounds
 import ui.util.CameraPosition
+import ui.util.Location
 
 @OptIn(ExperimentalForeignApi::class)
 @Composable
-actual fun GoogleMaps(
+actual fun ExploreMap(
     modifier: Modifier,
     markers: List<ExploreMarker>?,
     cameraPosition: CameraPosition?,
     cameraLocationBounds: CameraLocationBounds?,
-    userCurrentLocation: Pair<Double, Double>?,
+    userCurrentLocation: Location?,
     onPermissionsGranted: () -> Unit
 ) {
     LaunchedEffect(Unit) {

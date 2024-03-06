@@ -37,7 +37,7 @@ class GetExploreUseCase(
             Resource.Success(
                 ExploreModel(
                     sortedSpots,
-                    Pair(currentUserLocation.latitude, currentUserLocation.longitude)
+                    currentUserLocation
                 )
             )
         )

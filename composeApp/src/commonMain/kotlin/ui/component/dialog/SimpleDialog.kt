@@ -1,4 +1,4 @@
-package ui.component
+package ui.component.dialog
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ColumnScope
@@ -20,9 +20,7 @@ fun SimpleDialog(
     annotatedSubtitle: AnnotatedString? = null,
     iconId: Int? = null,
     confirmButtonText: String? = null,
-    redConfirmButton: Boolean = false,
     dismissButtonText: String? = null,
-    loading: Boolean = false,
     confirmButtonEnabled: Boolean = true,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,

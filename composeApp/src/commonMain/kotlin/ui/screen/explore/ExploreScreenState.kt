@@ -1,12 +1,13 @@
 package ui.screen.explore
 
 import androidx.compose.runtime.Immutable
+import ui.util.Location
 import util.Event
 
 
 @Immutable
 data class ExploreScreenState(
-    val userCurrentLocation: Pair<Double, Double>?,
+    val userCurrentLocation: Location?,
     val markers: List<ExploreMarker>,
     val isLoading: Boolean,
     val event: Event<ExploreScreenEvent>?

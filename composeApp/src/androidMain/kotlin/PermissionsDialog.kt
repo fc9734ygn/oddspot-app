@@ -7,7 +7,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
-import ui.component.SimpleDialog
+import ui.component.dialog.SimpleDialog
 
 @Composable
 fun PermissionDialog(

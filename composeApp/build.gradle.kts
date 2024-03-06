@@ -87,6 +87,10 @@ kotlin {
             implementation(libs.kermit)
             implementation(libs.kermit.crashlytics)
 
+            // Image picker and camera
+            implementation(libs.peekaboo.ui)
+            implementation(libs.peekaboo.image.picker)
+
         }
 
         androidMain.dependencies {

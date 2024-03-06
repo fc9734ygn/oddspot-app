@@ -1,7 +1,6 @@
 package ui.screen.explore
 
-import GoogleMaps
-import androidx.compose.foundation.background
+import ExploreMap
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.SnackbarHostState
@@ -9,13 +8,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import ui.base.BaseScreen
+import ui.component.MapGradient
+import ui.component.button.PrimaryButton
+import ui.screen.submit.SubmitSpotScreen
 import ui.util.CameraPosition
-import ui.util.Colors
 import ui.util.LatLong
+import ui.util.toLatLong
 
 class ExploreScreen : BaseScreen() {
 
@@ -24,42 +26,31 @@ class ExploreScreen : BaseScreen() {
 
         val screenModel = getScreenModel<ExploreScreenModel>()
         val state by screenModel.state.collectAsState()
+        val navigator = LocalNavigator.currentOrThrow
 
         Box(modifier = Modifier.fillMaxSize()) {
             val currentUserLatLong =
-                state.userCurrentLocation?.let { LatLong(it.first, it.second) }
+                state.userCurrentLocation?.toLatLong()
                     ?: LatLong(0.0, 0.0)
 
-            GoogleMaps(
+            ExploreMap(
                 modifier = Modifier.fillMaxSize(),
                 markers = state.markers,
                 cameraPosition = CameraPosition(currentUserLatLong, MAP_ZOOM_DEFAULT),
-                cameraLocationBounds = null,
                 userCurrentLocation = state.userCurrentLocation,
                 onPermissionsGranted = { screenModel.getCurrentUserLocation() }
             )
-            Box(
-                modifier = Modifier.fillMaxSize().background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(
-                            Colors.black,
-                            Color.Transparent
-                        ),
-                        endY = 300f
-                    )
-                )
+            MapGradient(
+                endY = 200f
             )
-            Box(
-                modifier = Modifier.fillMaxSize().background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(
-                            Colors.black,
-                            Color.Transparent
-                        ),
-                        endY = 2000f,
-                        startY = Float.POSITIVE_INFINITY
-                    )
-                )
+            MapGradient(
+                startY = 2600f,
+                endY = 2800f,
+                reverse = true
+            )
+            PrimaryButton(
+                onClick = { navigator.push(SubmitSpotScreen()) },
+                text = "Submit spot"
             )
         }
     }

@@ -1,4 +1,4 @@
-package ui.component
+package ui.component.input
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -17,7 +17,7 @@ import ui.util.footnote
 import ui.util.input
 
 @Composable
-fun SimpleTextInput(
+fun RoundTextInput(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
@@ -44,7 +44,7 @@ fun SimpleTextInput(
             Text(
                 label,
                 style = footnote(),
-                color = Colors.black
+                color = Colors.red
             )
         },
         visualTransformation = visualTransformation,

@@ -6,6 +6,7 @@ import domain.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.koin.core.annotation.Factory
+import ui.util.Location
 
 @Factory
 class SubmitSpotUseCase(
@@ -14,9 +15,9 @@ class SubmitSpotUseCase(
     operator fun invoke(
         title: String,
         description: String,
-        location: Pair<Double, Double>,
+        location: Location,
         difficulty: Int,
-        imageUri: String
+        image: ByteArray
     ): Flow<Resource<Unit>> = flow {
 
         emit(Resource.Loading())
@@ -26,7 +27,7 @@ class SubmitSpotUseCase(
             description,
             location,
             difficulty,
-            imageUri
+            image
         ).mapError {
             emit(Resource.Error())
             return@flow

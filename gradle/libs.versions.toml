@@ -34,7 +34,7 @@ android-location = "21.1.0"
 google-maps = "18.2.0"
 pods-google-maps = "8.3.1"
 pods-google-mapsUtils = "4.2.2"
-
+peekaboo = "0.4.3"
 
 [libraries]
 
@@ -106,6 +106,10 @@ google-play-services-android-location = { module = "com.google.android.gms:play-
 google-play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "google-maps" }
 google-maps-android-compose = { module = "com.google.maps.android:maps-compose", version.ref = "android-maps-compose" }
 google-maps-android-compose-utils = { module = "com.google.maps.android:maps-compose-utils", version.ref = "android-maps-compose" }
+
+# Image picker and camera
+peekaboo-ui = { module = "io.github.onseok:peekaboo-ui", version.ref = "peekaboo" }
+peekaboo-image-picker = { module = "io.github.onseok:peekaboo-image-picker", version.ref = "peekaboo" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

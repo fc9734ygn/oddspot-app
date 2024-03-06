@@ -44,8 +44,8 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.base.BaseScreen
-import ui.component.SimpleTextInput
 import ui.component.button.PrimaryButton
+import ui.component.input.RoundTextInput
 import ui.component.snackbar.GenericErrorSnackbar
 import ui.screen.explore.ExploreScreen
 import ui.util.Colors
@@ -88,7 +88,7 @@ class LoginScreen : BaseScreen() {
             )
             Spacer(modifier = Modifier.height(24.dp))
             InitialFocusRequester {
-                SimpleTextInput(
+                RoundTextInput(
                     value = state.email,
                     onValueChange = screenModel::onEmailInputChange,
                     label = stringResource(Res.string.register_email_label),
@@ -105,7 +105,7 @@ class LoginScreen : BaseScreen() {
                 )
             }
             Spacer(modifier = Modifier.height(32.dp))
-            SimpleTextInput(
+            RoundTextInput(
                 value = state.password,
                 onValueChange = screenModel::onPasswordInputChange,
                 label = stringResource(Res.string.register_password_label),

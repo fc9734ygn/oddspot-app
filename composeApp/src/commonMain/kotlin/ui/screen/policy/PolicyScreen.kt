@@ -52,7 +52,27 @@ class PolicyScreen : Screen {
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "Lorem ipsum dolor sit amet, consectetur Aliquam semper, tortor id dignissim posuere, ipsum justo malesuada arcu, vel porttitor lectus nisi sollicitudin mi. Suspendisse lorem libero, fermentum quis elit a, vehicula commodo urna. Duis viverra blandit facilisis. Pellentesque vitae pharetra nulla. Integer tristique, nisl non rutrum gravida, enim ligula placerat lectus, et bibendum nibh elit in nisi. Vestibulum nec placerat lectus. Nulla pretium purus id risus porttitor faucibus. Maecenas pretium erat lorem, eu tincidunt massa molestie et. Phasellus sed consequat nunc. Pellentesque accumsan luctus elit et tempus. adipiscing elit. Proin nunc sapien, tincidunt vitae quam quis, rutrum tristique risus. Quisque non dignissim leo. Nam fringilla elit eu vulputate mattis. Nullam viverra tincidunt dui, ultrices rutrum turpis malesuada at. Aliquam et pellentesque dolor. Phasellus iaculis quam est, vel ultrices nulla tincidunt ac. In at sapien feugiat neque dapibus feugiat et ac urna. Fusce eget elit nunc. Cras eu tortor quis enim viverra efficitur.",
+                text = "Lorem ipsum dolor sit amet, consectetur Aliqu" +
+                        "am semper, tortor id dignissim posuere, i" +
+                        "psum justo malesuada arcu, vel porttitor lec" +
+                        "tus nisi sollicitudin mi. Suspendisse lorem l" +
+                        "ibero, fermentum quis elit a, vehicula commod" +
+                        "o urna. Duis viverra blandit facilisis. Pellent" +
+                        "esque vitae pharetra nulla. Integer tristique, n" +
+                        "isl non rutrum gravida, enim ligula placerat lect" +
+                        "us, et bibendum nibh elit in nisi. Vestibulum nec" +
+                        " placerat lectus. Nulla pretium purus id risus por" +
+                        "ttitor faucibus. Maecenas pretium erat lorem, eu tin" +
+                        "cidunt massa molestie et. Phasellus sed consequat nun" +
+                        "c. Pellentesque accumsan luctus elit et tempus. adi" +
+                        "piscing elit. Proin nunc sapien, tincidunt vitae quam" +
+                        " quis, rutrum tristique risus. Quisque non dignissim " +
+                        "leo. Nam fringilla elit eu vulputate mattis. Nullam " +
+                        "viverra tincidunt dui, ultrices rutrum turpis malesuad" +
+                        "a at. Aliquam et pellentesque dolor. Phasellus iaculi" +
+                        "s quam est, vel ultrices nulla tincidunt ac. In at sa" +
+                        "pien feugiat neque dapibus feugiat et ac urna. Fusce " +
+                        "eget elit nunc. Cras eu tortor quis enim viverra efficitur.",
                 color = Colors.white,
                 style = body().copy(textAlign = TextAlign.Center)
             )
@@ -64,7 +84,34 @@ class PolicyScreen : Screen {
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet nisi eget felis ornare egestas non porta ante. Aenean vitae aliquam massa. Sed aliquam quam id justo semper consectetur. Vestibulum porta ipsum id odio auctor suscipit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Morbi blandit sem non lorem vehicula placerat. Vivamus dictum porttitor dui, in consequat purus eleifend at. Donec magna massa, vehicula at odio eget, convallis rhoncus odio. Etiam porttitor nunc ligula, non vehicula enim luctus a. Donec quis lorem arcu. Sed sed ultricies purus. Maecenas malesuada vel nulla sit Ut at pulvinar enim. Donec ut massa eget enim commodo tristique sit amet vitae turpis. Sed sodales pulvinar cursus. Donec posuere justo et consequat eleifend. Nulla nibh quam, pellentesque eu dui nec, condimentum fermentum ante. Pellentesque eleifend, mi non posuere suscipit, arcu mi vestibulum velit, vitae rhoncus nunc purus id quam. Integer egestas blandit finibus. Proin interdum, justo in cursus pellentesque, massa erat suscipit mi, a vulputate metus libero eu elit. amet elementum. Pellentesque dictum turpis ut urna ultrices porta. Etiam fringilla nec quam ac sodales. Proin nunc sapien, tincidunt vitae quam quis, rutrum tristique risus. Quisque non dignissim leo. Nam fringilla elit eu vulputate mattis. Nullam viverra tincidunt dui, ultrices rutrum turpis malesuada at. Aliquam et pellentesque dolor. Phasellus iaculis quam est, vel ultrices nulla tincidunt ac. In at sapien feugiat neque dapibus feugiat et ac urna. Fusce eget elit nunc. Cras eu tortor quis enim viverra efficitur.",
+                text = "Lorem ipsum dolor sit amet, consectetur adipiscing el" +
+                        "it. Vestibulum sit amet nisi eget felis ornare egest" +
+                        "as non porta ante. Aenean vitae aliquam massa. Sed al" +
+                        "iquam quam id justo semper consectetur. Vestibulum por" +
+                        "ta ipsum id odio auctor suscipit. Vestibulum ante ipsum " +
+                        "primis in faucibus orci luctus et ultrices posuere cubi" +
+                        "lia curae; Morbi blandit sem non lorem vehicula placerat" +
+                        ". Vivamus dictum porttitor dui, in consequat purus eleifen" +
+                        "d at. Donec magna massa, vehicula at odio eget, convallis r" +
+                        "honcus odio. Etiam porttitor nunc ligula, non vehicula enim " +
+                        "luctus a. Donec quis lorem arcu. Sed sed ultricies purus. Ma" +
+                        "ecenas malesuada vel nulla sit Ut at pulvinar enim. Donec ut" +
+                        " massa eget enim commodo tristique sit amet vitae turpis. Se" +
+                        "d sodales pulvinar cursus. Donec posuere justo et consequat " +
+                        "eleifend. Nulla nibh quam, pellentesque eu dui nec, condimen" +
+                        "tum fermentum ante. Pellentesque eleifend, mi non posuere susc" +
+                        "ipit, arcu mi vestibulum velit, vitae rhoncus nunc purus id qu" +
+                        "am. Integer egestas blandit finibus. Proin interdum, justo in " +
+                        "cursus pellentesque, massa erat suscipit mi, a vulputate metus" +
+                        " libero eu elit. amet elementum. Pellentesque dictum turpis u" +
+                        " urna ultrices porta. Etiam fringilla nec quam ac sodales. Pr" +
+                        "oin nunc sapien, tincidunt vitae quam quis, rutrum tristique " +
+                        "risus. Quisque non dignissim leo. Nam fringilla elit eu vulpu" +
+                        "tate mattis. Nullam viverra tincidunt dui, ultrices rutrum tu" +
+                        "rpis malesuada at. Aliquam et pellentesque dolor. Phasellus i" +
+                        "aculis quam est, vel ultrices nulla tincidunt ac. In at sapie" +
+                        "n feugiat neque dapibus feugiat et ac urna. Fusce eget elit n" +
+                        "unc. Cras eu tortor quis enim viverra efficitur.",
                 color = Colors.white,
                 style = body().copy(textAlign = TextAlign.Center)
             )

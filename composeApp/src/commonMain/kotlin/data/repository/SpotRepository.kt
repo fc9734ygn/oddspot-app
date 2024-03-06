@@ -1,12 +1,13 @@
 package data.repository
 
+import API_BASE_URL
 import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.getOrThrow
 import com.github.michaelbull.result.runCatching
-import API_BASE_URL
 import data.ENDPOINT_SUBMIT_SPOT
 import data.MULTIPART_DATA_KEY
 import data.MULTIPART_IMAGE_KEY
+import data.MimeTypeMapper
 import data.UPLOAD_IMAGE_FILE_NAME
 import data.request.SubmitSpotRequest
 import domain.use_case.spot.model.Spot
@@ -26,12 +27,12 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
 import kotlinx.serialization.json.Json
 import org.koin.core.annotation.Singleton
+import ui.util.Location
 
 @Suppress("MagicNumber")
 @Singleton
 class SpotRepository(
     private val client: HttpClient,
-    private val fileProvider: FileProvider
 ) {
     suspend fun getVisitedSpots(): List<VisitedSpot>? {
         // temporary mock data
@@ -50,12 +51,11 @@ class SpotRepository(
     suspend fun submitSpot(
         title: String,
         description: String,
-        location: Pair<Double, Double>,
+        location: Location,
         difficulty: Int,
-        imageUri: String
+        image: ByteArray
     ): Result<Unit, Throwable> = runCatching {
-        val imageFile = fileProvider.readBytesFromUri(imageUri).getOrThrow()
-        val mimeType = fileProvider.getMimeType(imageUri).getOrThrow()
+        val mimeType = MimeTypeMapper.detectImageFormat(image).getOrThrow()
         val multipartData = MultiPartFormDataContent(
             formData {
                 append(
@@ -64,13 +64,13 @@ class SpotRepository(
                         SubmitSpotRequest(
                             title,
                             description,
-                            location.first,
-                            location.second,
+                            location.latitude,
+                            location.longitude,
                             difficulty
                         )
                     )
                 )
-                append(MULTIPART_IMAGE_KEY, imageFile, Headers.build {
+                append(MULTIPART_IMAGE_KEY, image, Headers.build {
                     append(HttpHeaders.ContentDisposition, "filename=$UPLOAD_IMAGE_FILE_NAME")
                     append(HttpHeaders.ContentType, mimeType)
                 })
