@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import ui.base.BaseScreen
+import ui.base.BaseTabScreen
 import ui.component.MapGradient
 import ui.component.button.PrimaryButton
 import ui.screen.submit.SubmitSpotScreen
@@ -19,7 +19,7 @@ import ui.util.CameraPosition
 import ui.util.LatLong
 import ui.util.toLatLong
 
-class ExploreScreen : BaseScreen() {
+class ExploreScreen : BaseTabScreen() {
 
     @Composable
     override fun ScreenContent(snackbarHostState: SnackbarHostState) {

@@ -1,4 +1,4 @@
-package ui.screen.onboarding.welcome
+package ui.screen.splash
 
 import domain.use_case.flag.GetTutorialSeenUseCase
 import domain.use_case.user.GetInitialUserState
@@ -8,10 +8,10 @@ import ui.base.BaseScreenModel
 import util.Event
 
 @Factory
-class WelcomeScreenModel(
+class SplashScreenModel(
     private val getTutorialSeenUseCase: GetTutorialSeenUseCase,
     private val getInitialUserState: GetInitialUserState
-) : BaseScreenModel<WelcomeScreenState>(WelcomeScreenState.Initial) {
+) : BaseScreenModel<SplashScreenState>(SplashScreenState.Initial) {
 
     init {
         getState()
@@ -25,7 +25,7 @@ class WelcomeScreenModel(
                     mutableState.update {
                         it.copy(
                             isLoading = false,
-                            event = Event(WelcomeScreenEvent.NavigateToMap)
+                            event = Event(SplashScreenEvent.NavigateToMap)
                         )
                     }
                 } else {
@@ -47,7 +47,7 @@ class WelcomeScreenModel(
                 mutableState.update {
                     it.copy(
                         isLoading = false,
-                        event = if (tutorialWasShown) Event(WelcomeScreenEvent.NavigateToGetStarted) else null
+                        event = if (tutorialWasShown) Event(SplashScreenEvent.NavigateToGetStarted) else Event(SplashScreenEvent.NavigateWelcome)
                     )
                 }
             },

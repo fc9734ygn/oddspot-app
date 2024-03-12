@@ -151,4 +151,8 @@
     <string name="submit_spot_accessibility_info_description_average">Average - The spot may be in the suburban parts of the city, or I might need more time to find it due to other circumstances.</string>
     <string name="submit_spot_accessibility_info_description_hard">Hard - I might need to leave the city to find the spot. The spot can be in the forest/wild nature and there is no urban pathway/sidewalk/road leading to it.</string>
     <string name="submit_spot_no_image_error">Please select a photo</string>
+
+    <!-- Bottom navigation-->
+    <string name="bottom_nav_explore">Explore</string>
+    <string name="bottom_nav_account">Account</string>
 </resources>
