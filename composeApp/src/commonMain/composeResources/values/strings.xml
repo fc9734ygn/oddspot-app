@@ -40,10 +40,10 @@
 
     <!-- Tutorial-->
     <string name="tutorial_button">NEXT</string>
-    <string name="tutorial_explore_title">Ready to share your own discoveries?</string>
+    <string name="tutorial_explore_title">Ready to share \nyour own \ndiscoveries?</string>
     <string name="tutorial_explore_subtitle">Explore the map</string>
     <string name="tutorial_explore_description">Identify and navigate to intriguing spots nearby. Once you're at the location in real life, simply click on the marker in the app to unlock more details about the spot and earn points! Prepare yourself to explore and uncover hidden gems around you!</string>
-    <string name="tutorial_submit_title">Upload your own spots</string>
+    <string name="tutorial_submit_title">Upload your \nown spots</string>
     <string name="tutorial_submit_description">Capture a photo of the fascinating location or object, add an engaging title, and provide a concise description to help other users appreciate its uniqueness.</string>
     <string name="tutorial_safety_title">Safety first!</string>
     <string name="tutorial_safety_subtitle">Happy exploring!</string>

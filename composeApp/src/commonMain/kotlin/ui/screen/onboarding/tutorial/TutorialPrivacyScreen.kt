@@ -1,9 +1,9 @@
 package ui.screen.onboarding.tutorial
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -31,6 +31,7 @@ import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import oddspot_app.composeapp.generated.resources.Res
+import oddspot_app.composeapp.generated.resources.img_tutorial_privacy
 import oddspot_app.composeapp.generated.resources.tutorial_button
 import oddspot_app.composeapp.generated.resources.tutorial_privacy_and
 import oddspot_app.composeapp.generated.resources.tutorial_privacy_checkbox_prefix
@@ -41,6 +42,7 @@ import oddspot_app.composeapp.generated.resources.tutorial_privacy_terms
 import oddspot_app.composeapp.generated.resources.tutorial_privacy_terms_description_prefix
 import oddspot_app.composeapp.generated.resources.tutorial_privacy_title
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.base.BaseScreen
 import ui.component.button.PrimaryButton
@@ -70,41 +72,36 @@ class TutorialPrivacyScreen : BaseScreen() {
             }
         }
 
-        Box(
+        Column(
             modifier = Modifier
                 .background(color = Colors.background)
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
+                .verticalScroll(rememberScrollState())
+                .padding(48.dp),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Text(
+                text = stringResource(Res.string.tutorial_privacy_title),
+                color = Colors.white,
+                style = h1()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Image(
+                painterResource(Res.drawable.img_tutorial_privacy),
+                contentDescription = null,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
             Column(
-                modifier = Modifier.align(Alignment.TopCenter),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    modifier = Modifier.padding(horizontal = 64.dp).padding(top = 48.dp),
-                    text = stringResource(Res.string.tutorial_privacy_title),
-                    color = Colors.white,
-                    style = h1()
-                )
-                Box(
-                    modifier = Modifier.height(300.dp).width(200.dp)
-                        .background(color = Colors.red)
-                )
-            }
-            Column(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(horizontal = 48.dp),
-                verticalArrangement = Arrangement.Bottom,
-                horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.Center
             ) {
                 Text(
                     text = stringResource(Res.string.tutorial_privacy_description),
                     color = Colors.white,
                     style = body()
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(8.dp))
                 val privacyAndTermsReference = buildAnnotatedString {
                     append(stringResource(Res.string.tutorial_privacy_terms_description_prefix))
                     append(" ")
@@ -125,40 +122,39 @@ class TutorialPrivacyScreen : BaseScreen() {
                     color = Colors.darkGrey,
                     style = footnote()
                 )
-                Spacer(modifier = Modifier.height(32.dp))
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    PrimaryCheckbox(
-                        checked = state.isCheckboxChecked,
-                        onCheckedChange = screenModel::onCheckboxCheckedChange
-                    )
-                    Spacer(modifier = Modifier.width(12.dp))
-                    val privacyAndTermsAgreementText = buildAnnotatedString {
-                        append(stringResource(Res.string.tutorial_privacy_checkbox_prefix))
-                        append(" ")
-                        append(stringResource(Res.string.tutorial_privacy_policy))
-                        append(" ")
-                        append(stringResource(Res.string.tutorial_privacy_and))
-                        append(" ")
-                        append(stringResource(Res.string.tutorial_privacy_terms))
-                        append(stringResource(Res.string.tutorial_privacy_suffix))
-                    }
-                    Text(
-                        modifier = Modifier.clickable { screenModel.onCheckboxCheckedChange(!state.isCheckboxChecked) },
-                        text = privacyAndTermsAgreementText,
-                        color = Colors.darkGrey,
-                        style = footnote().copy(textAlign = TextAlign.Start)
-                    )
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                PrimaryCheckbox(
+                    checked = state.isCheckboxChecked,
+                    onCheckedChange = screenModel::onCheckboxCheckedChange
+                )
+                Spacer(modifier = Modifier.width(12.dp))
+                val privacyAndTermsAgreementText = buildAnnotatedString {
+                    append(stringResource(Res.string.tutorial_privacy_checkbox_prefix))
+                    append(" ")
+                    append(stringResource(Res.string.tutorial_privacy_policy))
+                    append(" ")
+                    append(stringResource(Res.string.tutorial_privacy_and))
+                    append(" ")
+                    append(stringResource(Res.string.tutorial_privacy_terms))
+                    append(stringResource(Res.string.tutorial_privacy_suffix))
                 }
-                Spacer(modifier = Modifier.height(32.dp))
-                PrimaryButton(
-                    modifier = Modifier
-                        .padding(bottom = 48.dp)
-                        .fillMaxWidth(),
-                    text = stringResource(Res.string.tutorial_button),
-                    onClick = screenModel::onNextClick,
-                    enabled = state.isCheckboxChecked
+                Text(
+                    modifier = Modifier.clickable { screenModel.onCheckboxCheckedChange(!state.isCheckboxChecked) },
+                    text = privacyAndTermsAgreementText,
+                    color = Colors.darkGrey,
+                    style = footnote().copy(textAlign = TextAlign.Start)
                 )
             }
+            Spacer(modifier = Modifier.height(8.dp))
+            PrimaryButton(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                text = stringResource(Res.string.tutorial_button),
+                onClick = screenModel::onNextClick,
+                enabled = state.isCheckboxChecked
+            )
         }
     }
 

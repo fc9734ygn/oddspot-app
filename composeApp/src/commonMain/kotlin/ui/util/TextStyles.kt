@@ -20,7 +20,8 @@ fun h1() : TextStyle {
        fontFamily = FontFamily(Font(Res.font.PassionOne_Regular)),
        fontSize = 48.sp,
        textAlign = TextAlign.Center,
-       color = Colors.white
+       color = Colors.white,
+       lineHeight = 45.sp
    )
 }
 

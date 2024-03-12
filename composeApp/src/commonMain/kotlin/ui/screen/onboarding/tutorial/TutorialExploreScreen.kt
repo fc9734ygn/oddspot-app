@@ -1,15 +1,14 @@
 package ui.screen.onboarding.tutorial
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.SnackbarHostState
@@ -21,11 +20,13 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import oddspot_app.composeapp.generated.resources.Res
+import oddspot_app.composeapp.generated.resources.img_tutorial_explore
 import oddspot_app.composeapp.generated.resources.tutorial_button
 import oddspot_app.composeapp.generated.resources.tutorial_explore_description
 import oddspot_app.composeapp.generated.resources.tutorial_explore_subtitle
 import oddspot_app.composeapp.generated.resources.tutorial_explore_title
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.base.BaseScreen
 import ui.component.button.PrimaryButton
@@ -41,59 +42,45 @@ class TutorialExploreScreen : BaseScreen() {
     override fun ScreenContent(snackbarHostState: SnackbarHostState) {
         val navigator = LocalNavigator.currentOrThrow
 
-        Box(
+        Column(
             modifier = Modifier
                 .background(color = Colors.background)
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
+                .verticalScroll(rememberScrollState())
+                .padding(vertical = 48.dp),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
+            Text(
+                modifier = Modifier.padding(horizontal = 24.dp),
+                text = stringResource(Res.string.tutorial_explore_title),
+                color = Colors.white,
+                style = h1()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Image(painterResource(Res.drawable.img_tutorial_explore), contentDescription = null)
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                modifier = Modifier.padding(horizontal = 32.dp),
+                text = stringResource(Res.string.tutorial_explore_subtitle),
+                color = Colors.white,
+                style = h3()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                modifier = Modifier.padding(horizontal = 32.dp),
+                text = stringResource(Res.string.tutorial_explore_description),
+                color = Colors.white,
+                style = body()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            PrimaryButton(
                 modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .padding(top = 64.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    modifier = Modifier.padding(horizontal = 24.dp),
-                    text = stringResource(Res.string.tutorial_explore_title),
-                    color = Colors.white,
-                    style = h1()
-                )
-                Box(
-                    modifier = Modifier.height(300.dp).width(200.dp)
-                        .background(color = Colors.red)
-                )
-            }
-            Column(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter),
-                verticalArrangement = Arrangement.Bottom,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    modifier = Modifier.padding(horizontal = 32.dp),
-                    text = stringResource(Res.string.tutorial_explore_subtitle),
-                    color = Colors.white,
-                    style = h3()
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    modifier = Modifier.padding(horizontal = 32.dp),
-                    text = stringResource(Res.string.tutorial_explore_description),
-                    color = Colors.white,
-                    style = body()
-                )
-                Spacer(modifier = Modifier.height(32.dp))
-                PrimaryButton(
-                    modifier = Modifier
-                        .padding(horizontal = 48.dp)
-                        .padding(bottom = 48.dp)
-                        .fillMaxWidth(),
-                    text = stringResource(Res.string.tutorial_button),
-                    onClick = { navigator.push(TutorialSubmitScreen()) }
-                )
-            }
+                    .padding(horizontal = 48.dp)
+                    .fillMaxWidth(),
+                text = stringResource(Res.string.tutorial_button),
+                onClick = { navigator.push(TutorialSubmitScreen()) }
+            )
         }
     }
 }
