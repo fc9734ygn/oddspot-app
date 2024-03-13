@@ -3,6 +3,7 @@ package ui.component.dialog
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -12,6 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -23,6 +25,7 @@ import ui.component.button.PrimaryButton
 import ui.component.input.LineTextInput
 import ui.util.Colors
 import ui.util.body
+import ui.util.footnote
 import ui.util.h3
 
 @OptIn(ExperimentalResourceApi::class)
@@ -34,7 +37,9 @@ fun InputDialog(
     inputValue: String,
     onInputValueChange: (String) -> Unit,
     onConfirmClick: () -> Unit,
-    isLoading: Boolean
+    isLoading: Boolean,
+    inputPlaceholder : String = "",
+    maxInputLength: Int? = null
 ) {
 
     Dialog(
@@ -51,22 +56,35 @@ fun InputDialog(
         ) {
             Text(
                 text = title,
-                style = h3()
+                style = h3().copy(textAlign = TextAlign.Start)
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             description?.let {
                 Text(
                     text = it,
-                    style = body()
+                    style = body().copy(textAlign = TextAlign.Start)
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(32.dp))
             LineTextInput(
                 modifier = Modifier.fillMaxWidth(),
                 value = inputValue,
-                onValueChange = onInputValueChange
+                onValueChange = onInputValueChange,
+                placeholder = inputPlaceholder
             )
-            Spacer(modifier = Modifier.height(24.dp))
+            maxInputLength?.let {
+                Spacer(modifier = Modifier.height(4.dp))
+                Row(
+                    horizontalArrangement = Arrangement.End,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = "${inputValue.length}/$it",
+                        style = footnote().copy(color = Colors.darkGrey)
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.height(32.dp))
             PrimaryButton(
                 text = stringResource(Res.string.ok),
                 onClick = onConfirmClick,

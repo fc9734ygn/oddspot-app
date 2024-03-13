@@ -166,5 +166,5 @@
     <string name="account_item_privacy">Privacy policy</string>
     <string name="account_button_logout">LOG OUT</string>
     <string name="account_change_username_dialog_title">Change username</string>
-    <string name="account_change_username_dialog_description">Enter your new username:</string>
+    <string name="account_change_username_dialog_description">Username must contain between %1$d and %2$d characters and consists of only letters, digits, and underscores</string>
 </resources>

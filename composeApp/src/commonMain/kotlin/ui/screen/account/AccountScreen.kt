@@ -67,6 +67,9 @@ import ui.util.button1
 import ui.util.h3
 import ui.util.input
 
+private const val MAX_USERNAME_LENGTH = 20
+private const val MIN_USERNAME_LENGTH = 4
+
 class AccountScreen : BaseTabScreen() {
 
     @OptIn(ExperimentalResourceApi::class)
@@ -88,11 +91,17 @@ class AccountScreen : BaseTabScreen() {
             InputDialog(
                 onDismiss = { screenModel.onDismissUsernameChangeDialog() },
                 title = stringResource(Res.string.account_change_username_dialog_title),
-                description = stringResource(Res.string.account_change_username_dialog_description),
+                description = stringResource(
+                    Res.string.account_change_username_dialog_description,
+                    MIN_USERNAME_LENGTH,
+                    MAX_USERNAME_LENGTH
+                ),
                 inputValue = state.changeUsernameDialogState.input,
                 onInputValueChange = { screenModel.onUsernameInputChange(it) },
                 onConfirmClick = { screenModel.onConfirmUsernameChangeClick() },
-                isLoading = state.changeUsernameDialogState.isLoading
+                isLoading = state.changeUsernameDialogState.isLoading,
+                inputPlaceholder = state.username,
+                maxInputLength = MAX_USERNAME_LENGTH
             )
         }
 
