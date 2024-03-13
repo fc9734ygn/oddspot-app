@@ -11,9 +11,9 @@ import ui.base.BaseScreenModel
 import ui.util.Location
 import util.Event
 
-const val MIN_TITLE_LENGTH = 3
+const val MIN_TITLE_LENGTH = 1
 const val MAX_TITLE_LENGTH = 50
-const val MIN_DESCRIPTION_LENGTH = 20
+const val MIN_DESCRIPTION_LENGTH = 1
 const val MAX_DESCRIPTION_LENGTH = 200
 
 @Factory
