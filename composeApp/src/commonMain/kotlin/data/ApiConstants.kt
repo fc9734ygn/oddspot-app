@@ -6,6 +6,8 @@ const val ENDPOINT_LOGIN = "v1/auth/login"
 const val ENDPOINT_AUTHENTICATE = "v1/auth/authenticate"
 const val ENDPOINT_SECRET_INFO = "v1/auth/secret-info"
 
+const val ENDPOINT_CHANGE_USERNAME = "v1/profile/change-username"
+
 const val ENDPOINT_SUBMIT_SPOT = "v1/spot/submit-spot"
 
 // Other:

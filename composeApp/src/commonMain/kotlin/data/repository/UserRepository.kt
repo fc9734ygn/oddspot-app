@@ -3,15 +3,18 @@ package data.repository
 import API_BASE_URL
 import app.cash.sqldelight.coroutines.asFlow
 import com.github.michaelbull.result.Result
+import com.github.michaelbull.result.map
 import com.github.michaelbull.result.runCatching
 import com.homato.oddspot.Database
 import com.homato.oddspot.User
 import data.ENDPOINT_AUTHENTICATE
+import data.ENDPOINT_CHANGE_USERNAME
 import data.ENDPOINT_LOGIN
 import data.ENDPOINT_REGISTER
 import data.request.LoginRequest
 import data.request.RegisterRequest
-import data.response.TokenResponse
+import data.request.UsernameChangeRequest
+import data.response.LoginResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.post
@@ -43,15 +46,26 @@ class UserRepository(
         return runCatching {
             val response = client.post(API_BASE_URL + ENDPOINT_LOGIN) {
                 setBody(LoginRequest(email, password))
-            }.body<TokenResponse>()
+            }.body<LoginResponse>()
 
             database.userQueries.insertUser(
                 id = DEFAULT_PROFILE_ID,
-                name = email.substringBefore("@"),
-                email = email,
-                imageUrl = null,
-                jwt = response.token
+                userId = response.id,
+                name = response.username,
+                email = response.email,
+                imageUrl = response.imageUrl,
+                jwt = response.jwt
             )
+        }
+    }
+
+    suspend fun changeUsername(username: String): Result<Unit, Throwable> {
+        return runCatching {
+            client.post(API_BASE_URL + ENDPOINT_CHANGE_USERNAME) {
+                setBody(UsernameChangeRequest(username))
+            }
+        }.map {
+            database.userQueries.updateUsername(username, DEFAULT_PROFILE_ID)
         }
     }
 

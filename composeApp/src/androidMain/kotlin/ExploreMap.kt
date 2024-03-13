@@ -113,7 +113,9 @@ actual fun ExploreMap(
             mutableStateOf(
                 MapUiSettings(
                     myLocationButtonEnabled = true,
-                    zoomControlsEnabled = false
+                    zoomControlsEnabled = false,
+                    tiltGesturesEnabled = false,
+                    mapToolbarEnabled = false
                 )
             )
         }
@@ -122,7 +124,7 @@ actual fun ExploreMap(
             cameraPositionState = cameraPositionState,
             properties = properties.value,
             uiSettings = uiSettings.value,
-            contentPadding = PaddingValues(vertical = 48.dp)
+            contentPadding = PaddingValues(8.dp)
         ) {
             markers?.forEach { marker ->
                 Marker(

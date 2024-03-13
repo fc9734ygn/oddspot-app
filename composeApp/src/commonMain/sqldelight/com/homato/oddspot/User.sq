@@ -1,5 +1,6 @@
 CREATE TABLE User (
     id TEXT PRIMARY KEY,
+    userId TEXT NOT NULL,
     name TEXT NOT NULL,
     imageUrl TEXT,
     email TEXT NOT NULL,
@@ -7,11 +8,14 @@ CREATE TABLE User (
 );
 
 insertUser:
-INSERT OR REPLACE INTO User(id, name, imageUrl, email, jwt)
-VALUES (?,?, ?, ?, ?);
+INSERT OR REPLACE INTO User(id, userId, name, imageUrl, email, jwt)
+VALUES (?,?, ?,?, ?, ?);
 
 selectUser:
 SELECT * FROM User;
 
 deleteUser:
 DELETE FROM User;
+
+updateUsername:
+UPDATE User SET name = ? WHERE id = ?;

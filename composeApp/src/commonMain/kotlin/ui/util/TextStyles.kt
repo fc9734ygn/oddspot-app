@@ -29,8 +29,9 @@ fun h1() : TextStyle {
 fun h3() : TextStyle {
    return TextStyle(
        fontFamily = FontFamily(Font(Res.font.PassionOne_Regular)),
-       fontSize = 24.sp,
+       fontSize = 26.sp,
        textAlign = TextAlign.Center,
+       lineHeight = 24.sp,
        color = Colors.white
    )
 }
@@ -51,6 +52,18 @@ fun button() : TextStyle {
        fontFamily = FontFamily(Font(Res.font.Inter_Medium)),
        fontSize = 24.sp,
        textAlign = TextAlign.Center,
+       lineHeight = 29.sp
+   )
+}
+
+@Composable
+fun button1() : TextStyle {
+   return TextStyle(
+       fontFamily = FontFamily(Font(Res.font.Inter_Medium)),
+       fontSize = 20.sp,
+       textAlign = TextAlign.Center,
+       color = Colors.white,
+       lineHeight = 24.sp
    )
 }
 

@@ -155,4 +155,16 @@
     <!-- Bottom navigation-->
     <string name="bottom_nav_explore">Explore</string>
     <string name="bottom_nav_account">Account</string>
+
+    <!-- Account screen -->
+    <string name="account_item_submitted_spots">Submitted spots</string>
+    <string name="account_item_visited_spots">Visited spots</string>
+    <string name="account_item_wishlist">My wish list</string>
+    <string name="account_item_settings">My settings</string>
+    <string name="account_item_about">About</string>
+    <string name="account_item_feedback">Submit feedback</string>
+    <string name="account_item_privacy">Privacy policy</string>
+    <string name="account_button_logout">LOG OUT</string>
+    <string name="account_change_username_dialog_title">Change username</string>
+    <string name="account_change_username_dialog_description">Enter your new username:</string>
 </resources>

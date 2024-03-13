@@ -1,9 +1,11 @@
 package ui.screen.onboarding.welcome
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,10 +22,13 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import oddspot_app.composeapp.generated.resources.Res
+import oddspot_app.composeapp.generated.resources.img_welcome_bottom
+import oddspot_app.composeapp.generated.resources.img_welcome_top
 import oddspot_app.composeapp.generated.resources.welcome_button
 import oddspot_app.composeapp.generated.resources.welcome_subtitle
 import oddspot_app.composeapp.generated.resources.welcome_title
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.base.BaseScreen
 import ui.component.button.PrimaryButton
@@ -50,12 +55,24 @@ class WelcomeScreen : BaseScreen() {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 48.dp),
+                    horizontalArrangement = Arrangement.Start
+                ) {
+                    Image(painterResource(Res.drawable.img_welcome_top), contentDescription = null)
+                }
                 Text(
                     modifier = Modifier.padding(horizontal = 64.dp),
                     text = stringResource(Res.string.welcome_title),
                     color = Colors.white,
                     style = h1()
                 )
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 48.dp),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    Image(painterResource(Res.drawable.img_welcome_bottom), contentDescription = null)
+                }
                 Spacer(modifier = Modifier.height(24.dp))
                 Text(
                     modifier = Modifier.padding(horizontal = 48.dp),

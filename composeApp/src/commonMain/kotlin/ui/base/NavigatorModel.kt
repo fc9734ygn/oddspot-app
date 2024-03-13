@@ -1,13 +1,15 @@
 package ui.base
 
-import cafe.adriel.voyager.core.model.ScreenModel
 import org.koin.core.annotation.Factory
 
 @Factory
-class NavigatorModel : ScreenModel {
-    var currentBottomNavigationTab: BottomNavigationTab = BottomNavigationTab.Explore
+class NavigatorModel : BaseScreenModel<BottomNavigationTab>(BottomNavigationTab.Explore) {
 
     fun setCurrentBottomNavTab(bottomNavigationTab: BottomNavigationTab) {
-        currentBottomNavigationTab = bottomNavigationTab
+        mutableState.value = bottomNavigationTab
+    }
+
+    fun resetCurrentBottomNavTab() {
+        mutableState.value = BottomNavigationTab.Explore
     }
 }
