@@ -13,5 +13,6 @@ expect fun ExploreMap(
     cameraPosition: CameraPosition? = null,
     cameraLocationBounds: CameraLocationBounds? = null,
     userCurrentLocation: Location?,
-    onPermissionsGranted: () -> Unit
+    onPermissionsGranted: () -> Unit,
+    onMarkerClick: (String) -> Unit,
 )

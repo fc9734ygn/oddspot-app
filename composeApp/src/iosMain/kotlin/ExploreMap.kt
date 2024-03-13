@@ -1,4 +1,3 @@
-
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,7 +26,8 @@ actual fun ExploreMap(
     cameraPosition: CameraPosition?,
     cameraLocationBounds: CameraLocationBounds?,
     userCurrentLocation: Location?,
-    onPermissionsGranted: () -> Unit
+    onPermissionsGranted: () -> Unit,
+    onMarkerClick: (String) -> Unit,
 ) {
     LaunchedEffect(Unit) {
         onPermissionsGranted()

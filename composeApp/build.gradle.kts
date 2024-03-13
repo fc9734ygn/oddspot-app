@@ -78,8 +78,6 @@ kotlin {
             // Voyager
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.screenModel)
-            implementation(libs.voyager.bottomSheetNavigator)
-//            implementation(libs.voyager.tabNavigator)
             implementation(libs.voyager.transitions)
             implementation(libs.voyager.koin)
 
@@ -90,6 +88,9 @@ kotlin {
             // Image picker and camera
             implementation(libs.peekaboo.ui)
             implementation(libs.peekaboo.image.picker)
+
+            // BottomSheet
+            implementation(libs.flexible.bottomsheet.material)
 
         }
 

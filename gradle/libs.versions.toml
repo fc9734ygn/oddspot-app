@@ -13,6 +13,7 @@ androidx-test-junit = "1.1.5"
 compose = "1.6.2"
 compose-compiler = "1.5.8"
 compose-plugin = "1.6.0-rc03"
+flexibleBottomsheetMaterial = "0.1.2"
 junit = "4.13.2"
 kotlin = "1.9.22"
 koin = "3.5.3"
@@ -110,6 +111,9 @@ google-maps-android-compose-utils = { module = "com.google.maps.android:maps-com
 # Image picker and camera
 peekaboo-ui = { module = "io.github.onseok:peekaboo-ui", version.ref = "peekaboo" }
 peekaboo-image-picker = { module = "io.github.onseok:peekaboo-image-picker", version.ref = "peekaboo" }
+
+# BottomSheet
+flexible-bottomsheet-material = { module = "com.github.skydoves:flexible-bottomsheet-material", version.ref = "flexibleBottomsheetMaterial" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

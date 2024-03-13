@@ -10,6 +10,7 @@ data class ExploreScreenState(
     val userCurrentLocation: Location?,
     val markers: List<ExploreMarker>,
     val isLoading: Boolean,
+    val spotDetailsSheetState: SpotDetailsSheetState,
     val event: Event<ExploreScreenEvent>?
 ) {
     companion object {
@@ -17,7 +18,18 @@ data class ExploreScreenState(
             userCurrentLocation = null,
             markers = emptyList(),
             isLoading = true,
+            spotDetailsSheetState = SpotDetailsSheetState.Initial,
             event = null
+        )
+    }
+}
+
+data class SpotDetailsSheetState(
+    val spotId: String?,
+){
+    companion object {
+        val Initial = SpotDetailsSheetState(
+            spotId = null,
         )
     }
 }
@@ -30,4 +42,5 @@ data class ExploreMarker(
 
 sealed class ExploreScreenEvent{
     data object Error: ExploreScreenEvent()
+    data object OnSpotMarkerClick: ExploreScreenEvent()
 }

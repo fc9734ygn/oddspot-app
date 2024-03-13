@@ -38,4 +38,25 @@ class ExploreScreenModel(
         )
     }
 
+    fun onMarkerClick(id: String) {
+        mutableState.update {
+            it.copy(
+                spotDetailsSheetState = it.spotDetailsSheetState.copy(
+                    spotId = id,
+                ),
+                event = Event(ExploreScreenEvent.OnSpotMarkerClick)
+            )
+        }
+    }
+
+    fun onSpotDetailsSheetDismiss() {
+        mutableState.update {
+            it.copy(
+                spotDetailsSheetState = it.spotDetailsSheetState.copy(
+                    spotId  = null
+                )
+            )
+        }
+    }
+
 }
