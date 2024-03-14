@@ -23,7 +23,7 @@ actual fun FullMap(
     onSelectionChange: (Location) -> Unit,
 ) {
     val mapViewDelegate = remember {
-        MapViewDelegate(onCameraIdle = onSelectionChange)
+        FullMapViewDelegate(onCameraIdle = onSelectionChange)
     }
 
     val mapView = remember {
@@ -34,6 +34,7 @@ actual fun FullMap(
                 initialCameraPosition.zoom.toFloat()
             )
             setMyLocationEnabled(true)
+            setMapType(2u) //kGMSTypeSatellite = 2
         }
     }
 
@@ -54,10 +55,9 @@ actual fun FullMap(
     )
 }
 
-
 @OptIn(BetaInteropApi::class, ExperimentalForeignApi::class)
 @ExportObjCClass
-class MapViewDelegate(private val onCameraIdle: (Location) -> Unit) : NSObject(), GMSMapViewDelegateProtocol {
+class FullMapViewDelegate(private val onCameraIdle: (Location) -> Unit) : NSObject(), GMSMapViewDelegateProtocol {
     @OptIn(ExperimentalForeignApi::class)
     override fun mapView(
         mapView: GMSMapView,

@@ -19,6 +19,7 @@ actual fun LockedMap(
             setMyLocationEnabled(true)
             settings.setAllGesturesEnabled(false)
             settings.myLocationButton = false
+            setMapType(2u) //kGMSTypeSatellite = 2
         }
     }
 

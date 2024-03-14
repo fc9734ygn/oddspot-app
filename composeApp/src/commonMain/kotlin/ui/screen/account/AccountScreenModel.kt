@@ -84,6 +84,7 @@ class AccountScreenModel(
     }
 
     fun onConfirmUsernameChangeClick() {
+        if (state.value.changeUsernameDialogState.input.isEmpty()) return
         changeUsernameUseCase(state.value.changeUsernameDialogState.input)
             .collectResource(
                 onSuccess = {

@@ -79,7 +79,7 @@ class ExploreScreen : BaseTabScreen() {
             )
             MapGradient(endY = 200f)
             FloatingActionButton(
-                modifier = Modifier.padding(16.dp).align(Alignment.BottomEnd),
+                modifier = Modifier.padding(8.dp).align(Alignment.BottomStart),
                 onClick = { navigator.push(SubmitSpotScreen()) },
                 backgroundColor = Colors.red,
                 contentColor = Colors.black,

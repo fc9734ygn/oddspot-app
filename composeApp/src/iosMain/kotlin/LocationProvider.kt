@@ -33,14 +33,19 @@ actual class LocationProvider {
     }
 
     actual suspend fun getUserLocation(): Result<Location, UserLocationError> = suspendCoroutine { continuation ->
+        var hasResumed = false // Track whether the continuation has already been resumed
+
         locationManager.startUpdatingLocation()
 
         locationDelegate.onLocationUpdate = { location ->
             locationManager.stopUpdatingLocation()
 
-            location?.let {
-                continuation.resume(Ok(it))
-            } ?: continuation.resume(Err(UserLocationError.NoLocationAvailable))
+            if (!hasResumed) {
+                hasResumed = true // Mark that we're resuming the coroutine to prevent future resumption attempts
+                location?.let {
+                    continuation.resume(Ok(it))
+                } ?: continuation.resume(Err(UserLocationError.NoLocationAvailable))
+            }
         }
     }
 

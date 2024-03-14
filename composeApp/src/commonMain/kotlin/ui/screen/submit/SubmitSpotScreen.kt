@@ -108,7 +108,7 @@ class SubmitSpotScreen(
                 .background(Colors.background)
                 .fillMaxSize()
                 .padding(horizontal = 32.dp)
-                .padding(vertical = 48.dp)
+                .padding(top = 24.dp)
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -266,7 +266,7 @@ class SubmitSpotScreen(
                 }
             }
             PrimaryButton(
-                modifier = Modifier.padding(top = 24.dp).fillMaxWidth(),
+                modifier = Modifier.padding(top = 24.dp).padding(bottom = 48.dp).fillMaxWidth(),
                 onClick = { screenModel.onSubmitClick() },
                 text = stringResource(Res.string.submit_spot_button_submit)
             )

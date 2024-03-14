@@ -144,25 +144,25 @@ class AccountScreen : BaseTabScreen() {
                         tint = Color.Unspecified,
                     )
                 }
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(24.dp))
                 AccountButtonItem(
                     text = Res.string.account_item_submitted_spots,
                     onClick = { },
                     iconRes = Res.drawable.ic_account_submitted_spots
                 )
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(12.dp))
                 AccountButtonItem(
                     text = Res.string.account_item_visited_spots,
                     onClick = { },
                     iconRes = Res.drawable.ic_account_visited_spots
                 )
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(12.dp))
                 AccountButtonItem(
                     text = Res.string.account_item_wishlist,
                     onClick = { },
                     iconRes = Res.drawable.ic_account_wishlist
                 )
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(12.dp))
                 AccountButtonItem(
                     text = Res.string.account_item_settings,
                     onClick = { },
