@@ -90,7 +90,10 @@ class AccountScreenModel(
                 onSuccess = {
                     mutableState.update {
                         it.copy(
-                            changeUsernameDialogState = it.changeUsernameDialogState.copy(isLoading = false, show = false),
+                            changeUsernameDialogState = it.changeUsernameDialogState.copy(
+                                isLoading = false,
+                                show = false
+                            ),
                             username = it.changeUsernameDialogState.input,
                         )
                     }
@@ -98,7 +101,10 @@ class AccountScreenModel(
                 onError = {
                     mutableState.update {
                         it.copy(
-                            changeUsernameDialogState = it.changeUsernameDialogState.copy(isLoading = false, show = false),
+                            changeUsernameDialogState = it.changeUsernameDialogState.copy(
+                                isLoading = false,
+                                show = false
+                            ),
                             event = Event(AccountScreenEvent.Error)
                         )
                     }

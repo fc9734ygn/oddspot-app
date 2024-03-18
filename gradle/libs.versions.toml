@@ -15,6 +15,7 @@ compose-compiler = "1.5.8"
 compose-plugin = "1.6.0-rc03"
 flexibleBottomsheetMaterial = "0.1.2"
 junit = "4.13.2"
+kamel = "0.9.3"
 kotlin = "1.9.22"
 koin = "3.5.3"
 ktor = "2.3.7"
@@ -36,6 +37,7 @@ google-maps = "18.2.0"
 pods-google-maps = "8.3.1"
 pods-google-mapsUtils = "4.2.2"
 peekaboo = "0.4.3"
+zoomable = "1.6.1"
 
 [libraries]
 
@@ -114,6 +116,10 @@ peekaboo-image-picker = { module = "io.github.onseok:peekaboo-image-picker", ver
 
 # BottomSheet
 flexible-bottomsheet-material = { module = "com.github.skydoves:flexible-bottomsheet-material", version.ref = "flexibleBottomsheetMaterial" }
+
+# Image loading
+kamel-image = { module = "media.kamel:kamel-image", version.ref = "kamel" }
+zoomable = { module = "com.mxalbert.zoomable:zoomable", version.ref = "zoomable" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

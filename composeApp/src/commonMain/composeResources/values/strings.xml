@@ -5,6 +5,9 @@
     <string name="ok">OK</string>
     <string name="lorem_impsum">Lorem Ipsum</string>
     <string name="error_generic">Oops! Something went wrong.</string>
+    <string name="accessibility_easy">Easy</string>
+    <string name="accessibility_average">Average</string>
+    <string name="accessibility_hard">Hard</string>
 
     <!-- Welcome -->
     <string name="welcome_title">Welcome to OddSpot!</string>
@@ -167,4 +170,13 @@
     <string name="account_button_logout">LOG OUT</string>
     <string name="account_change_username_dialog_title">Change username</string>
     <string name="account_change_username_dialog_description">Username must contain between %1$d and %2$d characters and consists of only letters, digits, and underscores</string>
+
+    <!-- Spot Detail-->
+    <string name="spot_detail_report">There's an issue</string>
+    <string name="spot_detail_report_dialog_title">Issue with the spot?</string>
+    <string name="spot_detail_report_dialog_option_unsafe">The spot is unsafe</string>
+    <string name="spot_detail_report_dialog_option_changed">The spot is gone/has changed</string>
+    <string name="spot_detail_report_dialog_option_other">Other</string>
+    <string name="spot_detail_report_snackbar">Thank you for your feedback!</string>
+    <string name="spot_detail_button_mark_visited">MARK AS VISITED</string>
 </resources>

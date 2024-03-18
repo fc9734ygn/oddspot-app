@@ -7,18 +7,29 @@ import domain.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import util.collectResource
 
 open class BaseScreenModel<T> constructor(initialState: T) : StateScreenModel<T>(initialState) {
 
     fun <T> Flow<T>.toStateFlow(default: T) =
-        stateIn(screenModelScope, SharingStarted.WhileSubscribed(FLOW_SUBSCRIPTION_TIMEOUT), default)
+        stateIn(
+            screenModelScope,
+            SharingStarted.WhileSubscribed(FLOW_SUBSCRIPTION_TIMEOUT),
+            default
+        )
 
     fun <T> Flow<Resource<T>>.collectResource(
         onError: (DomainError) -> Unit = {},
         onLoading: () -> Unit = {},
         onSuccess: (T) -> Unit = {},
     ) = collectResource(screenModelScope, onError, onLoading, onSuccess)
+
+    protected fun updateState(transform: T.() -> T) {
+        mutableState.update { currentState ->
+            currentState.transform()
+        }
+    }
 
     companion object {
         private const val FLOW_SUBSCRIPTION_TIMEOUT = 5000L

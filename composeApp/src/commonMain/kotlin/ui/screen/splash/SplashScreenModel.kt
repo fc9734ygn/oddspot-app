@@ -47,7 +47,8 @@ class SplashScreenModel(
                 mutableState.update {
                     it.copy(
                         isLoading = false,
-                        event = if (tutorialWasShown) Event(SplashScreenEvent.NavigateToGetStarted) else Event(SplashScreenEvent.NavigateWelcome)
+                        event = if (tutorialWasShown) Event(SplashScreenEvent.NavigateToGetStarted)
+                        else Event(SplashScreenEvent.NavigateWelcome)
                     )
                 }
             },

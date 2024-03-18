@@ -1,6 +1,7 @@
 package ui.screen.explore
 
 import androidx.compose.runtime.Immutable
+import ui.screen.explore.detail.SpotDetailSheetState
 import ui.util.Location
 import util.Event
 
@@ -10,26 +11,15 @@ data class ExploreScreenState(
     val userCurrentLocation: Location?,
     val markers: List<ExploreMarker>,
     val isLoading: Boolean,
-    val spotDetailsSheetState: SpotDetailsSheetState,
-    val event: Event<ExploreScreenEvent>?
+    val event: Event<ExploreScreenEvent>?,
+    val spotDetailsSheetState: SpotDetailSheetState = SpotDetailSheetState.Initial
 ) {
     companion object {
         val Initial = ExploreScreenState(
             userCurrentLocation = null,
             markers = emptyList(),
             isLoading = true,
-            spotDetailsSheetState = SpotDetailsSheetState.Initial,
             event = null
-        )
-    }
-}
-
-data class SpotDetailsSheetState(
-    val spotId: String?,
-){
-    companion object {
-        val Initial = SpotDetailsSheetState(
-            spotId = null,
         )
     }
 }
@@ -42,5 +32,7 @@ data class ExploreMarker(
 
 sealed class ExploreScreenEvent{
     data object Error: ExploreScreenEvent()
-    data object OnSpotMarkerClick: ExploreScreenEvent()
+    data object OpenSpotDetailBottomSheet: ExploreScreenEvent()
+    data object ShowReportSuccessSnackbar: ExploreScreenEvent()
+    data object CloseSpotDetailBottomSheet: ExploreScreenEvent()
 }

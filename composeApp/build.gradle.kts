@@ -92,6 +92,10 @@ kotlin {
             // BottomSheet
             implementation(libs.flexible.bottomsheet.material)
 
+            // Image loading
+            implementation(libs.kamel.image)
+            implementation(libs.zoomable)
+
         }
 
         androidMain.dependencies {

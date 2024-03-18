@@ -10,7 +10,12 @@ import ui.screen.splash.SplashScreen
 @Composable
 fun App() {
     KoinContext {
-        MaterialTheme {
+        MaterialTheme(colors = MaterialTheme.colors.copy(
+            primary = ui.util.Colors.red,
+            secondary = ui.util.Colors.white,
+            background = ui.util.Colors.background
+
+        )) {
             Navigator(screen = SplashScreen()){
                 FadeTransition(it)
             }

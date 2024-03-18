@@ -1,4 +1,3 @@
-
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -10,6 +9,7 @@ import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.ExportObjCClass
 import kotlinx.cinterop.useContents
+import kotlinx.coroutines.DefaultExecutor.delegate
 import platform.CoreLocation.CLLocationCoordinate2DMake
 import platform.darwin.NSObject
 import ui.util.CameraPosition
@@ -30,7 +30,10 @@ actual fun FullMap(
         GMSMapView().apply {
             delegate = mapViewDelegate
             camera = GMSCameraPosition.cameraWithTarget(
-                CLLocationCoordinate2DMake(initialCameraPosition.target.latitude, initialCameraPosition.target.longitude),
+                CLLocationCoordinate2DMake(
+                    initialCameraPosition.target.latitude,
+                    initialCameraPosition.target.longitude
+                ),
                 initialCameraPosition.zoom.toFloat()
             )
             setMyLocationEnabled(true)
@@ -57,7 +60,8 @@ actual fun FullMap(
 
 @OptIn(BetaInteropApi::class, ExperimentalForeignApi::class)
 @ExportObjCClass
-class FullMapViewDelegate(private val onCameraIdle: (Location) -> Unit) : NSObject(), GMSMapViewDelegateProtocol {
+class FullMapViewDelegate(private val onCameraIdle: (Location) -> Unit) : NSObject(),
+    GMSMapViewDelegateProtocol {
     @OptIn(ExperimentalForeignApi::class)
     override fun mapView(
         mapView: GMSMapView,

@@ -1,6 +1,7 @@
 package data.repository
 
 import API_BASE_URL
+import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.getOrThrow
 import com.github.michaelbull.result.runCatching
@@ -34,6 +35,12 @@ import ui.util.Location
 class SpotRepository(
     private val client: HttpClient,
 ) {
+
+    suspend fun getSpotById(id: String): Result<Spot, Throwable> = runCatching {
+        // temporary mock data
+        return Ok(getSpotsTestData().first { it.id == id })
+    }
+
     suspend fun getVisitedSpots(): List<VisitedSpot>? {
         // temporary mock data
         return getVisitedSpotsTestData().asReversed().take(9)
