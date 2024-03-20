@@ -1,7 +1,7 @@
 package domain.use_case.spot.model
 
 data class SpotDetail(
-    val id: String,
+    val id: Int,
     val title: String,
     val description: String,
     val imageUrl: String,

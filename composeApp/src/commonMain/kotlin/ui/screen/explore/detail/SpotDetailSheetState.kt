@@ -3,7 +3,7 @@ package ui.screen.explore.detail
 import domain.use_case.spot.model.Accessibility
 
 data class SpotDetailSheetState(
-    val spotId: String?,
+    val spotId: Int?,
     val isWishlisted: Boolean,
     val title: String,
     val description: String,

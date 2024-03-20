@@ -1,7 +1,7 @@
 package domain.use_case.spot.model
 
 data class SubmittedSpot(
-    val id : String, // id is the same as the object of Spot data class
+    val id : Int, // id is the same as the object of Spot data class
     val title: String,
     val description: String,
 

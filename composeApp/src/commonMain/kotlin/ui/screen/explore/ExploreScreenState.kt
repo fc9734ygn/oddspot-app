@@ -12,21 +12,23 @@ data class ExploreScreenState(
     val markers: List<ExploreMarker>,
     val isLoading: Boolean,
     val event: Event<ExploreScreenEvent>?,
-    val spotDetailsSheetState: SpotDetailSheetState = SpotDetailSheetState.Initial
+    val spotDetailsSheetState: SpotDetailSheetState = SpotDetailSheetState.Initial,
+    val cameraPosition: Location?
 ) {
     companion object {
         val Initial = ExploreScreenState(
             userCurrentLocation = null,
             markers = emptyList(),
             isLoading = true,
-            event = null
+            event = null,
+            cameraPosition = null
         )
     }
 }
 
 data class ExploreMarker(
-    val id: String,
-    val coordinates: Pair<Double, Double>,
+    val id: Int,
+    val coordinates: Location,
     val category: Int
 )
 

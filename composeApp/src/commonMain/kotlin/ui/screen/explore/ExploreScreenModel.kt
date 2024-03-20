@@ -18,7 +18,7 @@ class ExploreScreenModel(
     private val getSpotDetailUseCase: GetSpotDetailUseCase
 ) : BaseScreenModel<ExploreScreenState>(ExploreScreenState.Initial) {
 
-    fun getCurrentUserLocation() {
+    fun getData() {
         getExploreUseCase().collectResource(
             onError = {
                 mutableState.update { it.copy(event = Event(ExploreScreenEvent.Error)) }
@@ -37,7 +37,8 @@ class ExploreScreenModel(
                             )
                         },
                         userCurrentLocation = domainModel.userCurrentLocation,
-                        isLoading = false
+                        isLoading = false,
+                        cameraPosition = domainModel.userCurrentLocation
                     )
                 }
 
@@ -45,24 +46,25 @@ class ExploreScreenModel(
         )
     }
 
-    fun onMarkerClick(id: String) {
+    fun onMarkerClick(id: Int) {
         getSpotDetailUseCase(id).collectResource(
-            onSuccess = {
+            onSuccess = { spotDetails ->
                 updateState {
                     copy(
                         spotDetailsSheetState = spotDetailsSheetState.copy(
                             spotId = id,
-                            title = it.title,
-                            description = it.description,
-                            mainImage = it.imageUrl,
-                            amountOfVisits = it.amountOfVisits,
-                            accessibility = it.accessibility,
+                            title = spotDetails.title,
+                            description = spotDetails.description,
+                            mainImage = spotDetails.imageUrl,
+                            amountOfVisits = spotDetails.amountOfVisits,
+                            accessibility = spotDetails.accessibility,
                             isLoading = false,
-                            isLocked = it.isLocked,
-                            visitImages = it.visitImages
+                            isLocked = spotDetails.isLocked,
+                            visitImages = spotDetails.visitImages
                         ),
                         event = Event(ExploreScreenEvent.OpenSpotDetailBottomSheet),
-                        isLoading = false
+                        isLoading = false,
+                        cameraPosition = mutableState.value.markers.find { it.id == id }?.coordinates
                     )
                 }
             },
@@ -92,7 +94,7 @@ class ExploreScreenModel(
         }
     }
 
-    fun onWishlistClick(spotId: String): () -> Unit = {
+    fun onWishlistClick(spotId: Int): () -> Unit = {
         // TODO: Implement
     }
 

@@ -16,6 +16,7 @@ import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.ExportObjCClass
 import kotlinx.cinterop.useContents
+import kotlinx.coroutines.DefaultExecutor.delegate
 import platform.CoreLocation.CLLocationCoordinate2DMake
 import platform.darwin.NSObject
 import ui.screen.explore.ExploreMarker
@@ -32,7 +33,7 @@ actual fun ExploreMap(
     cameraLocationBounds: CameraLocationBounds?,
     userCurrentLocation: Location?,
     onPermissionsGranted: () -> Unit,
-    onMarkerClick: (String) -> Unit,
+    onMarkerClick: (Int) -> Unit,
 ) {
     LaunchedEffect(Unit) {
         onPermissionsGranted()
@@ -92,11 +93,11 @@ actual fun ExploreMap(
             markers?.forEach { marker ->
                 GMSMarker().apply {
                     position = CLLocationCoordinate2DMake(
-                        marker.coordinates.first,
-                        marker.coordinates.second
+                        marker.coordinates.latitude,
+                        marker.coordinates.longitude
                     )
                     map = view
-                    userData = marker.id
+                    userData = marker.id.toString()
                 }
             }
         }
@@ -105,7 +106,7 @@ actual fun ExploreMap(
 
 @OptIn(BetaInteropApi::class, ExperimentalForeignApi::class)
 @ExportObjCClass
-class ExploreMapViewDelegate(private val onMarkerClick: (String) -> Unit) : NSObject(),
+class ExploreMapViewDelegate(private val onMarkerClick: (Int) -> Unit) : NSObject(),
     GMSMapViewDelegateProtocol {
     @OptIn(ExperimentalForeignApi::class)
     override fun mapView(
@@ -115,7 +116,7 @@ class ExploreMapViewDelegate(private val onMarkerClick: (String) -> Unit) : NSOb
     ) : Boolean // Shows error but builds ¯\_(ツ)_/¯
     {
         val userData = didTapMarker.userData()
-        onMarkerClick(userData as String)
+        onMarkerClick(userData as Int)
         return true
     }
 }

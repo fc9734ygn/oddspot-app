@@ -1,0 +1,26 @@
+CREATE TABLE ExploreSpot (
+    id INTEGER PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL,
+    creator_id TEXT NOT NULL,
+    image_url TEXT NOT NULL,
+    create_time INTEGER NOT NULL,
+    category TEXT NOT NULL,
+    accessibility INTEGER NOT NULL
+);
+
+insert:
+INSERT INTO ExploreSpot (title, description, latitude, longitude, creator_id, image_url, create_time, category, accessibility)
+VALUES (?, ?, ?,?, ?, ?, ?, ?, ?);
+
+selectById:
+SELECT * FROM ExploreSpot WHERE id = ? LIMIT 1;
+
+selectAll:
+SELECT * FROM ExploreSpot;
+
+replaceSpot:
+INSERT OR REPLACE INTO ExploreSpot (id, title, description, latitude, longitude, creator_id, image_url, create_time, category, accessibility)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);

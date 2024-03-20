@@ -86,7 +86,8 @@ fun SpotDetailSheet(
                     .clickable { navigator.push(FullScreenImageScreen(state.mainImage)) },
                 resource = asyncPainterResource(state.mainImage),
                 contentDescription = null,
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                onLoading = { progress -> CircularProgressIndicator(progress) },
             )
             val icon = if (state.isWishlisted) {
                 Icons.Filled.Favorite
@@ -142,7 +143,8 @@ fun SpotDetailSheet(
         }
         Spacer(modifier = Modifier.height(16.dp))
         LazyRow(
-            modifier = Modifier.padding(horizontal = 24.dp)
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp),
+            horizontalArrangement = Arrangement.Start
         ) {
             items(state.visitImages.size) { index ->
                 KamelImage(

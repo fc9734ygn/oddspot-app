@@ -14,3 +14,12 @@ fun Int.toAccessibility(): Accessibility {
         else -> throw IllegalArgumentException("Invalid accessibility value")
     }
 }
+
+fun Long.toAccessibility(): Accessibility {
+    return when (this) {
+        0L -> Accessibility.Easy
+        1L -> Accessibility.Average
+        2L -> Accessibility.Hard
+        else -> throw IllegalArgumentException("Invalid accessibility value")
+    }
+}

@@ -60,11 +60,13 @@ class ExploreScreen : BaseTabScreen() {
                         sheetState.fullyExpand()
                     }
                 }
+
                 is ExploreScreenEvent.CloseSpotDetailBottomSheet -> {
                     scope.launch {
                         sheetState.hide()
                     }
                 }
+
                 is ExploreScreenEvent.ShowReportSuccessSnackbar -> {
                     ShowSnackBar(
                         snackbarHostState,
@@ -75,16 +77,17 @@ class ExploreScreen : BaseTabScreen() {
         }
 
         Box(modifier = Modifier.fillMaxSize()) {
-            val currentUserLatLong =
-                state.userCurrentLocation?.toLatLong()
-                    ?: LatLong(0.0, 0.0)
-
             ExploreMap(
                 modifier = Modifier.fillMaxSize(),
                 markers = state.markers,
-                cameraPosition = CameraPosition(currentUserLatLong, MAP_ZOOM_DEFAULT),
+                cameraPosition = CameraPosition(
+                    state.cameraPosition?.toLatLong() ?: LatLong(
+                        0.0,
+                        0.0
+                    ), MAP_ZOOM_DEFAULT
+                ),
                 userCurrentLocation = state.userCurrentLocation,
-                onPermissionsGranted = { screenModel.getCurrentUserLocation() },
+                onPermissionsGranted = { screenModel.getData() },
                 onMarkerClick = screenModel::onMarkerClick
             )
             MapGradient(endY = 200f)

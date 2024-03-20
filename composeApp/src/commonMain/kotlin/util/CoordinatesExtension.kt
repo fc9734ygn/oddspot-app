@@ -15,7 +15,8 @@ fun Pair<Double, Double>.distanceInMetersTo(other: Pair<Double, Double>): Float 
     val dLon = (other.second - this.second) * DEGREES_TO_RADIANS
 
     val a = sin(dLat / 2).pow(2) +
-            cos(this.first * DEGREES_TO_RADIANS) * cos(other.first * DEGREES_TO_RADIANS) *
+            cos(this.first * DEGREES_TO_RADIANS) *
+            cos(other.first * DEGREES_TO_RADIANS) *
             sin(dLon / 2).pow(2)
 
     val c = 2 * atan2(sqrt(a), sqrt(1 - a))

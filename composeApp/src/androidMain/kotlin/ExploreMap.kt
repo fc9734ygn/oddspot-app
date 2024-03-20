@@ -40,7 +40,7 @@ actual fun ExploreMap(
     cameraLocationBounds: CameraLocationBounds?,
     userCurrentLocation: Location?,
     onPermissionsGranted: () -> Unit,
-    onMarkerClick: (String) -> Unit,
+    onMarkerClick: (Int) -> Unit,
 ) {
     val context: Context = LocalContext.current
 
@@ -130,8 +130,8 @@ actual fun ExploreMap(
             markers?.forEach { marker ->
                 Marker(
                     state = rememberMarkerState(
-                        key = marker.id,
-                        position = LatLng(marker.coordinates.first, marker.coordinates.second)
+                        key = marker.id.toString(),
+                        position = LatLng(marker.coordinates.latitude, marker.coordinates.longitude)
                     ),
                     onClick = {
                         onMarkerClick(marker.id)

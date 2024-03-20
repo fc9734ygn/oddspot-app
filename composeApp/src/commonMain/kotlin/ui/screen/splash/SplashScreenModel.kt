@@ -1,5 +1,6 @@
 package ui.screen.splash
 
+import domain.holder.UserHolder
 import domain.use_case.flag.GetTutorialSeenUseCase
 import domain.use_case.user.GetInitialUserState
 import kotlinx.coroutines.flow.update
@@ -10,7 +11,8 @@ import util.Event
 @Factory
 class SplashScreenModel(
     private val getTutorialSeenUseCase: GetTutorialSeenUseCase,
-    private val getInitialUserState: GetInitialUserState
+    private val getInitialUserState: GetInitialUserState,
+    private val userHolder: UserHolder // This initializes the holder to not return null values later
 ) : BaseScreenModel<SplashScreenState>(SplashScreenState.Initial) {
 
     init {

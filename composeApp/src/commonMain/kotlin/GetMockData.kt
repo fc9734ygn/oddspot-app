@@ -5,6 +5,7 @@ import domain.use_case.spot.model.Spot
 import domain.use_case.spot.model.SubmissionStatus
 import domain.use_case.spot.model.SubmittedSpot
 import domain.use_case.spot.model.VisitedSpot
+import ui.util.Location
 import kotlin.random.Random
 
 // TODO: do not use domain models in data layer
@@ -49,10 +50,10 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
     val currentUserCoordinates = currentUserCoordinatesInput ?: Pair(0.0, 0.0)
     return listOf(
         Spot(
-            id = "SPOT01",
+            id = 1,
             title = "The Tiny Door",
             description = "Discover a mysterious tiny door hidden in plain sight, sparking curiosity and wonder.",
-            coordinates = Pair(
+            coordinates = Location(
                currentUserCoordinates.first + 0.003,
                currentUserCoordinates.second + 0.0005
             ),
@@ -60,10 +61,10 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
             inWishlist = false,
         ),
         Spot(
-            id = "SPOT02",
+            id = 2,
             title = "The Upside-Down House",
             description = "Explore this architectural oddity where everything is topsy-turvy, including your sense of balance.",
-            coordinates = Pair(
+            coordinates = Location(
                 currentUserCoordinates.first + 0.004,
                 currentUserCoordinates.second + 0.003
             ),
@@ -71,10 +72,10 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
             inWishlist = false,
         ),
         Spot(
-            id = "SPOT03",
+            id = 3,
             title = "Singing Fence",
             description = "Listen to the melodic tunes created by the wind blowing through this unusual fence.",
-            coordinates = Pair(
+            coordinates = Location(
                 currentUserCoordinates.first + 0.001,
                 currentUserCoordinates.second + 0.001
             ),
@@ -82,10 +83,10 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
             inWishlist = false,
         ),
         Spot(
-            id = "SPOT04",
+            id = 4,
             title = "The Bubblegum Wall",
             description = "Contribute to this colorful, ever-growing collage of chewed-up bubblegum.",
-            coordinates = Pair(
+            coordinates = Location(
                 currentUserCoordinates.first + 0.00136,
                 currentUserCoordinates.second + 0.004532
             ),
@@ -93,10 +94,10 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
             inWishlist = false,
         ),
         Spot(
-            id = "SPOT05",
+            id = 5,
             title = "The Secret Garden",
             description = "Uncover a hidden urban oasis filled with lush greenery and vibrant street art.",
-            coordinates = Pair(
+            coordinates = Location(
                 currentUserCoordinates.first + 0.00213,
                 currentUserCoordinates.second + 0.00455
             ),
@@ -104,10 +105,10 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
             inWishlist = false,
         ),
         Spot(
-            id = "SPOT06",
+            id = 6,
             title = "Whimsical Wonderland",
             description = "Step into a magical, interactive art installation that sparks joy and creativity.",
-            coordinates = Pair(
+            coordinates = Location(
                 currentUserCoordinates.first + 0.00613,
                 currentUserCoordinates.second + 0.00845
             ),
@@ -115,10 +116,10 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
             inWishlist = false,
         ),
         Spot(
-            id = "SPOT07",
+            id = 7,
             title = "The Abandoned Carousel",
             description = "Discover the eerie beauty of a forgotten carousel hidden in the woods.",
-            coordinates = Pair(
+            coordinates = Location(
                 currentUserCoordinates.first + 0.00143,
                 currentUserCoordinates.second + 0.00145
             ),
@@ -126,10 +127,10 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
             inWishlist = false,
         ),
         Spot(
-            id = "SPOT08",
+            id = 8,
             title = "The Shoe Tree",
             description = "Behold a tree adorned with an eclectic assortment of footwear hanging from its branches.",
-            coordinates = Pair(
+            coordinates = Location(
                 currentUserCoordinates.first + 0.00113,
                 currentUserCoordinates.second + 0.00745
             ),
@@ -137,10 +138,10 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
             inWishlist = false,
         ),
         Spot(
-            id = "SPOT09",
+            id = 9,
             title = "The Staircase to Nowhere",
             description = "Climb this enigmatic outdoor staircase that seemingly leads to nowhere.",
-            coordinates = Pair(
+            coordinates = Location(
                 currentUserCoordinates.first + 0.00713,
                 currentUserCoordinates.second + 0.00645
             ),
@@ -148,10 +149,10 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
             inWishlist = false,
         ),
         Spot(
-            id = "SPOT10",
+            id = 10,
             title = "The Hidden Hobbit Hole",
             description = "Find a charming, secluded dwelling straight out of a fantasy world.",
-            coordinates = Pair(
+            coordinates = Location(
                 currentUserCoordinates.first + 0.00513,
                 currentUserCoordinates.second + 0.00245
             ),
@@ -159,10 +160,10 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
             inWishlist = false,
         ),
         Spot(
-            id = "SPOT11",
+            id = 11,
             title = "The Disappearing Door",
             description = "Can you spot the secret door that blends seamlessly with its surroundings?",
-            coordinates = Pair(
+            coordinates = Location(
                 currentUserCoordinates.first + 0.00713,
                 currentUserCoordinates.second + 0.00145
             ),
@@ -170,10 +171,10 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
             inWishlist = false,
         ),
         Spot(
-            id = "SPOT12",
+            id = 12,
             title = "The Paperclip Sculpture",
             description = "Admire an unusually large sculpture made entirely of paperclips.",
-            coordinates = Pair(
+            coordinates = Location(
                 currentUserCoordinates.first + 0.00413,
                 currentUserCoordinates.second + 0.00945
             ),
@@ -181,10 +182,10 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
             inWishlist = false,
         ),
         Spot(
-            id = "SPOT13",
+            id = 13,
             title = "The Yarn-Bombed Bridge",
             description = "Cross a vibrant, colorful bridge adorned with cozy, knitted creations.",
-            coordinates = Pair(
+            coordinates = Location(
                 currentUserCoordinates.first + 0.00713,
                 currentUserCoordinates.second + 0.00645
             ),
@@ -192,10 +193,10 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
             inWishlist = false,
         ),
         Spot(
-            id = "SPOT14",
+            id = 14,
             title = "The Chalkboard Tunnel",
             description = "Express your creativity on this tunnel's walls, transformed into a giant chalkboard canvas.",
-            coordinates = Pair(
+            coordinates = Location(
                 currentUserCoordinates.first + 0.00113,
                 currentUserCoordinates.second + 0.00945
             ),
@@ -203,10 +204,10 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
             inWishlist = false,
         ),
         Spot(
-            id = "SPOT15",
+            id = 15,
             title = "The Inverted Traffic Cone",
             description = "Find a quirky, upside-down traffic cone that's become an unofficial landmark.",
-            coordinates = Pair(
+            coordinates = Location(
                 currentUserCoordinates.first + 0.007173,
                 currentUserCoordinates.second + 0.00445
             ),
@@ -214,10 +215,10 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
             inWishlist = false,
         ),
         Spot(
-            id = "SPOT16",
+            id = 16,
             title = "The Sidewalk Diorama",
             description = "Peer into a miniature world built into the pavement, complete with tiny inhabitants.",
-            coordinates = Pair(
+            coordinates = Location(
                 currentUserCoordinates.first + 0.004135,
                 currentUserCoordinates.second + 0.00452
             ),
@@ -225,10 +226,10 @@ fun getSpotsTestData(currentUserCoordinatesInput: Pair<Double,Double>? = null) :
             inWishlist = false,
         ),
         Spot(
-            id = "SPOT17",
+            id = 17,
             title = "The Teapot Water Tower",
             description = "Marvel at a quirky, teapot-shaped water tower that's been a local icon for decades.",
-            coordinates = Pair(
+            coordinates = Location(
                 currentUserCoordinates.first + 0.002113,
                 currentUserCoordinates.second + 0.03645
             ),
