@@ -179,4 +179,25 @@
     <string name="spot_detail_report_dialog_option_other">Other</string>
     <string name="spot_detail_report_snackbar">Thank you for your feedback!</string>
     <string name="spot_detail_button_mark_visited">MARK AS VISITED</string>
+
+    <!-- Visited spots-->
+    <string name="visited_spots_title">My visited spots</string>
+
+    <!-- Submitted spots -->
+    <string name="submitted_spots_title">My submitted spots</string>
+    <string name="submitted_spots_rejected_spot_dialog_title">Why is my spot rejected?</string>
+    <string name="submitted_spots_rejected_spot_dialog_subtitle">We’re sorry to inform that your submitted spot does not follow our terms &amp; conditions or is one of the following:</string>
+    <string name="submitted_spots_rejected_spot_dialog_reason_1">The spot is unsafe</string>
+    <string name="submitted_spots_rejected_spot_dialog_reason_2">The spot is fake or a scam</string>
+    <string name="submitted_spots_rejected_spot_dialog_reason_3">The spot does not follow the concept of urban exploration and is too touristic or not interesting</string>
+    <string name="submitted_spots_rejected_spot_dialog_reason_4">The spot is already pinned in the map</string>
+    <string name="submitted_spots_rejected_spot_dialog_reason_5">The spot supports commercial activity</string>
+    <string name="submitted_spots_rejected_spot_dialog_reason_6">Other</string>
+    <string name="submitted_spots_rejected_spot_dialog_footnote_part_1">If you disagree with the rejection status, you can always</string>
+    <string name="submitted_spots_rejected_spot_dialog_footnote_part_2">submit your feedback</string>
+    <string name="submitted_spots_rejected_spot_dialog_footnote_part_3">to us.</string>
+
+
+    <!-- Wishlist -->
+    <string name="wishlist_title">My wish list</string>
 </resources>

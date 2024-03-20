@@ -1,6 +1,5 @@
 package ui.screen.explore.detail
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,14 +31,10 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import domain.use_case.spot.model.Accessibility
 import domain.use_case.spot.model.ReportReason
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import oddspot_app.composeapp.generated.resources.Res
-import oddspot_app.composeapp.generated.resources.accessibility_average
-import oddspot_app.composeapp.generated.resources.accessibility_easy
-import oddspot_app.composeapp.generated.resources.accessibility_hard
 import oddspot_app.composeapp.generated.resources.ic_visit
 import oddspot_app.composeapp.generated.resources.spot_detail_button_mark_visited
 import oddspot_app.composeapp.generated.resources.spot_detail_report
@@ -47,6 +42,7 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.component.button.PrimaryButton
+import ui.component.tag.AccessibilityTag
 import ui.screen.shared.FullScreenImageScreen
 import ui.util.Colors
 import ui.util.body
@@ -133,13 +129,7 @@ fun SpotDetailSheet(
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(text = state.amountOfVisits.toString(), style = body())
             }
-            Box(modifier = Modifier.background(Colors.red, shape = RoundedCornerShape(32.dp))) {
-                Text(
-                    text = getAccessibilityText(state.accessibility),
-                    style = body(),
-                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp)
-                )
-            }
+            AccessibilityTag(accessibility = state.accessibility)
         }
         Spacer(modifier = Modifier.height(16.dp))
         LazyRow(
@@ -184,15 +174,4 @@ fun SpotDetailSheet(
                 .padding(bottom = 48.dp)
         )
     }
-}
-
-@OptIn(ExperimentalResourceApi::class)
-@Composable
-private fun getAccessibilityText(accessibility: Accessibility): String {
-    val res = when (accessibility) {
-        Accessibility.Easy -> Res.string.accessibility_easy
-        Accessibility.Average -> Res.string.accessibility_average
-        Accessibility.Hard -> Res.string.accessibility_hard
-    }
-    return stringResource(res)
 }

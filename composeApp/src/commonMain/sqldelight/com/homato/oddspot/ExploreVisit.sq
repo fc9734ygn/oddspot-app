@@ -11,7 +11,7 @@ insert:
 INSERT INTO ExploreVisit (spot_id, user_id, visit_time, image_url)
 VALUES (?, ?, ?, ?);
 
-selectAllWhereUserId:
+selectAllByUserId:
 SELECT * FROM ExploreVisit WHERE user_id = ?;
 
 selectBySpotId:

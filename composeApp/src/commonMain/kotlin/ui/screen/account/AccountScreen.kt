@@ -59,6 +59,7 @@ import ui.base.NavigatorModel
 import ui.component.button.PrimaryButton
 import ui.component.dialog.InputDialog
 import ui.component.snackbar.GenericErrorSnackbar
+import ui.screen.account.visited.VisitedSpotsScreen
 import ui.screen.onboarding.welcome.WelcomeScreen
 import ui.screen.policy.PolicyScreen
 import ui.util.Colors
@@ -153,7 +154,7 @@ class AccountScreen : BaseTabScreen() {
                 Spacer(modifier = Modifier.height(12.dp))
                 AccountButtonItem(
                     text = Res.string.account_item_visited_spots,
-                    onClick = { },
+                    onClick = { navigator.push(VisitedSpotsScreen()) },
                     iconRes = Res.drawable.ic_account_visited_spots
                 )
                 Spacer(modifier = Modifier.height(12.dp))

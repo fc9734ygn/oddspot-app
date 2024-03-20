@@ -4,7 +4,6 @@ import domain.use_case.spot.model.RejectionReason
 import domain.use_case.spot.model.Spot
 import domain.use_case.spot.model.SubmissionStatus
 import domain.use_case.spot.model.SubmittedSpot
-import domain.use_case.spot.model.VisitedSpot
 import ui.util.Location
 import kotlin.random.Random
 
@@ -30,19 +29,6 @@ private fun getRandomState(): SubmissionStatus {
         1 -> SubmissionStatus.Accepted
         2 -> SubmissionStatus.Rejected(RejectionReason.LOW_QUALITY)
         else -> throw IllegalStateException("Invalid random index")
-    }
-}
-
-fun getVisitedSpotsTestData() : List<VisitedSpot>{
-    val spots : List<Spot> = getSpotsTestData(null)
-    return spots.map { spot: Spot ->
-        VisitedSpot(
-            id = spot.id,
-            title = spot.title,
-            description = spot.description,
-            visitedOn = Random.nextLong(1672531200000), // year 2023
-            imageByUserUrl = "https://qrstrees.com/wp-content/uploads/2017/10/cropped-shutterstock_268475741-1.jpg",
-        )
     }
 }
 

@@ -17,7 +17,7 @@ class RegisterUseCase(
 
     fun register(email: String, password: String): Flow<Resource<Unit>> = flow {
         userRepository.register(email, password).mapError {
-            emit(Resource.Error())
+            emit(Resource.Error(it))
             return@flow
         }
 

@@ -1,7 +1,9 @@
 package ui.screen.splash
 
+import androidx.compose.runtime.Immutable
 import util.Event
 
+@Immutable
 data class SplashScreenState(
     val isLoading: Boolean,
     val event: Event<SplashScreenEvent>? = null

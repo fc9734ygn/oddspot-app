@@ -26,7 +26,7 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.base.BaseTabScreen
-import ui.component.MapGradient
+import ui.component.map.MapGradient
 import ui.component.sheet.BottomSheet
 import ui.component.snackbar.GenericErrorSnackbar
 import ui.component.snackbar.ShowSnackBar

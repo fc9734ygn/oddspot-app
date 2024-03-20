@@ -14,12 +14,11 @@ import data.MULTIPART_IMAGE_KEY
 import data.MimeTypeMapper
 import data.UPLOAD_IMAGE_FILE_NAME
 import data.model.SpotWithVisits
+import data.model.VisitedSpot
 import data.request.SubmitSpotRequest
 import data.response.SpotsFeedResponse
 import domain.use_case.spot.model.SubmittedSpot
-import domain.use_case.spot.model.VisitedSpot
 import getSubmittedSpotsTestData
-import getVisitedSpotsTestData
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.forms.MultiPartFormDataContent
@@ -32,7 +31,6 @@ import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -48,10 +46,6 @@ class SpotRepository(
     private val database: Database
 ) {
 
-    init {
-
-    }
-
     suspend fun getSpotById(id: Int): Result<SpotWithVisits, Throwable> =
         withContext(Dispatchers.IO) {
             runCatching {
@@ -62,32 +56,43 @@ class SpotRepository(
             }
         }
 
-    suspend fun getVisitedSpots(): List<VisitedSpot>? {
-        // temporary mock data
-        return getVisitedSpotsTestData().asReversed().take(9)
-    }
+    suspend fun getVisitedSpots(userId: String): Result<List<VisitedSpot>, Throwable> =
+        withContext(Dispatchers.IO) {
+            runCatching {
+                val visits =
+                    database.exploreVisitQueries.selectAllByUserId(userId).executeAsList()
+                visits.map { visit ->
+                    val spot = database.exploreSpotQueries.selectById(visit.spot_id).executeAsOne()
+                    VisitedSpot(
+                        id = visit.id.toInt(),
+                        title = spot.title,
+                        description = spot.description,
+                        mainImage = spot.image_url,
+                        visitTimestamp = visit.visit_time,
+                        accessibility = spot.accessibility.toInt()
+                    )
+                }
+            }
+        }
 
     suspend fun getSubmittedSpots(): List<SubmittedSpot>? {
         // temporary mock data
         return getSubmittedSpotsTestData().asReversed().take(7)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     fun getExploreSpotsFlow(): Flow<List<SpotWithVisits>> {
-        // Flow that emits every time the ExploreSpot table changes
+
         val spotsFlow = database.exploreSpotQueries
             .selectAll()
             .asFlow()
             .mapToList(Dispatchers.IO)
 
-        // Flow that emits every time the ExploreVisit table changes
         val visitsFlow = database.exploreVisitQueries
             .selectAll()
             .asFlow()
             .mapToList(Dispatchers.IO)
 
         return combine(spotsFlow, visitsFlow) { spots, visits ->
-            // Combine the latest list of spots with the latest list of visits
             spots.map { spot ->
                 SpotWithVisits(
                     spot = spot,

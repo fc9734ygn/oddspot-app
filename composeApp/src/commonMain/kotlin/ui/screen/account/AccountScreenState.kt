@@ -1,7 +1,9 @@
 package ui.screen.account
 
+import androidx.compose.runtime.Immutable
 import util.Event
 
+@Immutable
 data class AccountScreenState(
     val username: String,
     val isLoading: Boolean,

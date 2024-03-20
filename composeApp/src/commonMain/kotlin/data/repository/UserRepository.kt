@@ -4,6 +4,7 @@ import API_BASE_URL
 import app.cash.sqldelight.coroutines.asFlow
 import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.map
+import com.github.michaelbull.result.mapError
 import com.github.michaelbull.result.runCatching
 import com.homato.oddspot.Database
 import com.homato.oddspot.User
@@ -15,6 +16,7 @@ import data.request.LoginRequest
 import data.request.RegisterRequest
 import data.request.UsernameChangeRequest
 import data.response.LoginResponse
+import domain.util.DomainError
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.post
@@ -34,11 +36,14 @@ class UserRepository(
     private val database: Database
 ) : BaseRepository() {
 
-    suspend fun register(email: String, password: String): Result<Unit, Throwable> {
+    suspend fun register(email: String, password: String): Result<Unit, DomainError.Network> {
         return runCatching {
             client.post(API_BASE_URL + ENDPOINT_REGISTER) {
                 setBody(RegisterRequest(email, password))
             }
+            Unit
+        }.mapError {
+            DomainError.Network(it)
         }
     }
 

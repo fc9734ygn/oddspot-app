@@ -16,9 +16,7 @@ class UserHolder(
     val userFlow = userRepository.getUserFlow()
         .stateIn(scope, SharingStarted.Eagerly, null)
 
+    // Can be safely used with !! after login
     val user
         get() = userFlow.value
-
-    val isLoggedIn
-        get() = user != null
 }
