@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.unit.dp
 import domain.use_case.spot.model.VisitedSpotItemModel
 import io.kamel.image.KamelImage
@@ -45,7 +46,9 @@ fun VisitedSpotItem(state: VisitedSpotItemModel, onClick: () -> Unit) {
             text = state.title,
             style = body(),
             textAlign = TextAlign.Start,
-            modifier = Modifier.padding(horizontal = 24.dp)
+            modifier = Modifier.padding(horizontal = 24.dp),
+            maxLines = 1,
+            overflow = Ellipsis
         )
         Spacer(modifier = Modifier.height(8.dp))
         AccessibilityTag(modifier = Modifier.padding(horizontal = 24.dp), state.accessibility)
