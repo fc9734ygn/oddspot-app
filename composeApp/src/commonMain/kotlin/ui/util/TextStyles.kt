@@ -86,3 +86,89 @@ fun footnote() : TextStyle {
        color = Colors.white
    )
 }
+
+@Composable
+fun h2(): TextStyle = TextStyle(
+    fontFamily = FontFamily(Font(Res.font.PassionOne_Regular)),
+    fontSize = 36.sp,
+    textAlign = TextAlign.Center,
+    color = Colors.white,
+    lineHeight = 34.sp
+)
+
+@Composable
+fun h4(): TextStyle = TextStyle(
+    fontFamily = FontFamily(Font(Res.font.PassionOne_Regular)),
+    fontSize = 22.sp,
+    textAlign = TextAlign.Center,
+    color = Colors.white,
+    lineHeight = 20.sp
+)
+
+@Composable
+fun h5(): TextStyle = TextStyle(
+    fontFamily = FontFamily(Font(Res.font.PassionOne_Regular)),
+    fontSize = 18.sp,
+    textAlign = TextAlign.Center,
+    color = Colors.white,
+    lineHeight = 17.sp
+)
+
+@Composable
+fun h6(): TextStyle = TextStyle(
+    fontFamily = FontFamily(Font(Res.font.PassionOne_Regular)),
+    fontSize = 16.sp,
+    textAlign = TextAlign.Center,
+    color = Colors.white,
+    lineHeight = 15.sp
+)
+
+@Composable
+fun code(): TextStyle = TextStyle(
+    fontFamily = FontFamily(Font(Res.font.Inter_Medium)),
+    fontSize = 14.sp,
+    textAlign = TextAlign.Center,
+    color = Colors.white,
+    background = Colors.background
+)
+
+@Composable
+fun quote(): TextStyle = TextStyle(
+    fontFamily = FontFamily(Font(Res.font.Inter_Regular)),
+    fontSize = 16.sp,
+    textAlign = TextAlign.Center,
+    color = Colors.white,
+    lineHeight = 24.sp
+)
+
+@Composable
+fun paragraph(): TextStyle = TextStyle(
+    fontFamily = FontFamily(Font(Res.font.Inter_Regular)),
+    fontSize = 14.sp,
+    textAlign = TextAlign.Start, // Paragraphs typically start-aligned
+    color = Colors.white
+)
+
+@Composable
+fun ordered(): TextStyle = TextStyle(
+    fontFamily = FontFamily(Font(Res.font.Inter_Regular)),
+    fontSize = 14.sp,
+    textAlign = TextAlign.Start,
+    color = Colors.white
+)
+
+@Composable
+fun bullet(): TextStyle = TextStyle(
+    fontFamily = FontFamily(Font(Res.font.Inter_Regular)),
+    fontSize = 14.sp,
+    textAlign = TextAlign.Start,
+    color = Colors.white
+)
+
+@Composable
+fun list(): TextStyle = TextStyle(
+    fontFamily = FontFamily(Font(Res.font.Inter_Regular)),
+    fontSize = 14.sp,
+    textAlign = TextAlign.Start,
+    color = Colors.white
+)

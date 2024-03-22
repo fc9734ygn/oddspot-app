@@ -57,13 +57,13 @@
     <string name="tutorial_privacy_checkbox_prefix">I have read and agree to the</string>
     <string name="tutorial_privacy_policy">Privacy Policy</string>
     <string name="tutorial_privacy_and">and</string>
-    <string name="tutorial_privacy_terms">Terms of Service</string>
+    <string name="tutorial_privacy_terms">Terms &amp; Conditions</string>
     <string name="tutorial_privacy_suffix">.</string>
 
-    <!--Privacy Policy and Terms of Service-->
-    <string name="privacy_policy_and_terms_title">Privacy Policy and Terms of Service</string>
+    <!--Privacy Policy and Terms & Conditions-->
+    <string name="privacy_policy_and_terms_title">Privacy Policy and Terms &amp; Conditions</string>
     <string name="privacy_policy_title">Privacy Policy</string>
-    <string name="terms_of_service_title">Terms of Service</string>
+    <string name="terms_of_service_title">Terms &amp; Conditions</string>
 
     <!-- Explore-->
     <string name="explore_bottom_navigation">Explore</string>
@@ -166,7 +166,7 @@
     <string name="account_item_settings">My settings</string>
     <string name="account_item_about">About</string>
     <string name="account_item_feedback">Submit feedback</string>
-    <string name="account_item_privacy">Privacy policy</string>
+    <string name="account_item_privacy">Privacy policy and Terms &amp; Conditions</string>
     <string name="account_button_logout">LOG OUT</string>
     <string name="account_change_username_dialog_title">Change username</string>
     <string name="account_change_username_dialog_description">Username must contain between %1$d and %2$d characters and consists of only letters, digits, and underscores</string>

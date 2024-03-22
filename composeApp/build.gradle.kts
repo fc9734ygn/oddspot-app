@@ -96,6 +96,10 @@ kotlin {
             implementation(libs.kamel.image)
             implementation(libs.zoomable)
 
+            // Markdown
+            implementation(libs.multiplatform.markdown.renderer)
+
+
         }
 
         androidMain.dependencies {

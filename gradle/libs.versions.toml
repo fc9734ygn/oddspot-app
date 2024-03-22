@@ -22,6 +22,7 @@ ktor = "2.3.7"
 koin-annotations = "1.3.0"
 koin-compose = "1.1.2"
 #secrets-gradle-plugin = "2.0.1"
+multiplatformMarkdownRenderer = "0.13.0"
 secretsGradlePlugin = "2.0.1"
 serialization = "1.6.2"
 result = "1.1.18"
@@ -29,6 +30,7 @@ sqldelight = "2.0.1"
 ksp = "1.9.22-1.0.17"
 kotlinx-datetime = "0.5.0"
 detekt = "1.23.4"
+twain = "0.2.2"
 voyager = "1.0.0"
 kermit = "2.0.3"
 android-maps-compose = "4.3.0"
@@ -83,6 +85,7 @@ ktor-client-encoding = { module = "io.ktor:ktor-client-encoding", version.ref = 
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
 # Result
+multiplatform-markdown-renderer = { module = "com.mikepenz:multiplatform-markdown-renderer", version.ref = "multiplatformMarkdownRenderer" }
 result = { module = "com.michael-bull.kotlin-result:kotlin-result", version.ref = "result" }
 
 # SQLDelight
@@ -120,6 +123,8 @@ flexible-bottomsheet-material = { module = "com.github.skydoves:flexible-bottoms
 # Image loading
 kamel-image = { module = "media.kamel:kamel-image", version.ref = "kamel" }
 zoomable = { module = "com.mxalbert.zoomable:zoomable", version.ref = "zoomable" }
+
+# Markdown
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
