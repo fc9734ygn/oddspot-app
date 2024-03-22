@@ -18,9 +18,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,6 +32,8 @@ import domain.use_case.spot.model.ReportReason
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import oddspot_app.composeapp.generated.resources.Res
+import oddspot_app.composeapp.generated.resources.ic_heart_filled
+import oddspot_app.composeapp.generated.resources.ic_heart_outlined
 import oddspot_app.composeapp.generated.resources.ic_visit
 import oddspot_app.composeapp.generated.resources.spot_detail_button_mark_visited
 import oddspot_app.composeapp.generated.resources.spot_detail_report
@@ -86,9 +85,9 @@ fun SpotDetailSheet(
                 onLoading = { progress -> CircularProgressIndicator(progress) },
             )
             val icon = if (state.isWishlisted) {
-                Icons.Filled.Favorite
+                painterResource(Res.drawable.ic_heart_filled)
             } else {
-                Icons.Outlined.Favorite
+                painterResource(Res.drawable.ic_heart_outlined)
             }
             Icon(
                 icon,

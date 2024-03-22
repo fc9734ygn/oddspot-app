@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS Wishlist (
+    spot_id INTEGER PRIMARY KEY
+);
+
+insertWishlistItem:
+INSERT OR IGNORE INTO Wishlist (spot_id)
+VALUES (?);
+
+removeWishlistItem:
+DELETE FROM Wishlist
+WHERE spot_id = ?;
+
+selectAllWishlistItems:
+SELECT spot_id
+FROM Wishlist;

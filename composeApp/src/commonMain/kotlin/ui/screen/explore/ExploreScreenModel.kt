@@ -4,6 +4,8 @@ import cafe.adriel.voyager.core.model.screenModelScope
 import domain.use_case.spot.GetExploreUseCase
 import domain.use_case.spot.GetSpotDetailUseCase
 import domain.use_case.spot.model.ReportReason
+import domain.use_case.wishlist.AddToWishlistUseCase
+import domain.use_case.wishlist.RemoveFromWishlistUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -15,7 +17,9 @@ import util.Event
 @Factory
 class ExploreScreenModel(
     private val getExploreUseCase: GetExploreUseCase,
-    private val getSpotDetailUseCase: GetSpotDetailUseCase
+    private val getSpotDetailUseCase: GetSpotDetailUseCase,
+    private val addToWishlistUseCase: AddToWishlistUseCase,
+    private val removeFromWishlistUseCase: RemoveFromWishlistUseCase
 ) : BaseScreenModel<ExploreScreenState>(ExploreScreenState.Initial) {
 
     fun getData() {
@@ -29,11 +33,11 @@ class ExploreScreenModel(
             onSuccess = { domainModel ->
                 mutableState.update {
                     it.copy(
-                        markers = domainModel.spots.map { spot ->
+                        markers = domainModel.spotMarkerModels.map { spot ->
                             ExploreMarker(
                                 id = spot.id,
                                 coordinates = spot.coordinates,
-                                category = 1 // TODO: Figure out categories
+                                category = spot.category
                             )
                         },
                         userCurrentLocation = domainModel.userCurrentLocation,
@@ -60,7 +64,8 @@ class ExploreScreenModel(
                             accessibility = spotDetails.accessibility,
                             isLoading = false,
                             isLocked = spotDetails.isLocked,
-                            visitImages = spotDetails.visitImages
+                            visitImages = spotDetails.visitImages,
+                            isWishlisted = spotDetails.isWishlisted
                         ),
                         event = Event(ExploreScreenEvent.OpenSpotDetailBottomSheet),
                         isLoading = false,
@@ -95,7 +100,27 @@ class ExploreScreenModel(
     }
 
     fun onWishlistClick(spotId: Int): () -> Unit = {
-        // TODO: Implement
+        val action = if (mutableState.value.spotDetailsSheetState.isWishlisted) {
+            removeFromWishlistUseCase(spotId)
+        } else {
+            addToWishlistUseCase(spotId)
+        }
+        updateState {
+            copy(
+                spotDetailsSheetState = spotDetailsSheetState.copy(
+                    isWishlisted = !mutableState.value.spotDetailsSheetState.isWishlisted
+                )
+            )
+        }
+        action.collectResource(
+            onError = {
+                updateState {
+                    copy(
+                        event = Event(ExploreScreenEvent.Error)
+                    )
+                }
+            }
+        )
     }
 
     fun onReportDialogDismiss() {

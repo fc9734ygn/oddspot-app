@@ -9,6 +9,7 @@ import ui.base.BaseScreenModel
 import util.Event
 
 @Factory
+@Suppress("UnusedPrivateProperty")
 class SplashScreenModel(
     private val getTutorialSeenUseCase: GetTutorialSeenUseCase,
     private val getInitialUserState: GetInitialUserState,

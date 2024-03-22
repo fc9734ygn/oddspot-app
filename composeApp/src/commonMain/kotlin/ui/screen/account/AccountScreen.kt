@@ -60,6 +60,7 @@ import ui.component.button.PrimaryButton
 import ui.component.dialog.InputDialog
 import ui.component.snackbar.GenericErrorSnackbar
 import ui.screen.account.visited.VisitedSpotsScreen
+import ui.screen.account.wishlist.WishlistScreen
 import ui.screen.onboarding.welcome.WelcomeScreen
 import ui.screen.policy.PolicyScreen
 import ui.util.Colors
@@ -160,7 +161,7 @@ class AccountScreen : BaseTabScreen() {
                 Spacer(modifier = Modifier.height(12.dp))
                 AccountButtonItem(
                     text = Res.string.account_item_wishlist,
-                    onClick = { },
+                    onClick = { navigator.push(WishlistScreen()) },
                     iconRes = Res.drawable.ic_account_wishlist
                 )
                 Spacer(modifier = Modifier.height(12.dp))

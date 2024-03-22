@@ -7,6 +7,7 @@ import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.getOrThrow
 import com.github.michaelbull.result.runCatching
 import com.homato.oddspot.Database
+import com.homato.oddspot.ExploreSpot
 import data.ENDPOINT_SPOTS
 import data.ENDPOINT_SUBMIT_SPOT
 import data.MULTIPART_DATA_KEY
@@ -18,7 +19,6 @@ import data.model.VisitedSpot
 import data.request.SubmitSpotRequest
 import data.response.SpotsFeedResponse
 import domain.use_case.spot.model.SubmittedSpot
-import getSubmittedSpotsTestData
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.forms.MultiPartFormDataContent
@@ -46,13 +46,21 @@ class SpotRepository(
     private val database: Database
 ) {
 
-    suspend fun getSpotById(id: Int): Result<SpotWithVisits, Throwable> =
+    suspend fun getSpotWithVisitsBySpotId(id: Int): Result<SpotWithVisits, Throwable> =
         withContext(Dispatchers.IO) {
             runCatching {
                 val spots = database.exploreSpotQueries.selectById(id.toLong()).executeAsOne()
                 val visits =
                     database.exploreVisitQueries.selectBySpotId(id.toLong()).executeAsList()
                 SpotWithVisits(spots, visits)
+            }
+        }
+
+    suspend fun getSpotById(id: Int): Result<ExploreSpot, Throwable> =
+        withContext(Dispatchers.IO) {
+            runCatching {
+                val spot = database.exploreSpotQueries.selectById(id.toLong()).executeAsOne()
+                spot
             }
         }
 
@@ -76,8 +84,7 @@ class SpotRepository(
         }
 
     suspend fun getSubmittedSpots(): List<SubmittedSpot>? {
-        // temporary mock data
-        return getSubmittedSpotsTestData().asReversed().take(7)
+        TODO()
     }
 
     fun getExploreSpotsFlow(): Flow<List<SpotWithVisits>> {

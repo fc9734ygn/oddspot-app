@@ -5,7 +5,7 @@ import com.github.michaelbull.result.getOrElse
 import com.github.michaelbull.result.mapError
 import data.repository.SpotRepository
 import domain.use_case.spot.model.ExploreModel
-import domain.use_case.spot.model.Spot
+import domain.use_case.spot.model.SpotMarkerModel
 import domain.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -40,12 +40,12 @@ class GetExploreUseCase(
                         Pair(currentUserLocation.latitude, currentUserLocation.longitude)
                     )
                 }
-            val sortedSpots = filteredAndSortedSpotEntities.map { Spot.fromEntity(it) }
+            val sortedSpotMarkerModels = filteredAndSortedSpotEntities.map { SpotMarkerModel.fromEntity(it) }
 
             emit(
                 Resource.Success(
                     ExploreModel(
-                        sortedSpots,
+                        sortedSpotMarkerModels,
                         currentUserLocation
                     )
                 )

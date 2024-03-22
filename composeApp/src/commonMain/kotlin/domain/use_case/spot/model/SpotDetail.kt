@@ -5,7 +5,7 @@ data class SpotDetail(
     val title: String,
     val description: String,
     val imageUrl: String,
-    val inWishlist: Boolean,
+    val isWishlisted: Boolean,
     val amountOfVisits: Int,
     val accessibility: Accessibility,
     val visitImages: List<String>,

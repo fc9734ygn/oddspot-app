@@ -19,6 +19,7 @@ import data.response.LoginResponse
 import domain.util.DomainError
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import kotlinx.coroutines.Dispatchers
@@ -66,7 +67,7 @@ class UserRepository(
 
     suspend fun changeUsername(username: String): Result<Unit, Throwable> {
         return runCatching {
-            client.post(API_BASE_URL + ENDPOINT_CHANGE_USERNAME) {
+            client.patch(API_BASE_URL + ENDPOINT_CHANGE_USERNAME) {
                 setBody(UsernameChangeRequest(username))
             }
         }.map {
