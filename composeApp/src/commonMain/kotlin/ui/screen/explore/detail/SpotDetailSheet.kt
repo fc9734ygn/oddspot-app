@@ -47,6 +47,7 @@ import ui.util.Colors
 import ui.util.body
 import ui.util.footnote
 import ui.util.h3
+import ui.util.noRippleClickable
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
@@ -97,7 +98,7 @@ fun SpotDetailSheet(
                     .padding(vertical = 16.dp, horizontal = 40.dp)
                     .align(Alignment.TopEnd)
                     .size(32.dp)
-                    .clickable { onWishlistClick() },
+                    .noRippleClickable(onWishlistClick),
             )
         }
         Spacer(modifier = Modifier.height(24.dp))
