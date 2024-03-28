@@ -3,10 +3,10 @@ package ui.screen.explore
 import cafe.adriel.voyager.core.model.screenModelScope
 import domain.use_case.spot.GetExploreUseCase
 import domain.use_case.spot.GetSpotDetailUseCase
+import domain.use_case.spot.ReportSpotUseCase
 import domain.use_case.spot.model.ReportReason
 import domain.use_case.wishlist.AddToWishlistUseCase
 import domain.use_case.wishlist.RemoveFromWishlistUseCase
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
@@ -19,7 +19,8 @@ class ExploreScreenModel(
     private val getExploreUseCase: GetExploreUseCase,
     private val getSpotDetailUseCase: GetSpotDetailUseCase,
     private val addToWishlistUseCase: AddToWishlistUseCase,
-    private val removeFromWishlistUseCase: RemoveFromWishlistUseCase
+    private val removeFromWishlistUseCase: RemoveFromWishlistUseCase,
+    private val reportSpotUseCase: ReportSpotUseCase
 ) : BaseScreenModel<ExploreScreenState>(ExploreScreenState.Initial) {
 
     fun getData() {
@@ -153,13 +154,26 @@ class ExploreScreenModel(
                     event = Event(ExploreScreenEvent.CloseSpotDetailBottomSheet)
                 )
             }
-            delay(500L) // TODO: Implement api call
-            updateState {
-                copy(
-                    spotDetailsSheetState = SpotDetailSheetState.Initial,
-                    event = Event(ExploreScreenEvent.ShowReportSuccessSnackbar)
-                )
-            }
+            reportSpotUseCase(
+                mutableState.value.spotDetailsSheetState.spotId!!,
+                reason
+            ).collectResource(
+                onSuccess = {
+                    updateState {
+                        copy(
+                            spotDetailsSheetState = SpotDetailSheetState.Initial,
+                            event = Event(ExploreScreenEvent.ShowReportSuccessSnackbar)
+                        )
+                    }
+                },
+                onError = {
+                    updateState {
+                        copy(
+                            event = Event(ExploreScreenEvent.Error)
+                        )
+                    }
+                }
+            )
         }
     }
 }

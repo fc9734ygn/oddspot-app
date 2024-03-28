@@ -8,6 +8,7 @@ import com.github.michaelbull.result.getOrThrow
 import com.github.michaelbull.result.runCatching
 import com.homato.oddspot.Database
 import com.homato.oddspot.ExploreSpot
+import data.ENDPOINT_REPORT_SPOT
 import data.ENDPOINT_SPOTS
 import data.ENDPOINT_SUBMIT_SPOT
 import data.MULTIPART_DATA_KEY
@@ -16,6 +17,7 @@ import data.MimeTypeMapper
 import data.UPLOAD_IMAGE_FILE_NAME
 import data.model.SpotWithVisits
 import data.model.VisitedSpot
+import data.request.ReportSpotRequest
 import data.request.SubmitSpotRequest
 import data.response.SpotsFeedResponse
 import domain.use_case.spot.model.SubmittedSpot
@@ -177,6 +179,12 @@ class SpotRepository(
         client.post(API_BASE_URL + ENDPOINT_SUBMIT_SPOT) {
             contentType(ContentType.MultiPart.FormData)
             setBody(multipartData)
+        }
+    }
+
+    suspend fun reportSpot(spotId: Int, reason: String) : Result<Unit, Throwable> = runCatching {
+        client.post(API_BASE_URL + ENDPOINT_REPORT_SPOT) {
+            setBody(ReportSpotRequest(spotId, reason))
         }
     }
 }
