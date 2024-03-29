@@ -9,7 +9,6 @@ import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.ExportObjCClass
 import kotlinx.cinterop.useContents
-import kotlinx.coroutines.DefaultExecutor.delegate
 import platform.CoreLocation.CLLocationCoordinate2DMake
 import platform.darwin.NSObject
 import ui.util.CameraPosition

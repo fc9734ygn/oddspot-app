@@ -15,9 +15,8 @@ import cocoapods.GoogleMaps.animateWithCameraUpdate
 import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.ExportObjCClass
-import kotlinx.cinterop.useContents
-import kotlinx.coroutines.DefaultExecutor.delegate
 import platform.CoreLocation.CLLocationCoordinate2DMake
+import platform.UIKit.UIImage
 import platform.darwin.NSObject
 import ui.screen.explore.ExploreMarker
 import ui.util.CameraLocationBounds
@@ -96,8 +95,9 @@ actual fun ExploreMap(
                         marker.coordinates.latitude,
                         marker.coordinates.longitude
                     )
+                    icon = UIImage.imageNamed("ic_marker_png.png")
                     map = view
-                    userData = marker.id.toString()
+                    userData = marker.id
                 }
             }
         }

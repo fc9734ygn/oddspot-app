@@ -1,3 +1,4 @@
+
 import android.Manifest
 import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
@@ -13,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.maps.android.compose.GoogleMap
@@ -22,6 +24,7 @@ import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
+import com.homato.oddspot.R
 import oddspot_app.composeapp.generated.resources.Res
 import oddspot_app.composeapp.generated.resources.permission_fine_location_rationale
 import org.jetbrains.compose.resources.ExperimentalResourceApi
@@ -129,6 +132,7 @@ actual fun ExploreMap(
         ) {
             markers?.forEach { marker ->
                 Marker(
+                    icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_png),
                     state = rememberMarkerState(
                         key = marker.id.toString(),
                         position = LatLng(marker.coordinates.latitude, marker.coordinates.longitude)
