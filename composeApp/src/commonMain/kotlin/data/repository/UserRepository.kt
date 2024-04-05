@@ -81,8 +81,9 @@ class UserRepository(
         }
     }
 
-    suspend fun logout(): Result<Unit, Throwable> = withContext(Dispatchers.IO) {
+    suspend fun deleteLocalData(): Result<Unit, Throwable> = withContext(Dispatchers.IO) {
         runCatching {
+            database.wishlistQueries.deleteAll()
             database.userQueries.deleteUser()
         }
     }

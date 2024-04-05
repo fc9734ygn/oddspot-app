@@ -13,7 +13,7 @@ class LogoutUseCase(private val userRepository: UserRepository) {
 
         emit(Resource.Loading())
 
-        userRepository.logout().mapError {
+        userRepository.deleteLocalData().mapError {
             emit(Resource.Error())
             return@flow
         }

@@ -13,3 +13,6 @@ WHERE spot_id = ?;
 selectAllWishlistItems:
 SELECT spot_id
 FROM Wishlist;
+
+deleteAll:
+DELETE FROM Wishlist;
