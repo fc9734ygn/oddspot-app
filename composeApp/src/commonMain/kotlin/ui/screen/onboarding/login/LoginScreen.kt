@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,7 +24,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
-import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -36,6 +36,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import oddspot_app.composeapp.generated.resources.Res
 import oddspot_app.composeapp.generated.resources.eye
 import oddspot_app.composeapp.generated.resources.eye_slash
+import oddspot_app.composeapp.generated.resources.ic_arrow_back
 import oddspot_app.composeapp.generated.resources.login_button
 import oddspot_app.composeapp.generated.resources.login_title
 import oddspot_app.composeapp.generated.resources.register_email_label
@@ -50,7 +51,6 @@ import ui.component.snackbar.GenericErrorSnackbar
 import ui.screen.explore.ExploreScreen
 import ui.util.Colors
 import ui.util.Consume
-import ui.util.InitialFocusRequester
 import ui.util.h1
 
 class LoginScreen : BaseScreen() {
@@ -76,26 +76,44 @@ class LoginScreen : BaseScreen() {
             modifier = Modifier
                 .background(Colors.background)
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = stringResource(Res.string.login_title),
-                style = h1(),
-                modifier = Modifier.padding(horizontal = 96.dp),
-                color = Colors.white
-            )
-            Spacer(modifier = Modifier.height(24.dp))
-            InitialFocusRequester {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp)
+                    .padding(top = 24.dp),
+                horizontalArrangement = Arrangement.Start,
+            ) {
+                Icon(
+                    painter = painterResource(Res.drawable.ic_arrow_back),
+                    contentDescription = null,
+                    tint = Colors.darkGrey,
+                    modifier = Modifier.clickable { navigator.pop() }
+                )
+            }
+            Column(
+                modifier = Modifier
+                    .background(Colors.background)
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                Text(
+                    text = stringResource(Res.string.login_title),
+                    style = h1(),
+                    modifier = Modifier.padding(horizontal = 96.dp),
+                    color = Colors.white
+                )
+                Spacer(modifier = Modifier.height(24.dp))
                 RoundTextInput(
                     value = state.email,
                     onValueChange = screenModel::onEmailInputChange,
                     label = stringResource(Res.string.register_email_label),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 48.dp)
-                        .focusRequester(it),
+                        .padding(horizontal = 48.dp),
                     keyboardActions = KeyboardActions { focusManager.moveFocus(FocusDirection.Down) },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Email,
@@ -103,47 +121,47 @@ class LoginScreen : BaseScreen() {
                         autoCorrect = false
                     ),
                 )
+                Spacer(modifier = Modifier.height(32.dp))
+                RoundTextInput(
+                    value = state.password,
+                    onValueChange = screenModel::onPasswordInputChange,
+                    label = stringResource(Res.string.register_password_label),
+                    modifier = Modifier
+                        .padding(horizontal = 48.dp)
+                        .fillMaxWidth(),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done,
+                        autoCorrect = false
+                    ),
+                    keyboardActions = KeyboardActions { focusManager.moveFocus(FocusDirection.Down) },
+                    visualTransformation = if (state.passwordPreview) {
+                        VisualTransformation.None
+                    } else {
+                        PasswordVisualTransformation()
+                    },
+                    trailingIcon = {
+                        Icon(
+                            painter = painterResource(
+                                if (state.passwordPreview) Res.drawable.eye_slash
+                                else Res.drawable.eye
+                            ),
+                            contentDescription = null,
+                            modifier = Modifier.size(24.dp).clickable {
+                                screenModel.onPasswordPreviewClick()
+                            },
+                            tint = Colors.red
+                        )
+                    },
+                )
+                Spacer(modifier = Modifier.height(48.dp))
+                PrimaryButton(
+                    onClick = { screenModel.onContinueClick() },
+                    text = stringResource(Res.string.login_button),
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 48.dp),
+                    isLoading = state.isLoading
+                )
             }
-            Spacer(modifier = Modifier.height(32.dp))
-            RoundTextInput(
-                value = state.password,
-                onValueChange = screenModel::onPasswordInputChange,
-                label = stringResource(Res.string.register_password_label),
-                modifier = Modifier
-                    .padding(horizontal = 48.dp)
-                    .fillMaxWidth(),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Password,
-                    imeAction = ImeAction.Done,
-                    autoCorrect = false
-                ),
-                keyboardActions = KeyboardActions { focusManager.moveFocus(FocusDirection.Down) },
-                visualTransformation = if (state.passwordPreview) {
-                    VisualTransformation.None
-                } else {
-                    PasswordVisualTransformation()
-                },
-                trailingIcon = {
-                    Icon(
-                        painter = painterResource(
-                            if (state.passwordPreview) Res.drawable.eye_slash
-                            else Res.drawable.eye
-                        ),
-                        contentDescription = null,
-                        modifier = Modifier.size(24.dp).clickable {
-                            screenModel.onPasswordPreviewClick()
-                        },
-                        tint = Colors.red
-                    )
-                },
-            )
-            Spacer(modifier = Modifier.height(48.dp))
-            PrimaryButton(
-                onClick = { screenModel.onContinueClick() },
-                text = stringResource(Res.string.login_button),
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 48.dp),
-                isLoading = state.isLoading
-            )
         }
     }
 }

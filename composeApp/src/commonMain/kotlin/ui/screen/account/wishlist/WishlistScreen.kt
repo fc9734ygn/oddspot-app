@@ -1,17 +1,21 @@
 package ui.screen.account.wishlist
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Icon
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -24,11 +28,14 @@ import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import oddspot_app.composeapp.generated.resources.Res
+import oddspot_app.composeapp.generated.resources.ic_arrow_back
 import oddspot_app.composeapp.generated.resources.wishlist_title
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.base.BaseScreen
 import ui.component.snackbar.GenericErrorSnackbar
+import ui.util.Colors
 import ui.util.Consume
 import ui.util.h1
 
@@ -53,10 +60,21 @@ class WishlistScreen : BaseScreen() {
             contentPadding = PaddingValues(horizontal = 12.dp)
         ) {
             item(span = { GridItemSpan(this.maxLineSpan) }) {
+                Row(modifier = Modifier
+                    .padding(vertical = 24.dp, horizontal = 12.dp)
+                    .clickable { navigator.pop() }
+                ) {
+                    Icon(
+                        painter = painterResource(Res.drawable.ic_arrow_back),
+                        contentDescription = null,
+                        tint = Colors.darkGrey
+                    )
+                }
+            }
+            item(span = { GridItemSpan(this.maxLineSpan) }) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    Spacer(modifier = Modifier.height(48.dp))
                     Text(
                         text = stringResource(Res.string.wishlist_title),
                         style = h1()
@@ -75,7 +93,10 @@ class WishlistScreen : BaseScreen() {
                 return@LazyVerticalGrid
             }
             items(state.items) {
-                WishlistItem(state = it, onClick = {}, onRemoveClick = { screenModel.removeWishlistItem(it.spotId) })
+                WishlistItem(
+                    state = it,
+                    onClick = {},
+                    onRemoveClick = { screenModel.removeWishlistItem(it.spotId) })
             }
         }
     }

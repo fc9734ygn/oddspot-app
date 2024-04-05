@@ -8,10 +8,12 @@ import androidx.compose.runtime.LaunchedEffect
 fun ShowSnackBar(
     snackbarHostState: SnackbarHostState,
     message: String,
+    actionAfter: (() -> Unit)? = null
 ) {
     LaunchedEffect(snackbarHostState) {
         snackbarHostState.showSnackbar(
             message = message,
         )
+        actionAfter?.invoke()
     }
 }

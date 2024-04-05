@@ -37,6 +37,7 @@ import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import oddspot_app.composeapp.generated.resources.Res
+import oddspot_app.composeapp.generated.resources.ic_arrow_back
 import oddspot_app.composeapp.generated.resources.ic_info
 import oddspot_app.composeapp.generated.resources.ic_marker
 import oddspot_app.composeapp.generated.resources.ic_marker_button
@@ -51,6 +52,7 @@ import oddspot_app.composeapp.generated.resources.submit_spot_no_image_error
 import oddspot_app.composeapp.generated.resources.submit_spot_title
 import oddspot_app.composeapp.generated.resources.submit_spot_title_error_too_long_or_too_short
 import oddspot_app.composeapp.generated.resources.submit_spot_title_placeholder
+import oddspot_app.composeapp.generated.resources.submit_spot_toast_spot_submitted
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringArrayResource
@@ -87,7 +89,12 @@ class SubmitSpotScreen(
         state.event?.Consume {
             when (it) {
                 is SubmitSpotEvent.SpotSubmitted -> {
-                    navigator.pop()
+                    ShowSnackBar(
+                        snackbarHostState = snackbarHostState,
+                        message = stringResource(Res.string.submit_spot_toast_spot_submitted)
+                    ) {
+                        navigator.pop()
+                    }
                 }
 
                 is SubmitSpotEvent.Error -> GenericErrorSnackbar(snackbarHostState)
@@ -107,12 +114,23 @@ class SubmitSpotScreen(
             modifier = Modifier
                 .background(Colors.background)
                 .fillMaxSize()
-                .padding(horizontal = 32.dp)
-                .padding(top = 24.dp)
+                .padding(horizontal = 24.dp)
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 24.dp),
+                horizontalArrangement = Arrangement.Start,
+            ) {
+                Icon(
+                    painter = painterResource(Res.drawable.ic_arrow_back),
+                    contentDescription = null,
+                    tint = Colors.darkGrey,
+                    modifier = Modifier.clickable { navigator.pop() }
+                )
+            }
             ImageSelector(
                 modifier = Modifier.fillMaxWidth(),
                 state.image?.data,
@@ -268,7 +286,8 @@ class SubmitSpotScreen(
             PrimaryButton(
                 modifier = Modifier.padding(top = 24.dp).padding(bottom = 48.dp).fillMaxWidth(),
                 onClick = { screenModel.onSubmitClick() },
-                text = stringResource(Res.string.submit_spot_button_submit)
+                text = stringResource(Res.string.submit_spot_button_submit),
+                isLoading = state.isLoading,
             )
         }
     }

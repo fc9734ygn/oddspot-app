@@ -1,26 +1,35 @@
 package ui.screen.policy
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.mikepenz.markdown.compose.Markdown
 import com.mikepenz.markdown.model.DefaultMarkdownColors
 import com.mikepenz.markdown.model.DefaultMarkdownTypography
 import oddspot_app.composeapp.generated.resources.Res
+import oddspot_app.composeapp.generated.resources.ic_arrow_back
 import oddspot_app.composeapp.generated.resources.privacy_policy_title
 import oddspot_app.composeapp.generated.resources.terms_of_service_title
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.util.Colors
 import ui.util.body
@@ -42,14 +51,28 @@ class PolicyScreen : Screen {
     @OptIn(ExperimentalResourceApi::class)
     @Composable
     override fun Content() {
+        val navigator = LocalNavigator.currentOrThrow
         Column(
             modifier = Modifier
                 .background(color = Colors.background)
-                .padding(vertical = 64.dp, horizontal = 24.dp)
+                .padding(bottom = 64.dp)
+                .padding(horizontal = 24.dp)
                 .verticalScroll(rememberScrollState())
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 32.dp),
+                horizontalArrangement = Arrangement.Start,
+            ) {
+                Icon(
+                    painter = painterResource(Res.drawable.ic_arrow_back),
+                    contentDescription = null,
+                    tint = Colors.darkGrey,
+                    modifier = Modifier.clickable { navigator.pop() }
+                )
+            }
             Text(
                 style = h3(),
                 color = Colors.white,
