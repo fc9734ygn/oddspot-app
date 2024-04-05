@@ -52,14 +52,14 @@ fun SimpleDialog(
         ) {
             dismissButtonText?.let {
                 PrimaryButton(
-                    enabled = confirmButtonEnabled,
+                    isEnabled = confirmButtonEnabled,
                     onClick = onConfirm,
                     text = dismissButtonText ?: "abc",
                 )
             }
 
             PrimaryButton(
-                enabled = confirmButtonEnabled,
+                isEnabled = confirmButtonEnabled,
                 onClick = onConfirm,
                 text = confirmButtonText ?: "abc",
             )

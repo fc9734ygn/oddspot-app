@@ -9,5 +9,5 @@ data class SpotDetail(
     val amountOfVisits: Int,
     val accessibility: Accessibility,
     val visitImages: List<String>,
-    val isLocked: Boolean,
+    val isInRange: Boolean,
 )

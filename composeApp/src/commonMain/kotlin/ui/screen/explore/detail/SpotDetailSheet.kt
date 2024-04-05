@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import domain.use_case.spot.MAX_DISTANCE_FROM_SPOT_METERS
 import domain.use_case.spot.model.ReportReason
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
@@ -36,6 +37,7 @@ import oddspot_app.composeapp.generated.resources.ic_heart_filled
 import oddspot_app.composeapp.generated.resources.ic_heart_outlined
 import oddspot_app.composeapp.generated.resources.ic_visit
 import oddspot_app.composeapp.generated.resources.spot_detail_button_mark_visited
+import oddspot_app.composeapp.generated.resources.spot_detail_range_explanation
 import oddspot_app.composeapp.generated.resources.spot_detail_report
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
@@ -155,6 +157,16 @@ fun SpotDetailSheet(
         }
         Spacer(modifier = Modifier.height(16.dp))
         Text(
+            text = stringResource(
+                Res.string.spot_detail_range_explanation,
+                MAX_DISTANCE_FROM_SPOT_METERS
+            ),
+            style = body(),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp),
+            textAlign = TextAlign.Start
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
             text = stringResource(Res.string.spot_detail_report),
             style = footnote(),
             modifier = Modifier
@@ -171,7 +183,8 @@ fun SpotDetailSheet(
             onClick = { /* TODO */ },
             modifier = Modifier.fillMaxWidth()
                 .padding(horizontal = 24.dp)
-                .padding(bottom = 48.dp)
+                .padding(bottom = 48.dp),
+            isEnabled = state.isInRange
         )
     }
 }

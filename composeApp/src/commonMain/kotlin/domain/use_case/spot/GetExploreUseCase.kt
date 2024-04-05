@@ -10,7 +10,8 @@ import domain.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.koin.core.annotation.Factory
-import util.distanceInMetersTo
+import ui.util.Location
+import ui.util.distanceInMetersTo
 
 @Factory
 class GetExploreUseCase(
@@ -35,9 +36,9 @@ class GetExploreUseCase(
             val filteredAndSortedSpotEntities = spotsWithVisits
                 .map { it.spot }
                 .sortedBy { spot ->
-                    val coordinates = spot.latitude to spot.longitude
-                    coordinates.distanceInMetersTo(
-                        Pair(currentUserLocation.latitude, currentUserLocation.longitude)
+                    val spotLocation = Location(spot.latitude, spot.longitude)
+                    spotLocation.distanceInMetersTo(
+                        Location(currentUserLocation.latitude, currentUserLocation.longitude)
                     )
                 }
             val sortedSpotMarkerModels = filteredAndSortedSpotEntities.map { SpotMarkerModel.fromEntity(it) }

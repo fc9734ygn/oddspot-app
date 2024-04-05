@@ -18,7 +18,7 @@ fun PrimaryButton(
     modifier: Modifier = Modifier,
     text: String,
     onClick: () -> Unit,
-    enabled: Boolean = true,
+    isEnabled: Boolean = true,
     isLoading: Boolean = false
 ) {
     Button(
@@ -31,7 +31,7 @@ fun PrimaryButton(
         ),
         shape = RoundedCornerShape(32.dp),
         onClick = onClick,
-        enabled = enabled
+        enabled = isEnabled
     ) {
         if (isLoading){
             CircularProgressIndicator(

@@ -153,7 +153,7 @@ class TutorialPrivacyScreen : BaseScreen() {
                     .fillMaxWidth(),
                 text = stringResource(Res.string.tutorial_button),
                 onClick = screenModel::onNextClick,
-                enabled = state.isCheckboxChecked
+                isEnabled = state.isCheckboxChecked
             )
         }
     }

@@ -179,6 +179,7 @@
     <string name="spot_detail_report_dialog_option_other">Other</string>
     <string name="spot_detail_report_snackbar">Thank you for your feedback!</string>
     <string name="spot_detail_button_mark_visited">MARK AS VISITED</string>
+    <string name="spot_detail_range_explanation">The spot unlocks when you're within %1$d meters of it.</string>
 
     <!-- Visited spots-->
     <string name="visited_spots_title">My visited spots</string>
