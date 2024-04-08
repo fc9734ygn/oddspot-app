@@ -59,6 +59,7 @@ import ui.base.NavigatorModel
 import ui.component.button.PrimaryButton
 import ui.component.dialog.InputDialog
 import ui.component.snackbar.GenericErrorSnackbar
+import ui.screen.account.submitted.SubmittedSpotsScreen
 import ui.screen.account.visited.VisitedSpotsScreen
 import ui.screen.account.wishlist.WishlistScreen
 import ui.screen.onboarding.welcome.WelcomeScreen
@@ -149,7 +150,7 @@ class AccountScreen : BaseTabScreen() {
                 Spacer(modifier = Modifier.height(24.dp))
                 AccountButtonItem(
                     text = Res.string.account_item_submitted_spots,
-                    onClick = { },
+                    onClick = { navigator.push(SubmittedSpotsScreen()) },
                     iconRes = Res.drawable.ic_account_submitted_spots
                 )
                 Spacer(modifier = Modifier.height(12.dp))

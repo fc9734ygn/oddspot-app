@@ -201,4 +201,9 @@
 
     <!-- Wishlist -->
     <string name="wishlist_title">My wish list</string>
+
+    <!--Submitted spots-->
+    <string name="submitted_spots_title">My submitted spots</string>
+    <string name="submitted_spots_rejected">Spot Rejected</string>
+    <string name="submitted_spots_submitted">Waiting for approval</string>
 </resources>

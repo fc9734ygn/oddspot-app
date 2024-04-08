@@ -34,9 +34,9 @@ import ui.util.Colors
 import ui.util.dashedBorder
 import ui.util.input
 
-private const val RESIZE_THRESHOLD_BYTES = 15 * 1024 * 1024L // 15MB
-private const val RESIZE_IMAGE_SIZE_WIDTH = 2560
-private const val RESIZE_IMAGE_SIZE_HEIGHT = 1440
+private const val RESIZE_THRESHOLD_BYTES = 1 * 1024 * 1024L // 1MB
+private const val RESIZE_IMAGE_SIZE_WIDTH = 1920
+private const val RESIZE_IMAGE_SIZE_HEIGHT = 1080
 private const val RESIZE_IMAGE_COMPRESSION_QUALITY = 1.0
 
 @OptIn(ExperimentalResourceApi::class)

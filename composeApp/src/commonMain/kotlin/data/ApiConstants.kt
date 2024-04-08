@@ -13,6 +13,7 @@ const val ENDPOINT_CHANGE_USERNAME = "v1/profile/change-username"
 const val ENDPOINT_SUBMIT_SPOT = "v1/spot/submit-spot"
 const val ENDPOINT_SPOTS = "v1/spot/spots-feed"
 const val ENDPOINT_REPORT_SPOT = "v1/spot/report"
+const val ENDPOINT_SUBMITTED_SPOTS = "v1/spot/submitted-spots"
 
 // Wishlist:
 const val ENDPOINT_WISHLIST = "v1/wishlist/wishlist"

@@ -1,23 +1,16 @@
 package domain.use_case.spot.model
 
 sealed class SubmissionStatus {
-    object Submitted : SubmissionStatus()
-    object Accepted : SubmissionStatus()
-    class Rejected(val reason : RejectionReason?) : SubmissionStatus()
+    data object Submitted : SubmissionStatus()
+    data object Verified : SubmissionStatus()
+    data object Rejected : SubmissionStatus()
 }
 
-enum class RejectionReason {
-    INAPPROPRIATE,
-    DUPLICATE,
-    SPAM,
-    LOW_QUALITY,
-    LACK_OF_INFO,
-    BAD_LOCATION,
-    BAD_IMAGE,
-    BAD_TITLE,
-    BAD_DESCRIPTION,
-    NOT_A_SPOT,
-    DANGEROUS,
-    TRESPASSING,
-    OTHER,
+fun String.toSubmissionStatus(): SubmissionStatus {
+    return when (this) {
+        "submitted" -> SubmissionStatus.Submitted
+        "verified" -> SubmissionStatus.Verified
+        "rejected" -> SubmissionStatus.Rejected
+        else -> SubmissionStatus.Submitted
+    }
 }

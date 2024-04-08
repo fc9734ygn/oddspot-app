@@ -10,6 +10,7 @@ import com.homato.oddspot.Database
 import com.homato.oddspot.ExploreSpot
 import data.ENDPOINT_REPORT_SPOT
 import data.ENDPOINT_SPOTS
+import data.ENDPOINT_SUBMITTED_SPOTS
 import data.ENDPOINT_SUBMIT_SPOT
 import data.MULTIPART_DATA_KEY
 import data.MULTIPART_IMAGE_KEY
@@ -20,7 +21,8 @@ import data.model.VisitedSpot
 import data.request.ReportSpotRequest
 import data.request.SubmitSpotRequest
 import data.response.SpotsFeedResponse
-import domain.use_case.spot.model.SubmittedSpot
+import data.response.SubmittedSpot
+import data.response.SubmittedSpotsResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.forms.MultiPartFormDataContent
@@ -85,8 +87,12 @@ class SpotRepository(
             }
         }
 
-    suspend fun getSubmittedSpots(): List<SubmittedSpot>? {
-        TODO()
+    suspend fun getSubmittedSpots() : Result<List<SubmittedSpot>, Throwable> = withContext(Dispatchers.IO) {
+        runCatching {
+            val response = client.get(API_BASE_URL + ENDPOINT_SUBMITTED_SPOTS)
+                .body<SubmittedSpotsResponse>()
+            response.spots
+        }
     }
 
     fun getExploreSpotsFlow(): Flow<List<SpotWithVisits>> {
