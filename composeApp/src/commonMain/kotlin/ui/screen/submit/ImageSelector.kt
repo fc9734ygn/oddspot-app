@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import com.preat.peekaboo.image.picker.ResizeOptions
 import com.preat.peekaboo.image.picker.SelectionMode
 import com.preat.peekaboo.image.picker.rememberImagePickerLauncher
 import com.preat.peekaboo.image.picker.toImageBitmap
@@ -32,6 +33,11 @@ import org.jetbrains.compose.resources.stringResource
 import ui.util.Colors
 import ui.util.dashedBorder
 import ui.util.input
+
+private const val RESIZE_THRESHOLD_BYTES = 15 * 1024 * 1024L // 15MB
+private const val RESIZE_IMAGE_SIZE_WIDTH = 2560
+private const val RESIZE_IMAGE_SIZE_HEIGHT = 1440
+private const val RESIZE_IMAGE_COMPRESSION_QUALITY = 1.0
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
@@ -49,7 +55,13 @@ fun ImageSelector(
             byteArrays.firstOrNull()?.let {
                 onImageSelected(it)
             }
-        }
+        },
+        resizeOptions = ResizeOptions(
+            resizeThresholdBytes = RESIZE_THRESHOLD_BYTES,
+            compressionQuality = RESIZE_IMAGE_COMPRESSION_QUALITY,
+            width = RESIZE_IMAGE_SIZE_WIDTH,
+            height = RESIZE_IMAGE_SIZE_HEIGHT
+        ),
     )
 
     if (image != null) {

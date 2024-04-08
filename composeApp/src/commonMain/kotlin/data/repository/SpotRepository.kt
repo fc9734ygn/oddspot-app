@@ -117,9 +117,14 @@ class SpotRepository(
             .body<SpotsFeedResponse>()
 
         database.transaction {
+
+            database.exploreSpotQueries.deleteAll()
+            database.exploreVisitQueries.deleteAll()
+
             response.spotsWithVisitsResponse.forEach { spotWithVisits ->
                 val spot = spotWithVisits.spot
-                database.exploreSpotQueries.replaceSpot(
+
+                database.exploreSpotQueries.insertOrReplaceSpot(
                     spot.id.toLong(),
                     spot.title,
                     spot.description,
@@ -134,7 +139,7 @@ class SpotRepository(
 
                 // Replace visits related to the spot
                 spotWithVisits.visits.forEach { visit ->
-                    database.exploreVisitQueries.replaceVisit(
+                    database.exploreVisitQueries.insertOrReplaceVisit(
                         visit.id.toLong(),
                         visit.spotId.toLong(),
                         visit.userId,
@@ -144,7 +149,6 @@ class SpotRepository(
                 }
             }
         }
-
     }
 
     suspend fun submitSpot(

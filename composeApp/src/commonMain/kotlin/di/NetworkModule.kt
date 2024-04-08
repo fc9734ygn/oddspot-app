@@ -17,7 +17,8 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 
-const val NETWORK_REQUEST_TIMEOUT = 15000L
+const val NETWORK_REQUEST_CONNECT_TIMEOUT = 30000L
+const val NETWORK_REQUEST_SOCKET_TIMEOUT = 30000L
 const val NETWORK_REQUEST_RETRY_ATTEMPTS = 5
 
 val networkModule = module {
@@ -41,7 +42,8 @@ val networkModule = module {
                 level = LogLevel.ALL
             }
             install(HttpTimeout) {
-                requestTimeoutMillis = NETWORK_REQUEST_TIMEOUT
+                requestTimeoutMillis = NETWORK_REQUEST_CONNECT_TIMEOUT
+                socketTimeoutMillis = NETWORK_REQUEST_SOCKET_TIMEOUT
             }
             install(HttpRequestRetry) {
                 retryOnServerErrors(maxRetries = NETWORK_REQUEST_RETRY_ATTEMPTS)

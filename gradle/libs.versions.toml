@@ -38,7 +38,7 @@ android-location = "21.1.0"
 google-maps = "18.2.0"
 pods-google-maps = "8.3.1"
 pods-google-mapsUtils = "4.2.2"
-peekaboo = "0.4.3"
+peekaboo = "0.5.1"
 zoomable = "1.6.1"
 
 [libraries]

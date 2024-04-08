@@ -21,6 +21,9 @@ SELECT * FROM ExploreSpot WHERE id = ? LIMIT 1;
 selectAll:
 SELECT * FROM ExploreSpot;
 
-replaceSpot:
+insertOrReplaceSpot:
 INSERT OR REPLACE INTO ExploreSpot (id, title, description, latitude, longitude, creator_id, image_url, create_time, category, accessibility)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+deleteAll:
+DELETE FROM ExploreSpot;
