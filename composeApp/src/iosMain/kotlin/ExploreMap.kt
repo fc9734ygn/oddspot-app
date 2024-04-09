@@ -2,6 +2,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.interop.UIKitView
 import cocoapods.GoogleMaps.GMSCameraPosition
@@ -15,6 +16,8 @@ import cocoapods.GoogleMaps.animateWithCameraUpdate
 import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.ExportObjCClass
+import kotlinx.coroutines.DefaultExecutor.delegate
+import org.intellij.markdown.html.entities.Entities.map
 import platform.CoreLocation.CLLocationCoordinate2DMake
 import platform.UIKit.UIImage
 import platform.darwin.NSObject
@@ -22,18 +25,23 @@ import ui.screen.explore.ExploreMarker
 import ui.util.CameraLocationBounds
 import ui.util.CameraPosition
 import ui.util.Location
+import util.Event
 
 @OptIn(ExperimentalForeignApi::class)
 @Composable
 actual fun ExploreMap(
     modifier: Modifier,
     markers: List<ExploreMarker>?,
-    cameraPosition: CameraPosition?,
+    initialCameraPosition: CameraPosition?,
     cameraLocationBounds: CameraLocationBounds?,
     userCurrentLocation: Location?,
     onPermissionsGranted: () -> Unit,
     onMarkerClick: (Int) -> Unit,
+    event: Event<MapControlsEvent>?,
+    initialMapType: Int
 ) {
+    val scope = rememberCoroutineScope()
+
     LaunchedEffect(Unit) {
         onPermissionsGranted()
     }
@@ -46,12 +54,10 @@ actual fun ExploreMap(
         GMSMapView().apply {
             delegate = mapViewDelegate
             setMyLocationEnabled(true)
-            settings.myLocationButton = true
-            settings.setMyLocationButton(true)
             settings.setScrollGestures(true)
             settings.setZoomGestures(true)
             settings.setCompassButton(true)
-            setMapType(2u) //kGMSTypeSatellite = 2
+            setMapType(initialMapType.toUInt())
         }
     }
 
@@ -62,7 +68,7 @@ actual fun ExploreMap(
             mapsView
         },
         update = { view ->
-            cameraPosition?.let {
+            initialCameraPosition?.let {
                 view.setCamera(
                     GMSCameraPosition.cameraWithLatitude(
                         it.target.latitude,
@@ -73,7 +79,6 @@ actual fun ExploreMap(
             }
 
             cameraLocationBounds?.let {
-
                 val bounds = GMSCoordinateBounds()
                 it.coordinates.forEach {
                     bounds.includingCoordinate(
@@ -86,6 +91,24 @@ actual fun ExploreMap(
                 GMSCameraUpdate().apply {
                     fitBounds(bounds, it.padding.toDouble())
                     view.animateWithCameraUpdate(this)
+                }
+            }
+
+            event?.get()?.let {
+                when (it) {
+                    is MapControlsEvent.AnimateToLocation -> {
+//                        val cameraUpdate = GMSCameraUpdate.setTarget(CLLocationCoordinate2D(latitude = it.location.latitude, longitude = it.location.longitude), zoom = 15f) // Assuming a zoom level of 15f, adjust as needed
+//                        mapsView.animateWithCameraUpdate(cameraUpdate)
+                    }
+                    is MapControlsEvent.MapTypeChange -> {
+//                        mapsView.mapType = it.mapType.toUInt()
+//                        mapsView.value.apply {
+//                            setMapType(it.mapType.toUInt())
+//                        }
+//                        GMSMapView().apply {
+//                            setMapType(it.mapType.toUInt())
+//                        }
+                    }
                 }
             }
 

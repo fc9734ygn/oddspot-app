@@ -13,12 +13,15 @@ import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.rememberCameraPositionState
 import ui.util.CameraPosition
 import ui.util.Location
+import util.Event
 
 @Composable
 actual fun FullMap(
     modifier: Modifier,
     initialCameraPosition: CameraPosition,
     onSelectionChange: (Location) -> Unit,
+    event: Event<MapControlsEvent>?,
+    initialMapType: Int
 ) {
 
     val properties = remember {

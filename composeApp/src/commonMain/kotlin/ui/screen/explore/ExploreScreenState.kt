@@ -1,5 +1,6 @@
 package ui.screen.explore
 
+import MapControlsEvent
 import androidx.compose.runtime.Immutable
 import ui.screen.explore.detail.SpotDetailSheetState
 import ui.util.Location
@@ -13,7 +14,9 @@ data class ExploreScreenState(
     val isLoading: Boolean,
     val event: Event<ExploreScreenEvent>?,
     val spotDetailsSheetState: SpotDetailSheetState = SpotDetailSheetState.Initial,
-    val cameraPosition: Location?
+    val cameraPosition: Location?,
+    val mapType: OddSpotMapType,
+    val mapEvent: Event<MapControlsEvent>?
 ) {
     companion object {
         val Initial = ExploreScreenState(
@@ -21,7 +24,9 @@ data class ExploreScreenState(
             markers = emptyList(),
             isLoading = true,
             event = null,
-            cameraPosition = null
+            cameraPosition = null,
+            mapType = OddSpotMapType.SATELLITE,
+            mapEvent = null
         )
     }
 }

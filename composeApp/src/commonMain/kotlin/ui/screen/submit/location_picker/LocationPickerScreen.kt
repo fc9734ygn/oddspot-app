@@ -1,14 +1,16 @@
-package ui.screen.submit
+package ui.screen.submit.location_picker
 
 import FullMap
+import MapControlsEvent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.runtime.Composable
@@ -23,12 +25,17 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import oddspot_app.composeapp.generated.resources.Res
 import oddspot_app.composeapp.generated.resources.ic_marker
 import oddspot_app.composeapp.generated.resources.ic_marker_button
+import oddspot_app.composeapp.generated.resources.ic_my_location
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import ui.base.BaseScreen
+import ui.screen.explore.OddSpotMapType
+import ui.screen.submit.SubmitSpotScreen
 import ui.util.CameraPosition
+import ui.util.Colors
 import ui.util.Location
 import ui.util.toLatLong
+import util.Event
 
 private const val DEFAULT_ZOOM = 17f
 
@@ -41,6 +48,7 @@ class LocationPickerScreen(
     override fun ScreenContent(snackbarHostState: SnackbarHostState) {
         val navigator = LocalNavigator.currentOrThrow
         val location = remember { mutableStateOf(userLocation) }
+        val event = remember { mutableStateOf<Event<MapControlsEvent>?>(null) }
 
         Column(
             Modifier
@@ -59,7 +67,9 @@ class LocationPickerScreen(
                     ),
                     onSelectionChange = { updatedLocation ->
                         location.value = updatedLocation
-                    }
+                    },
+                    event = event.value,
+                    initialMapType = OddSpotMapType.HYBRID.value,
                 )
                 Image(
                     painter = painterResource(Res.drawable.ic_marker),
@@ -68,15 +78,14 @@ class LocationPickerScreen(
                         Alignment.Center
                     )
                 )
-
-                Icon(
-                    painter = painterResource(Res.drawable.ic_marker_button),
-                    contentDescription = null,
+                Column(
                     modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .padding(32.dp)
-                        .clickable {
-                            navigator.popUntil{
+                        .padding(8.dp)
+                        .align(Alignment.BottomEnd),
+                ) {
+                    FloatingActionButton(
+                        onClick = {
+                            navigator.popUntil {
                                 it is SubmitSpotScreen
                             }
                             navigator.pop()
@@ -85,11 +94,30 @@ class LocationPickerScreen(
                                     selectedLocation = location.value
                                 )
                             )
-                        }
-                        .size(64.dp)
-                    ,
-                    tint = Color.Unspecified
-                )
+                        },
+                        backgroundColor = Colors.red,
+                        contentColor = Colors.black,
+                    ) {
+                        Icon(
+                            painterResource(Res.drawable.ic_marker_button),
+                            contentDescription = null,
+                            tint = Color.Unspecified
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    FloatingActionButton(
+                        onClick = {
+                            event.value = Event(MapControlsEvent.AnimateToLocation(userLocation))
+                        },
+                        backgroundColor = Colors.lightGrey,
+                        contentColor = Colors.black,
+                    ) {
+                        Icon(
+                            painterResource(Res.drawable.ic_my_location),
+                            contentDescription = null
+                        )
+                    }
+                }
             }
         }
     }

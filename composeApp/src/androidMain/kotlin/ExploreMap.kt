@@ -1,4 +1,3 @@
-
 import android.Manifest
 import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
@@ -9,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -25,6 +25,7 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
 import com.homato.oddspot.R
+import kotlinx.coroutines.launch
 import oddspot_app.composeapp.generated.resources.Res
 import oddspot_app.composeapp.generated.resources.permission_fine_location_rationale
 import org.jetbrains.compose.resources.ExperimentalResourceApi
@@ -32,20 +33,25 @@ import org.jetbrains.compose.resources.stringResource
 import ui.screen.explore.ExploreMarker
 import ui.util.CameraLocationBounds
 import ui.util.CameraPosition
+import ui.util.Consume
 import ui.util.Location
+import util.Event
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 actual fun ExploreMap(
     modifier: Modifier,
     markers: List<ExploreMarker>?,
-    cameraPosition: CameraPosition?,
+    initialCameraPosition: CameraPosition?,
     cameraLocationBounds: CameraLocationBounds?,
     userCurrentLocation: Location?,
     onPermissionsGranted: () -> Unit,
     onMarkerClick: (Int) -> Unit,
+    event: Event<MapControlsEvent>?,
+    initialMapType: Int
 ) {
     val context: Context = LocalContext.current
+    val scope = rememberCoroutineScope()
 
     PermissionDialog(
         permissions = mapOf(
@@ -60,6 +66,7 @@ actual fun ExploreMap(
         ),
         onPermissionsGranted = onPermissionsGranted
     )
+
     val allPermissionsGranted =
         context.hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION) && context.hasPermission(
             Manifest.permission.ACCESS_FINE_LOCATION
@@ -71,8 +78,8 @@ actual fun ExploreMap(
 
     val cameraPositionState = rememberCameraPositionState()
 
-    LaunchedEffect(cameraPosition) {
-        cameraPosition?.let {
+    LaunchedEffect(initialCameraPosition) {
+        initialCameraPosition?.let {
             cameraPositionState.animate(
                 CameraUpdateFactory.newLatLngZoom(
                     LatLng(
@@ -98,31 +105,53 @@ actual fun ExploreMap(
         }
     }
 
+    val properties = remember {
+        mutableStateOf(
+            MapProperties(
+                isMyLocationEnabled = true,
+                mapType = initialMapType.toMapType(),
+            )
+        )
+    }
+
+    val uiSettings = remember {
+        mutableStateOf(
+            MapUiSettings(
+                myLocationButtonEnabled = false,
+                zoomControlsEnabled = false,
+                tiltGesturesEnabled = false,
+                mapToolbarEnabled = false
+            )
+        )
+    }
+
+    event?.Consume {
+        when (it) {
+            is MapControlsEvent.AnimateToLocation -> {
+                scope.launch {
+                    cameraPositionState.animate(
+                        CameraUpdateFactory.newLatLngZoom(
+                            LatLng(
+                                it.location.latitude,
+                                it.location.longitude
+                            ), cameraPositionState.position.zoom
+                        )
+                    )
+                }
+            }
+
+            is MapControlsEvent.MapTypeChange -> {
+                properties.value = properties.value.copy(mapType = it.mapType.toMapType())
+            }
+        }
+    }
+
     Column(
         Modifier
             .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val properties = remember {
-            mutableStateOf(
-                MapProperties(
-                    isMyLocationEnabled = true,
-                    mapType = MapType.SATELLITE
-                )
-            )
-        }
-
-        val uiSettings = remember {
-            mutableStateOf(
-                MapUiSettings(
-                    myLocationButtonEnabled = true,
-                    zoomControlsEnabled = false,
-                    tiltGesturesEnabled = false,
-                    mapToolbarEnabled = false
-                )
-            )
-        }
 
         GoogleMap(
             cameraPositionState = cameraPositionState,
@@ -144,5 +173,16 @@ actual fun ExploreMap(
                 )
             }
         }
+    }
+}
+
+fun Int.toMapType(): MapType {
+    return when (this) {
+        0 -> MapType.NONE
+        1 -> MapType.NORMAL
+        2 -> MapType.SATELLITE
+        3 -> MapType.TERRAIN
+        4 -> MapType.HYBRID
+        else -> MapType.NORMAL
     }
 }

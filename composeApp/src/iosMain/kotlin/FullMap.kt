@@ -13,6 +13,7 @@ import platform.CoreLocation.CLLocationCoordinate2DMake
 import platform.darwin.NSObject
 import ui.util.CameraPosition
 import ui.util.Location
+import util.Event
 
 @OptIn(ExperimentalForeignApi::class)
 @Composable
@@ -20,6 +21,8 @@ actual fun FullMap(
     modifier: Modifier,
     initialCameraPosition: CameraPosition,
     onSelectionChange: (Location) -> Unit,
+    event: Event<MapControlsEvent>?,
+    initialMapType: Int
 ) {
     val mapViewDelegate = remember {
         FullMapViewDelegate(onCameraIdle = onSelectionChange)

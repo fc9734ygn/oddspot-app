@@ -3,27 +3,20 @@ package ui.screen.explore
 import ExploreMap
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.skydoves.flexible.core.rememberFlexibleBottomSheetState
 import kotlinx.coroutines.launch
 import oddspot_app.composeapp.generated.resources.Res
-import oddspot_app.composeapp.generated.resources.ic_plus
 import oddspot_app.composeapp.generated.resources.spot_detail_report_snackbar
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.base.BaseTabScreen
 import ui.component.map.MapGradient
@@ -33,7 +26,6 @@ import ui.component.snackbar.ShowSnackBar
 import ui.screen.explore.detail.SpotDetailSheet
 import ui.screen.submit.SubmitSpotScreen
 import ui.util.CameraPosition
-import ui.util.Colors
 import ui.util.Consume
 import ui.util.LatLong
 import ui.util.toLatLong
@@ -80,7 +72,7 @@ class ExploreScreen : BaseTabScreen() {
             ExploreMap(
                 modifier = Modifier.fillMaxSize(),
                 markers = state.markers,
-                cameraPosition = CameraPosition(
+                initialCameraPosition = CameraPosition(
                     state.cameraPosition?.toLatLong() ?: LatLong(
                         0.0,
                         0.0
@@ -88,17 +80,16 @@ class ExploreScreen : BaseTabScreen() {
                 ),
                 userCurrentLocation = state.userCurrentLocation,
                 onPermissionsGranted = { screenModel.getData() },
-                onMarkerClick = screenModel::onMarkerClick
+                onMarkerClick = screenModel::onMarkerClick,
+                event = state.mapEvent,
+                initialMapType = state.mapType.value,
             )
             MapGradient(endY = 200f)
-            FloatingActionButton(
-                modifier = Modifier.padding(8.dp).align(Alignment.BottomStart),
-                onClick = { navigator.push(SubmitSpotScreen()) },
-                backgroundColor = Colors.red,
-                contentColor = Colors.black,
-            ) {
-                Icon(painterResource(Res.drawable.ic_plus), contentDescription = null)
-            }
+            ExploreMapControls(
+                onSubmitSpotClick = { navigator.push(SubmitSpotScreen()) },
+                onMapTypeClick = screenModel::onMapTypeButtonClick,
+                onMyLocationClick = screenModel::onMyLocationButtonClick,
+            )
             val selectedSpotId = state.spotDetailsSheetState.spotId
             if (selectedSpotId != null) {
                 BottomSheet(

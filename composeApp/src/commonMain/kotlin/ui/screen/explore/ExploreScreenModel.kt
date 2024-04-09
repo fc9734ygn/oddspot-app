@@ -1,5 +1,6 @@
 package ui.screen.explore
 
+import MapControlsEvent
 import cafe.adriel.voyager.core.model.screenModelScope
 import domain.use_case.spot.GetExploreUseCase
 import domain.use_case.spot.GetSpotDetailUseCase
@@ -7,7 +8,6 @@ import domain.use_case.spot.ReportSpotUseCase
 import domain.use_case.spot.model.ReportReason
 import domain.use_case.wishlist.AddToWishlistUseCase
 import domain.use_case.wishlist.RemoveFromWishlistUseCase
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
 import ui.base.BaseScreenModel
@@ -26,14 +26,14 @@ class ExploreScreenModel(
     fun getData() {
         getExploreUseCase().collectResource(
             onError = {
-                mutableState.update { it.copy(event = Event(ExploreScreenEvent.Error)) }
+                updateState { copy(event = Event(ExploreScreenEvent.Error)) }
             },
             onLoading = {
-                mutableState.update { it.copy(isLoading = true) }
+                updateState { copy(isLoading = true) }
             },
             onSuccess = { domainModel ->
-                mutableState.update {
-                    it.copy(
+                updateState {
+                    copy(
                         markers = domainModel.spotMarkerModels.map { spot ->
                             ExploreMarker(
                                 id = spot.id,
@@ -173,6 +173,29 @@ class ExploreScreenModel(
                         )
                     }
                 }
+            )
+        }
+    }
+
+    fun onMapTypeButtonClick() {
+        val currentMapType = mutableState.value.mapType
+        val requiredMapType = when (currentMapType) {
+            OddSpotMapType.NORMAL -> OddSpotMapType.SATELLITE
+            OddSpotMapType.SATELLITE -> OddSpotMapType.HYBRID
+            OddSpotMapType.HYBRID -> OddSpotMapType.NORMAL
+        }
+        updateState {
+            copy(
+                mapType = requiredMapType,
+                mapEvent = Event(MapControlsEvent.MapTypeChange(requiredMapType.value))
+            )
+        }
+    }
+
+    fun onMyLocationButtonClick() {
+        updateState {
+            copy(
+                mapEvent = Event(MapControlsEvent.AnimateToLocation(mutableState.value.userCurrentLocation!!))
             )
         }
     }
