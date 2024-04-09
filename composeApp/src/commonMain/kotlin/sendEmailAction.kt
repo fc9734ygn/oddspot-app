@@ -1,6 +1,6 @@
 
 expect fun sendEmailAction(
-    to: String = "oddspot.feedback@gmail.com",
-    subject: String = "Feedback",
+    to: String = "contact@oddspot.eu",
+    subject: String = "App feedback",
     body: String = ""
 )
