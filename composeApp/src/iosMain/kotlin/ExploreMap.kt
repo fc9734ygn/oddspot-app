@@ -12,12 +12,11 @@ import cocoapods.GoogleMaps.GMSCoordinateBounds
 import cocoapods.GoogleMaps.GMSMapView
 import cocoapods.GoogleMaps.GMSMapViewDelegateProtocol
 import cocoapods.GoogleMaps.GMSMarker
+import cocoapods.GoogleMaps.animateToCameraPosition
 import cocoapods.GoogleMaps.animateWithCameraUpdate
 import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.ExportObjCClass
-import kotlinx.coroutines.DefaultExecutor.delegate
-import org.intellij.markdown.html.entities.Entities.map
 import platform.CoreLocation.CLLocationCoordinate2DMake
 import platform.UIKit.UIImage
 import platform.darwin.NSObject
@@ -57,7 +56,7 @@ actual fun ExploreMap(
             settings.setScrollGestures(true)
             settings.setZoomGestures(true)
             settings.setCompassButton(true)
-            setMapType(initialMapType.toUInt())
+            setMapType(initialMapType.toULong())
         }
     }
 
@@ -97,17 +96,19 @@ actual fun ExploreMap(
             event?.get()?.let {
                 when (it) {
                     is MapControlsEvent.AnimateToLocation -> {
-//                        val cameraUpdate = GMSCameraUpdate.setTarget(CLLocationCoordinate2D(latitude = it.location.latitude, longitude = it.location.longitude), zoom = 15f) // Assuming a zoom level of 15f, adjust as needed
-//                        mapsView.animateWithCameraUpdate(cameraUpdate)
+                        view.animateToCameraPosition(
+                            GMSCameraPosition.cameraWithLatitude(
+                                it.location.latitude,
+                                it.location.longitude,
+                                initialCameraPosition!!.zoom
+                            )
+                        )
                     }
+
                     is MapControlsEvent.MapTypeChange -> {
-//                        mapsView.mapType = it.mapType.toUInt()
-//                        mapsView.value.apply {
-//                            setMapType(it.mapType.toUInt())
-//                        }
-//                        GMSMapView().apply {
-//                            setMapType(it.mapType.toUInt())
-//                        }
+                        mapsView.apply {
+                            setMapType(it.mapType.toULong())
+                        }
                     }
                 }
             }
@@ -136,7 +137,7 @@ class ExploreMapViewDelegate(private val onMarkerClick: (Int) -> Unit) : NSObjec
         mapView: GMSMapView,
         @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
         didTapMarker: GMSMarker
-    ) : Boolean // Shows error but builds ¯\_(ツ)_/¯
+    ): Boolean // Shows error but builds ¯\_(ツ)_/¯
     {
         val userData = didTapMarker.userData()
         onMarkerClick(userData as Int)

@@ -5,6 +5,7 @@ import androidx.compose.ui.interop.UIKitView
 import cocoapods.GoogleMaps.GMSCameraPosition
 import cocoapods.GoogleMaps.GMSMapView
 import cocoapods.GoogleMaps.GMSMapViewDelegateProtocol
+import cocoapods.GoogleMaps.animateToCameraPosition
 import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.ExportObjCClass
@@ -39,7 +40,7 @@ actual fun FullMap(
                 initialCameraPosition.zoom.toFloat()
             )
             setMyLocationEnabled(true)
-            setMapType(2u) //kGMSTypeSatellite = 2
+            setMapType(initialMapType.toULong())
         }
     }
 
@@ -55,6 +56,25 @@ actual fun FullMap(
                         it.zoom
                     )
                 )
+            }
+            event?.get()?.let {
+                when (it) {
+                    is MapControlsEvent.AnimateToLocation -> {
+                        view.animateToCameraPosition(
+                            GMSCameraPosition.cameraWithLatitude(
+                                it.location.latitude,
+                                it.location.longitude,
+                                initialCameraPosition.zoom
+                            )
+                        )
+                    }
+
+                    is MapControlsEvent.MapTypeChange -> {
+                        mapView.apply {
+                            setMapType(it.mapType.toULong())
+                        }
+                    }
+                }
             }
         }
     )

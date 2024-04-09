@@ -247,10 +247,9 @@ class SubmitSpotScreen(
             )
             Spacer(modifier = Modifier.height(16.dp))
 
-            val location = state.locationPickerState.selectedLocation
-                ?: state.locationPickerState.currentUserLocation
+            val userLocation = state.locationPickerState.currentUserLocation
 
-            location?.let {
+            userLocation?.let {
                 Box(
                     modifier = Modifier.clickable { navigator.push(LocationPickerScreen(it)) },
                 ) {
@@ -261,7 +260,7 @@ class SubmitSpotScreen(
                             .aspectRatio(2f)
                             .clickable { navigator.push(LocationPickerScreen(it)) },
                         cameraPosition = CameraPosition(
-                            target = location.toLatLong(),
+                            target = userLocation.toLatLong(),
                             zoom = 15f
                         ),
                     )
