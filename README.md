@@ -86,7 +86,7 @@ as well) and E2E or integration tests (JUnit 4 or 5, Compose Rule/Espresso, Mock
 The project is still in its early stages, and there are a lot of things that need to be done.
 Unfortunately, the task board is private but for the most part right now it consists of additional
 features and some technical improvements - crashlytics, tests, introducing viewport loading or other
-approach to scale the feed API call
+approach to scale the feed/explore, add CI/CD, etc.
 
 ## How to Run:
 
