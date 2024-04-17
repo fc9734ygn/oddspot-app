@@ -139,6 +139,8 @@ fun SpotDetailSheet(
             horizontalArrangement = Arrangement.Start
         ) {
             items(state.visitImages.size) { index ->
+                val imageUrl = state.visitImages[index]
+                imageUrl ?: return@items
                 KamelImage(
                     modifier = Modifier
                         .height(124.dp)
@@ -146,9 +148,9 @@ fun SpotDetailSheet(
                         .padding(horizontal = 8.dp)
                         .clip(RoundedCornerShape(24.dp))
                         .clickable {
-                            navigator.push(FullScreenImageScreen(state.visitImages[index]))
+                            navigator.push(FullScreenImageScreen(imageUrl))
                         },
-                    resource = asyncPainterResource(state.visitImages[index]),
+                    resource = asyncPainterResource(imageUrl),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     onLoading = { progress -> CircularProgressIndicator(progress) },

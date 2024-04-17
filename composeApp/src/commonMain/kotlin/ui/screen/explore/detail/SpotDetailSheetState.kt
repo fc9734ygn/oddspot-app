@@ -11,7 +11,7 @@ data class SpotDetailSheetState(
     val amountOfVisits: Int,
     val accessibility: Accessibility,
     val isLoading: Boolean,
-    val visitImages: List<String>,
+    val visitImages: List<String?>,
     val showReportDialog: Boolean,
     val isInRange: Boolean
 ) {
