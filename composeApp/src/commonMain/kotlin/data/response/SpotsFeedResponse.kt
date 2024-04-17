@@ -33,5 +33,5 @@ data class ExploreVisitResponse(
     val spotId: Int,
     val userId: String,
     val visitTime: Long,
-    val imageUrl: String
+    val imageUrl: String?
 )
