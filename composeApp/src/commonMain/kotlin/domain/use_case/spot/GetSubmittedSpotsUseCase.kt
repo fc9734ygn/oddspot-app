@@ -1,5 +1,6 @@
 package domain.use_case.spot
 
+import co.touchlab.kermit.Logger
 import com.github.michaelbull.result.getOrElse
 import data.repository.SpotRepository
 import domain.use_case.spot.model.SubmittedSpotItemModel
@@ -16,6 +17,7 @@ class GetSubmittedSpotsUseCase(
         emit(Resource.Loading())
 
         val submittedSpots = spotRepository.getSubmittedSpots().getOrElse {
+            Logger.e("GetSubmittedSpotsUseCase", it)
             emit(Resource.Error())
             return@flow
         }.map { SubmittedSpotItemModel.fromSubmittedSpotResponse(it) }

@@ -1,5 +1,6 @@
 package domain.use_case.user
 
+import co.touchlab.kermit.Logger
 import com.github.michaelbull.result.mapError
 import data.repository.UserRepository
 import domain.util.DomainError
@@ -15,6 +16,7 @@ class ChangeUsernameUseCase(
 
     operator fun invoke(username: String) = flow {
         userRepository.changeUsername(username).mapError {
+            Logger.e("ChangeUsernameUseCase", it)
             emit(Resource.Error(DomainError.Network(throwable = it)))
             return@flow
         }

@@ -1,5 +1,6 @@
 package domain.use_case.wishlist
 
+import co.touchlab.kermit.Logger
 import com.github.michaelbull.result.getOrElse
 import com.github.michaelbull.result.mapError
 import data.repository.SpotRepository
@@ -21,12 +22,14 @@ class GetWishlistUseCase(
         emit(Resource.Loading())
 
         wishlistRepository.updateWishlist().mapError {
+            Logger.e("GetWishlistUseCase", it.throwable)
             // We do not want to expose this error and use cached data
         }
 
         wishlistRepository.getWishlistFlow().collect { wishlistIds ->
             val wishlistItems = wishlistIds.mapNotNull { id ->
                 spotRepository.getSpotById(id).getOrElse {
+                    Logger.e("GetWishlistUseCase", it)
                     // Skip this item if it fails to fetch
                     null
                 }?.let { spot ->

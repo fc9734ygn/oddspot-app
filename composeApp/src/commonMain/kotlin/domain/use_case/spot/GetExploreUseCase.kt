@@ -1,6 +1,7 @@
 package domain.use_case.spot
 
 import LocationProvider
+import co.touchlab.kermit.Logger
 import com.github.michaelbull.result.getOrElse
 import com.github.michaelbull.result.mapError
 import data.repository.SpotRepository
@@ -24,11 +25,13 @@ class GetExploreUseCase(
         emit(Resource.Loading())
 
         val currentUserLocation = locationProvider.getUserLocation().getOrElse {
+            Logger.w("GetExploreUseCase  $it")
             emit(Resource.Error())
             return@flow
         }
 
         spotRepository.updateExploreSpots().mapError {
+            Logger.e("GetExploreUseCase", it)
             // We do not want to expose this error and use cached spots
         }
 

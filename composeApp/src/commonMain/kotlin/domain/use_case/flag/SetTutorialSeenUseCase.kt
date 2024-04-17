@@ -1,5 +1,6 @@
 package domain.use_case.flag
 
+import co.touchlab.kermit.Logger
 import com.github.michaelbull.result.mapError
 import data.repository.LocalFlagsRepository
 import domain.util.Resource
@@ -15,6 +16,7 @@ class SetTutorialSeenUseCase(
 
         emit(Resource.Loading())
         flagsRepository.setTutorialSeen().mapError {
+            Logger.e("SetTutorialSeenUseCase", it)
             emit(Resource.Error())
             return@flow
         }

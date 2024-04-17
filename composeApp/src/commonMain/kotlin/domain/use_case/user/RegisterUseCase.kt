@@ -1,5 +1,6 @@
 package domain.use_case.user
 
+import co.touchlab.kermit.Logger
 import com.github.michaelbull.result.mapError
 import data.repository.UserRepository
 import domain.use_case.user.model.EmailError
@@ -17,11 +18,13 @@ class RegisterUseCase(
 
     fun register(email: String, password: String): Flow<Resource<Unit>> = flow {
         userRepository.register(email, password).mapError {
+            Logger.e("RegisterUseCase", it.throwable)
             emit(Resource.Error(it))
             return@flow
         }
 
         userRepository.login(email, password).mapError {
+            Logger.e("RegisterUseCase", it)
             emit(Resource.Error())
             return@flow
         }

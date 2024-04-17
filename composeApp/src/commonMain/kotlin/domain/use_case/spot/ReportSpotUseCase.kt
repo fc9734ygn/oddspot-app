@@ -1,5 +1,6 @@
 package domain.use_case.spot
 
+import co.touchlab.kermit.Logger
 import com.github.michaelbull.result.mapError
 import data.repository.SpotRepository
 import domain.use_case.spot.model.ReportReason
@@ -15,6 +16,7 @@ class ReportSpotUseCase(
     operator fun invoke(spotId: Int, reason: ReportReason): Flow<Resource<Unit>> = flow {
         emit(Resource.Loading())
         spotRepository.reportSpot(spotId, reason.toString()).mapError {
+            Logger.e("ReportSpotUseCase", it)
             emit(Resource.Error())
             return@flow
         }

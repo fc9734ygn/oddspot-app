@@ -1,5 +1,6 @@
 package domain.use_case.user
 
+import co.touchlab.kermit.Logger
 import com.github.michaelbull.result.mapError
 import data.repository.UserRepository
 import domain.util.DomainError
@@ -14,6 +15,7 @@ class LoginUseCase(
 ) {
     operator fun invoke(email: String, password: String) = flow {
         userRepository.login(email, password).mapError {
+            Logger.e("LoginUseCase", it)
             emit(Resource.Error(DomainError.Network(throwable = it)))
             return@flow
         }

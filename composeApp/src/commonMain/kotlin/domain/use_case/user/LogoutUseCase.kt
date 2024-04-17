@@ -1,5 +1,6 @@
 package domain.use_case.user
 
+import co.touchlab.kermit.Logger
 import com.github.michaelbull.result.mapError
 import data.repository.UserRepository
 import domain.util.Resource
@@ -14,6 +15,7 @@ class LogoutUseCase(private val userRepository: UserRepository) {
         emit(Resource.Loading())
 
         userRepository.deleteLocalData().mapError {
+            Logger.e("LogoutUseCase", it)
             emit(Resource.Error())
             return@flow
         }

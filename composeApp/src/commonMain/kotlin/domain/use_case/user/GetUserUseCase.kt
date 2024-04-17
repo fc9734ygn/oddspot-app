@@ -1,5 +1,6 @@
 package domain.use_case.user
 
+import co.touchlab.kermit.Logger
 import com.github.michaelbull.result.getOrElse
 import com.homato.oddspot.User
 import data.repository.UserRepository
@@ -15,10 +16,12 @@ class GetUserUseCase(
     operator fun invoke(): Flow<Resource<User>> = flow {
         emit(Resource.Loading())
         val user = userRepository.getUser().getOrElse {
+            Logger.e("GetUserUseCase", it)
             emit(Resource.Error())
             return@flow
         }
         if (user == null) {
+            Logger.e("GetUserUseCase User is null")
             emit(Resource.Error())
             return@flow
         }

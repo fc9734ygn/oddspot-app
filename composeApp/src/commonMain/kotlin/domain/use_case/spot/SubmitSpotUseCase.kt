@@ -1,5 +1,6 @@
 package domain.use_case.spot
 
+import co.touchlab.kermit.Logger
 import com.github.michaelbull.result.mapError
 import data.repository.SpotRepository
 import domain.util.Resource
@@ -29,6 +30,7 @@ class SubmitSpotUseCase(
             difficulty,
             image
         ).mapError {
+            Logger.e("SubmitSpotUseCase", it)
             emit(Resource.Error())
             return@flow
         }

@@ -1,5 +1,6 @@
 package domain.use_case.flag
 
+import co.touchlab.kermit.Logger
 import com.github.michaelbull.result.getOrElse
 import data.repository.LocalFlagsRepository
 import domain.util.Resource
@@ -14,6 +15,7 @@ class GetTutorialSeenUseCase (
     operator fun invoke(): Flow<Resource<Boolean>> = flow {
         emit(Resource.Loading())
         val wasShown = flagsRepository.isTutorialSeen().getOrElse {
+            Logger.e("GetTutorialSeenUseCase", it)
             emit(Resource.Error())
             return@flow
         }

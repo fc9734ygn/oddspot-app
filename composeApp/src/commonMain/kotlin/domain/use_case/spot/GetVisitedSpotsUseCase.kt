@@ -1,5 +1,6 @@
 package domain.use_case.spot
 
+import co.touchlab.kermit.Logger
 import com.github.michaelbull.result.getOrElse
 import data.repository.SpotRepository
 import domain.holder.UserHolder
@@ -19,6 +20,7 @@ class GetVisitedSpotsUseCase(
 
         val visitedSpots = spotRepository.getVisitedSpots(userHolder.user!!.userId)
             .getOrElse {
+                Logger.e("GetVisitedSpotsUseCase", it)
                 emit(Resource.Error())
                 return@flow
             }.sortedByDescending { it.visitTimestamp }

@@ -1,6 +1,7 @@
 package domain.use_case.spot
 
 import LocationProvider
+import co.touchlab.kermit.Logger
 import com.github.michaelbull.result.getOrElse
 import data.repository.SpotRepository
 import data.repository.WishlistRepository
@@ -26,16 +27,19 @@ class GetSpotDetailUseCase(
         emit(Resource.Loading())
 
         val spotWithVisits = spotRepository.getSpotWithVisitsBySpotId(id).getOrElse {
+            Logger.e("GetSpotDetailUseCase", it)
             emit(Resource.Error())
             return@flow
         }
 
         val wishlist = wishlistRepository.getWishlist().getOrElse {
+            Logger.e("GetSpotDetailUseCase", it)
             emit(Resource.Error())
             return@flow
         }
 
         val currentUserLocation = locationProvider.getUserLocation().getOrElse {
+            Logger.w("GetSpotDetailUseCase $it")
             emit(Resource.Error())
             return@flow
         }
