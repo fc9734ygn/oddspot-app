@@ -75,6 +75,10 @@ Interesting read: [The Result Monad](https://adambennett.dev/2020/05/the-result-
 - I use small libraries that do the job and don't require me to write too much code.
 - As it is my own project, I can usually adjust the designs to fit the libraries I use.
 
+### Detekt
+
+- Allows me to have some static code analysis.
+
 ## Tests:
 
 I haven't written any tests for the frontend as the features and designs have been changing a lot.
