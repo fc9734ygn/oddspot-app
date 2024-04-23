@@ -98,7 +98,8 @@ class SubmitSpotScreenModel(
             description = description,
             location = location,
             difficulty = state.value.selectedAccessibility,
-            image = imageData
+            image = imageData,
+            isArea = state.value.isArea
         ).collectResource(
             onSuccess = {
                 mutableState.update {
@@ -131,6 +132,24 @@ class SubmitSpotScreenModel(
     fun onAccessibilityInfoClick() {
         mutableState.update {
             it.copy(showAccessibilityInfoDialog = true)
+        }
+    }
+
+    fun onAreaInfoClick() {
+        mutableState.update {
+            it.copy(showAreaInfoDialog = true)
+        }
+    }
+
+    fun onAreaInfoDialogDismiss() {
+        mutableState.update {
+            it.copy(showAreaInfoDialog = false)
+        }
+    }
+
+    fun onAreaSwitchChange(isArea: Boolean) {
+        mutableState.update {
+            it.copy(isArea = isArea)
         }
     }
 

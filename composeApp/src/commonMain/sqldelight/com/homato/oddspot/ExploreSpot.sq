@@ -8,12 +8,13 @@ CREATE TABLE ExploreSpot (
     image_url TEXT NOT NULL,
     create_time INTEGER NOT NULL,
     category TEXT NOT NULL,
-    accessibility INTEGER NOT NULL
+    accessibility INTEGER NOT NULL,
+    is_area INTEGER NOT NULL
 );
 
 insert:
-INSERT INTO ExploreSpot (title, description, latitude, longitude, creator_id, image_url, create_time, category, accessibility)
-VALUES (?, ?, ?,?, ?, ?, ?, ?, ?);
+INSERT INTO ExploreSpot (title, description, latitude, longitude, creator_id, image_url, create_time, category, accessibility, is_area)
+VALUES (?, ?, ?,?, ?, ?, ?, ?, ?, ?);
 
 selectById:
 SELECT * FROM ExploreSpot WHERE id = ? LIMIT 1;
@@ -22,8 +23,8 @@ selectAll:
 SELECT * FROM ExploreSpot;
 
 insertOrReplaceSpot:
-INSERT OR REPLACE INTO ExploreSpot (id, title, description, latitude, longitude, creator_id, image_url, create_time, category, accessibility)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+INSERT OR REPLACE INTO ExploreSpot (id, title, description, latitude, longitude, creator_id, image_url, create_time, category, accessibility, is_area)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 deleteAll:
 DELETE FROM ExploreSpot;

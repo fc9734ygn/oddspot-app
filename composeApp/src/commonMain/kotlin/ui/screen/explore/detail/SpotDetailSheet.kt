@@ -28,7 +28,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import domain.use_case.spot.MAX_DISTANCE_FROM_SPOT_METERS
+import domain.use_case.spot.AREA_RADIUS_METERS
+import domain.use_case.spot.SPOT_RADIUS_METERS
 import domain.use_case.spot.model.ReportReason
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
@@ -44,6 +45,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.component.button.PrimaryButton
 import ui.component.tag.AccessibilityTag
+import ui.component.tag.AreaTag
 import ui.screen.shared.FullScreenImageScreen
 import ui.util.Colors
 import ui.util.body
@@ -131,7 +133,11 @@ fun SpotDetailSheet(
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(text = state.amountOfVisits.toString(), style = body())
             }
-            AccessibilityTag(accessibility = state.accessibility)
+            Row {
+                AccessibilityTag(accessibility = state.accessibility)
+                Spacer(modifier = Modifier.width(8.dp))
+                if (state.isArea) AreaTag()
+            }
         }
         Spacer(modifier = Modifier.height(16.dp))
         LazyRow(
@@ -161,7 +167,7 @@ fun SpotDetailSheet(
         Text(
             text = stringResource(
                 Res.string.spot_detail_range_explanation,
-                MAX_DISTANCE_FROM_SPOT_METERS
+                if (state.isArea) AREA_RADIUS_METERS else SPOT_RADIUS_METERS
             ),
             style = body(),
             modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp),

@@ -11,15 +11,6 @@ class LoginScreenModel (
     private val loginUseCase: LoginUseCase
 ) : BaseScreenModel<LoginScreenState>(LoginScreenState()) {
 
-    init {
-        mutableState.update { 
-            it.copy(
-                email = "kirminas@gmail.com",
-                password = "Password091230912309"
-            )
-        }
-    }
-
     fun onEmailInputChange(input: String) {
         mutableState.update { it.copy(email = input) }
     }

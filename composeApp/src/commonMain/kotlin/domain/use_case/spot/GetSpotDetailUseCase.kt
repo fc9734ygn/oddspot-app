@@ -13,8 +13,10 @@ import kotlinx.coroutines.flow.flow
 import org.koin.core.annotation.Factory
 import ui.util.Location
 import ui.util.distanceInMetersTo
+import util.toBoolean
 
-const val MAX_DISTANCE_FROM_SPOT_METERS = 25
+const val SPOT_RADIUS_METERS = 25
+const val AREA_RADIUS_METERS = 100
 
 @Factory
 class GetSpotDetailUseCase(
@@ -55,7 +57,8 @@ class GetSpotDetailUseCase(
             amountOfVisits = spotWithVisits.visits.size,
             accessibility = spotWithVisits.spot.accessibility.toAccessibility(),
             visitImages = spotWithVisits.visits.map { it.image_url },
-            isInRange = currentUserLocation.distanceInMetersTo(spotLocation) <= MAX_DISTANCE_FROM_SPOT_METERS
+            isInRange = currentUserLocation.distanceInMetersTo(spotLocation) <= SPOT_RADIUS_METERS,
+            isArea = spotWithVisits.spot.is_area.toBoolean()
         )
 
         emit(Resource.Success(spotDetail))

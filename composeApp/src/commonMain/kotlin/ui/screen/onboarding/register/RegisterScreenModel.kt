@@ -11,16 +11,6 @@ class RegisterScreenModel(
     private val registerUseCase: RegisterUseCase
 ) : BaseScreenModel<RegisterScreenState>(RegisterScreenState.Initial) {
 
-    init {
-        mutableState.update {
-            it.copy(
-                email = "kirminas@gmail.com",
-                password = "Password091230912309",
-                confirmPassword = "Password091230912309"
-            )
-        }
-    }
-
     fun onContinueClick() {
         if (!validateAll()) return
 

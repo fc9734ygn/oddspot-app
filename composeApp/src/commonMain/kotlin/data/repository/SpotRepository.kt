@@ -42,6 +42,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import org.koin.core.annotation.Singleton
 import ui.util.Location
+import util.toLong
 
 @Suppress("MagicNumber")
 @Singleton
@@ -141,6 +142,7 @@ class SpotRepository(
                     spot.createTime,
                     spot.category,
                     spot.difficulty.toLong(),
+                    spot.isArea.toLong()
                 )
 
                 // Replace visits related to the spot
@@ -162,7 +164,8 @@ class SpotRepository(
         description: String,
         location: Location,
         difficulty: Int,
-        image: ByteArray
+        image: ByteArray,
+        isArea : Boolean
     ): Result<Unit, Throwable> = runCatching {
         val mimeType = MimeTypeMapper.detectImageFormat(image).getOrThrow()
         val multipartData = MultiPartFormDataContent(
@@ -175,7 +178,8 @@ class SpotRepository(
                             description,
                             location.latitude,
                             location.longitude,
-                            difficulty
+                            difficulty,
+                            isArea
                         )
                     )
                 )

@@ -36,12 +36,16 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import domain.use_case.spot.SPOT_RADIUS_METERS
 import oddspot_app.composeapp.generated.resources.Res
 import oddspot_app.composeapp.generated.resources.ic_arrow_back
 import oddspot_app.composeapp.generated.resources.ic_info
 import oddspot_app.composeapp.generated.resources.ic_marker
 import oddspot_app.composeapp.generated.resources.ic_marker_button
 import oddspot_app.composeapp.generated.resources.submit_spot_accessibility_title
+import oddspot_app.composeapp.generated.resources.submit_spot_area_dialog_subtitle
+import oddspot_app.composeapp.generated.resources.submit_spot_area_dialog_title
+import oddspot_app.composeapp.generated.resources.submit_spot_area_title
 import oddspot_app.composeapp.generated.resources.submit_spot_button_submit
 import oddspot_app.composeapp.generated.resources.submit_spot_description
 import oddspot_app.composeapp.generated.resources.submit_spot_description_error_too_long_or_too_short
@@ -60,9 +64,11 @@ import org.jetbrains.compose.resources.stringResource
 import ui.base.BaseScreen
 import ui.component.button.PrimaryButton
 import ui.component.button.SegmentedButton
+import ui.component.dialog.SimpleInfoDialog
 import ui.component.input.LineTextInput
 import ui.component.snackbar.GenericErrorSnackbar
 import ui.component.snackbar.ShowSnackBar
+import ui.component.switch.SimpleSwitch
 import ui.screen.submit.location_picker.LocationPickerScreen
 import ui.util.CameraPosition
 import ui.util.Colors
@@ -111,6 +117,17 @@ class SubmitSpotScreen(
             AccessibilityInfoDialog { screenModel.onAccessibilityInfoDialogDismiss() }
         }
 
+        if (state.showAreaInfoDialog) {
+            SimpleInfoDialog(
+                title = stringResource(Res.string.submit_spot_area_dialog_title),
+                description = stringResource(
+                    Res.string.submit_spot_area_dialog_subtitle,
+                    SPOT_RADIUS_METERS
+                ),
+                onDismiss = { screenModel.onAreaInfoDialogDismiss() }
+            )
+        }
+
         Column(
             modifier = Modifier
                 .background(Colors.background)
@@ -120,9 +137,10 @@ class SubmitSpotScreen(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row(modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 24.dp),
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 24.dp),
                 horizontalArrangement = Arrangement.Start,
             ) {
                 Icon(
@@ -239,6 +257,29 @@ class SubmitSpotScreen(
                 defaultSelectedItemIndex = state.selectedAccessibility,
             )
             Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = stringResource(Res.string.submit_spot_area_title),
+                    style = h3(),
+                    textAlign = TextAlign.Start
+                )
+                Spacer(modifier = Modifier.width(4.dp))
+                Icon(
+                    modifier = Modifier.size(16.dp)
+                        .clickable { screenModel.onAreaInfoClick() },
+                    painter = painterResource(Res.drawable.ic_info),
+                    contentDescription = null,
+                    tint = Colors.darkGrey,
+                )
+            }
+            SimpleSwitch(
+                modifier = Modifier.align(Alignment.Start),
+                checked = state.isArea,
+                onCheckedChange = { screenModel.onAreaSwitchChange(it) },
+            )
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(Res.string.submit_spot_location_picker_topbar_title),
@@ -247,7 +288,8 @@ class SubmitSpotScreen(
             )
             Spacer(modifier = Modifier.height(16.dp))
 
-            val location = state.locationPickerState.selectedLocation ?: state.locationPickerState.currentUserLocation
+            val location = state.locationPickerState.selectedLocation
+                ?: state.locationPickerState.currentUserLocation
 
             location?.let {
                 Box(

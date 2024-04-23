@@ -25,6 +25,7 @@ data class ExploreSpotResponse(
     val createTime: Long,
     val category: String,
     val difficulty: Int,
+    val isArea: Boolean
 )
 
 @Serializable

@@ -10,4 +10,5 @@ data class SpotDetail(
     val accessibility: Accessibility,
     val visitImages: List<String?>,
     val isInRange: Boolean,
+    val isArea: Boolean
 )

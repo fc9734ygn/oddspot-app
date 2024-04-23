@@ -67,6 +67,7 @@ class ExploreScreenModel(
                             visitImages = spotDetails.visitImages,
                             isWishlisted = spotDetails.isWishlisted,
                             isInRange = spotDetails.isInRange,
+                            isArea = spotDetails.isArea
                         ),
                         event = Event(ExploreScreenEvent.OpenSpotDetailBottomSheet),
                         isLoading = false,

@@ -14,7 +14,9 @@ data class SubmitSpotUiState(
     val locationPickerState: LocationPickerState,
     val image: ImageWrapper?,
     val selectedAccessibility: Int,
+    val isArea: Boolean,
     val showAccessibilityInfoDialog: Boolean,
+    val showAreaInfoDialog: Boolean,
     val event: Event<SubmitSpotEvent>?
 ){
     companion object {
@@ -28,7 +30,9 @@ data class SubmitSpotUiState(
             image = null,
             selectedAccessibility = 0,
             showAccessibilityInfoDialog = false,
-            event = null
+            showAreaInfoDialog = false,
+            event = null,
+            isArea = false
         )
     }
 }

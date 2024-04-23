@@ -18,7 +18,8 @@ class SubmitSpotUseCase(
         description: String,
         location: Location,
         difficulty: Int,
-        image: ByteArray
+        image: ByteArray,
+        isArea: Boolean
     ): Flow<Resource<Unit>> = flow {
 
         emit(Resource.Loading())
@@ -28,7 +29,8 @@ class SubmitSpotUseCase(
             description,
             location,
             difficulty,
-            image
+            image,
+            isArea
         ).mapError {
             Logger.e("SubmitSpotUseCase", it)
             emit(Resource.Error())
