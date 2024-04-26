@@ -7,7 +7,9 @@ import util.Event
 data class AccountScreenState(
     val username: String,
     val isLoading: Boolean,
+    val avatarUrl: String?,
     val changeUsernameDialogState: ChangeUsernameDialogState,
+    val isAvatarLoading: Boolean,
     val event : Event<AccountScreenEvent>?
 ){
     companion object {
@@ -15,7 +17,9 @@ data class AccountScreenState(
             username = "",
             event = null,
             isLoading = false,
-            changeUsernameDialogState = ChangeUsernameDialogState.Initial
+            changeUsernameDialogState = ChangeUsernameDialogState.Initial,
+            avatarUrl = null,
+            isAvatarLoading = false
         )
     }
 }

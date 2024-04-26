@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,7 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.SnackbarHostState
@@ -46,7 +44,6 @@ import oddspot_app.composeapp.generated.resources.ic_account_my_settings
 import oddspot_app.composeapp.generated.resources.ic_account_submitted_spots
 import oddspot_app.composeapp.generated.resources.ic_account_visited_spots
 import oddspot_app.composeapp.generated.resources.ic_account_wishlist
-import oddspot_app.composeapp.generated.resources.ic_bottom_nav_account
 import oddspot_app.composeapp.generated.resources.ic_edit
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
@@ -120,19 +117,11 @@ class AccountScreen : BaseTabScreen() {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Box(
-                    modifier = Modifier
-                        .size(124.dp)
-                        .background(Colors.red, shape = CircleShape)
-                ) {
-                    Icon(
-                        painter = painterResource(Res.drawable.ic_bottom_nav_account),
-                        contentDescription = null,
-                        tint = Colors.black,
-                        modifier = Modifier.size(64.dp)
-                            .align(Alignment.Center)
-                    )
-                }
+                AvatarComponent(
+                    avatarUrl = state.avatarUrl,
+                    onImageSelected = screenModel::onAvatarSelected,
+                    isAvatarLoading = state.isAvatarLoading
+                )
                 Spacer(modifier = Modifier.height(24.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(text = state.username, style = h3())

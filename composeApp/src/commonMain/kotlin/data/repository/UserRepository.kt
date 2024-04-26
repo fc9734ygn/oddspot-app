@@ -3,15 +3,20 @@ package data.repository
 import API_BASE_URL
 import app.cash.sqldelight.coroutines.asFlow
 import com.github.michaelbull.result.Result
+import com.github.michaelbull.result.getOrThrow
 import com.github.michaelbull.result.map
 import com.github.michaelbull.result.mapError
 import com.github.michaelbull.result.runCatching
 import com.homato.oddspot.Database
 import com.homato.oddspot.User
 import data.ENDPOINT_AUTHENTICATE
+import data.ENDPOINT_CHANGE_AVATAR
 import data.ENDPOINT_CHANGE_USERNAME
 import data.ENDPOINT_LOGIN
 import data.ENDPOINT_REGISTER
+import data.MULTIPART_IMAGE_KEY
+import data.MimeTypeMapper
+import data.UPLOAD_IMAGE_FILE_NAME
 import data.request.LoginRequest
 import data.request.RegisterRequest
 import data.request.UsernameChangeRequest
@@ -19,9 +24,15 @@ import data.response.LoginResponse
 import domain.util.DomainError
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.request.forms.MultiPartFormDataContent
+import io.ktor.client.request.forms.formData
 import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.http.ContentType
+import io.ktor.http.Headers
+import io.ktor.http.HttpHeaders
+import io.ktor.http.contentType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
@@ -60,7 +71,8 @@ class UserRepository(
                 name = response.username,
                 email = response.email,
                 imageUrl = response.imageUrl,
-                jwt = response.jwt
+                jwt = response.jwt,
+                avatar_url = response.avatar
             )
         }
     }
@@ -72,6 +84,28 @@ class UserRepository(
             }
         }.map {
             database.userQueries.updateUsername(username, DEFAULT_PROFILE_ID)
+        }
+    }
+
+    suspend fun changeAvatar(avatar: ByteArray): Result<String, Throwable> {
+        return runCatching {
+            val mimeType = MimeTypeMapper.detectImageFormat(avatar).getOrThrow()
+            val multipartData = MultiPartFormDataContent(
+                formData {
+                    append(MULTIPART_IMAGE_KEY, avatar, Headers.build {
+                        append(HttpHeaders.ContentDisposition, "filename=$UPLOAD_IMAGE_FILE_NAME")
+                        append(HttpHeaders.ContentType, mimeType)
+                    })
+                }
+            )
+
+            val response = client.patch(API_BASE_URL + ENDPOINT_CHANGE_AVATAR) {
+                contentType(ContentType.MultiPart.FormData)
+                setBody(multipartData)
+            }.body<String>()
+
+            database.userQueries.updateAvatar(response, DEFAULT_PROFILE_ID)
+            response
         }
     }
 

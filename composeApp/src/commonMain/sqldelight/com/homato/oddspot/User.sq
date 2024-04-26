@@ -4,12 +4,13 @@ CREATE TABLE User (
     name TEXT NOT NULL,
     imageUrl TEXT,
     email TEXT NOT NULL,
-    jwt TEXT NOT NULL
+    jwt TEXT NOT NULL,
+    avatar_url TEXT
 );
 
 insertUser:
-INSERT OR REPLACE INTO User(id, userId, name, imageUrl, email, jwt)
-VALUES (?,?, ?,?, ?, ?);
+INSERT OR REPLACE INTO User(id, userId, name, imageUrl, email, jwt, avatar_url)
+VALUES (?,?, ?,?, ?, ?, ?);
 
 selectUser:
 SELECT * FROM User;
@@ -19,3 +20,6 @@ DELETE FROM User;
 
 updateUsername:
 UPDATE User SET name = ? WHERE id = ?;
+
+updateAvatar:
+UPDATE User SET avatar_url = ? WHERE id = ?;

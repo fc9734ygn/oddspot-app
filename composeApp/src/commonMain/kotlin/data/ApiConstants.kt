@@ -8,6 +8,7 @@ const val ENDPOINT_SECRET_INFO = "v1/auth/secret-info"
 
 // Profile:
 const val ENDPOINT_CHANGE_USERNAME = "v1/profile/change-username"
+const val ENDPOINT_CHANGE_AVATAR = "v1/profile/change-avatar"
 
 // Spot:
 const val ENDPOINT_SUBMIT_SPOT = "v1/spot/submit-spot"

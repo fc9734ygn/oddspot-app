@@ -1,10 +1,10 @@
 package ui.screen.account
 
+import domain.use_case.user.ChangeAvatarUseCase
 import domain.use_case.user.ChangeUsernameUseCase
 import domain.use_case.user.GetFeedbackEmailBodyUseCase
 import domain.use_case.user.GetUserUseCase
 import domain.use_case.user.LogoutUseCase
-import kotlinx.coroutines.flow.update
 import org.koin.core.annotation.Factory
 import ui.base.BaseScreenModel
 import util.Event
@@ -14,7 +14,8 @@ class AccountScreenModel(
     private val getUserUseCase: GetUserUseCase,
     private val logoutUseCase: LogoutUseCase,
     private val getFeedbackEmailBodyUseCase: GetFeedbackEmailBodyUseCase,
-    private val changeUsernameUseCase: ChangeUsernameUseCase
+    private val changeUsernameUseCase: ChangeUsernameUseCase,
+    private val changeAvatarUseCase: ChangeAvatarUseCase
 ) : BaseScreenModel<AccountScreenState>(AccountScreenState.Initial) {
 
     init {
@@ -24,45 +25,81 @@ class AccountScreenModel(
     private fun getUserData() {
         getUserUseCase().collectResource(
             onSuccess = { user ->
-                mutableState.update { it.copy(username = user.name, isLoading = false) }
+                updateState {
+                    copy(
+                        username = user.name,
+                        isLoading = false,
+                        avatarUrl = user.avatar_url
+                    )
+                }
             },
             onError = {
-                mutableState.update { it.copy(isLoading = false) }
+                updateState {
+                    copy(isLoading = false)
+                }
             },
             onLoading = {
-                mutableState.update { it.copy(isLoading = true) }
+                updateState {
+                    copy(isLoading = true)
+                }
             }
         )
     }
 
     fun onChangeUsernameClick() {
-        mutableState.update {
-            it.copy(
-                changeUsernameDialogState = it.changeUsernameDialogState.copy(show = true)
+        updateState {
+            copy(
+                changeUsernameDialogState = state.value.changeUsernameDialogState.copy(show = true)
             )
         }
+    }
+
+    fun onAvatarSelected(avatar: ByteArray) {
+        changeAvatarUseCase(avatar).collectResource(
+            onSuccess = {
+                updateState {
+                    copy(
+                        isAvatarLoading = false,
+                        avatarUrl = it,
+                    )
+                }
+            },
+            onError = {
+                updateState {
+                    copy(
+                        isAvatarLoading = false,
+                        event = Event(AccountScreenEvent.Error)
+                    )
+                }
+            },
+            onLoading = {
+                updateState {
+                    copy(isAvatarLoading = true)
+                }
+            }
+        )
     }
 
     fun onLogoutClick() {
         logoutUseCase().collectResource(
             onSuccess = {
-                mutableState.update {
-                    it.copy(
+                updateState {
+                    copy(
                         event = Event(AccountScreenEvent.GoToWelcomeScreen),
                         isLoading = false
                     )
                 }
             },
             onError = {
-                mutableState.update {
-                    it.copy(
+                updateState {
+                    copy(
                         event = Event(AccountScreenEvent.Error),
                         isLoading = false
                     )
                 }
             },
             onLoading = {
-                mutableState.update { it.copy(isLoading = true) }
+                updateState { copy(isLoading = true) }
             }
         )
     }
@@ -72,13 +109,13 @@ class AccountScreenModel(
     }
 
     fun onDismissUsernameChangeDialog() {
-        mutableState.update { it.copy(changeUsernameDialogState = ChangeUsernameDialogState.Initial) }
+        updateState { copy(changeUsernameDialogState = ChangeUsernameDialogState.Initial) }
     }
 
     fun onUsernameInputChange(username: String) {
-        mutableState.update {
-            it.copy(
-                changeUsernameDialogState = it.changeUsernameDialogState.copy(input = username)
+        updateState {
+            copy(
+                changeUsernameDialogState = state.value.changeUsernameDialogState.copy(input = username)
             )
         }
     }
@@ -88,20 +125,20 @@ class AccountScreenModel(
         changeUsernameUseCase(state.value.changeUsernameDialogState.input)
             .collectResource(
                 onSuccess = {
-                    mutableState.update {
-                        it.copy(
-                            changeUsernameDialogState = it.changeUsernameDialogState.copy(
+                    updateState {
+                        copy(
+                            changeUsernameDialogState = state.value.changeUsernameDialogState.copy(
                                 isLoading = false,
                                 show = false
                             ),
-                            username = it.changeUsernameDialogState.input,
+                            username = state.value.changeUsernameDialogState.input,
                         )
                     }
                 },
                 onError = {
-                    mutableState.update {
-                        it.copy(
-                            changeUsernameDialogState = it.changeUsernameDialogState.copy(
+                    updateState {
+                        copy(
+                            changeUsernameDialogState = state.value.changeUsernameDialogState.copy(
                                 isLoading = false,
                                 show = false
                             ),
@@ -110,9 +147,11 @@ class AccountScreenModel(
                     }
                 },
                 onLoading = {
-                    mutableState.update {
-                        it.copy(
-                            changeUsernameDialogState = it.changeUsernameDialogState.copy(isLoading = true)
+                    updateState {
+                        copy(
+                            changeUsernameDialogState = state.value.changeUsernameDialogState.copy(
+                                isLoading = true
+                            )
                         )
                     }
                 }
