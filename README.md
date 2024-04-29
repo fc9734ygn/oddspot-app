@@ -6,12 +6,16 @@ project is still in its early stages of development and has not been released ye
 become a commercial project in the future (if it works out) but also serves as a learning/portfolio
 project.
 
+The sharing of this repository is meant to showcase a real life project that is being developed with
+real problems/sacrifices. It may not be the cleanest architecturally or have the largest test
+coverage. It is a real project that is being developed by a single developer (me) in my free time.
+
 ## Features (as of right now):
 
 - User registration and login
 - Spot discovery (map), submission, details, wishlist, etc.
 - Tutorial
-- User profile and settings
+- User profile, avatar and settings
 
 ## Architecture Overview:
 
@@ -82,8 +86,9 @@ Interesting read: [The Result Monad](https://adambennett.dev/2020/05/the-result-
 ## Tests:
 
 I haven't written any tests for the frontend as the features and designs have been changing a lot.
-Usually, in Android projects, I prioritize unit tests for the domain layer (sometimes for ViewModels
-as well) and E2E or integration tests (JUnit 4 or 5, Compose Rule/Espresso, MockK).
+Usually, in Android projects, I prioritize unit tests for the domain layer and E2E or integration
+tests (JUnit 4 or 5, Compose Rule/Espresso, MockK) and then I continue with unit tests for
+presentation and data layers (ViewModels and Repositories).
 
 ## Future Enhancements:
 
