@@ -1,7 +1,7 @@
 package domain.use_case.spot.model
 
 import com.homato.oddspot.ExploreSpot
-import ui.util.Location
+import domain.util.Location
 
 data class SpotMarkerModel(
     val id: Int,

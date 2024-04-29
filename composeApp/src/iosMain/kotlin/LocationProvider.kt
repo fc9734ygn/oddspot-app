@@ -16,7 +16,7 @@ import platform.CoreLocation.CLLocationManagerDelegateProtocol
 import platform.CoreLocation.kCLLocationAccuracyBest
 import platform.Foundation.NSError
 import platform.darwin.NSObject
-import ui.util.Location
+import domain.util.Location
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 

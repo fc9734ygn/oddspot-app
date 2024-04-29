@@ -1,6 +1,6 @@
 package domain.use_case.spot.model
 
-import ui.util.Location
+import domain.util.Location
 
 data class ExploreModel(
     val spotMarkerModels: List<SpotMarkerModel>,

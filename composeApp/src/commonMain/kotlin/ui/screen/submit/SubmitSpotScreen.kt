@@ -73,10 +73,10 @@ import ui.screen.submit.location_picker.LocationPickerScreen
 import ui.util.CameraPosition
 import ui.util.Colors
 import ui.util.Consume
-import ui.util.Location
+import domain.util.Location
 import ui.util.footnote
 import ui.util.h3
-import ui.util.toLatLong
+import domain.util.toLatLong
 
 class SubmitSpotScreen(
     private val selectedLocation: Location? = null

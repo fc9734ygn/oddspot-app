@@ -28,7 +28,7 @@ import ui.screen.submit.SubmitSpotScreen
 import ui.util.CameraPosition
 import ui.util.Consume
 import ui.util.LatLong
-import ui.util.toLatLong
+import domain.util.toLatLong
 
 class ExploreScreen : BaseTabScreen() {
 

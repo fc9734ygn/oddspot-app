@@ -41,7 +41,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import org.koin.core.annotation.Singleton
-import ui.util.Location
+import domain.util.Location
 import util.toLong
 
 @Suppress("MagicNumber")

@@ -33,8 +33,8 @@ import ui.screen.explore.OddSpotMapType
 import ui.screen.submit.SubmitSpotScreen
 import ui.util.CameraPosition
 import ui.util.Colors
-import ui.util.Location
-import ui.util.toLatLong
+import domain.util.Location
+import domain.util.toLatLong
 import util.Event
 
 private const val DEFAULT_ZOOM = 17f

@@ -3,7 +3,7 @@ package ui.screen.explore
 import MapControlsEvent
 import androidx.compose.runtime.Immutable
 import ui.screen.explore.detail.SpotDetailSheetState
-import ui.util.Location
+import domain.util.Location
 import util.Event
 
 

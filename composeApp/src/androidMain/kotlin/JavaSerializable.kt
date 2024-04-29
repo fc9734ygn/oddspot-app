@@ -1,0 +1,1 @@
+actual typealias JavaSerializable = java.io.Serializable

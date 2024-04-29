@@ -1,7 +1,7 @@
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import ui.util.CameraPosition
-import ui.util.Location
+import domain.util.Location
 import util.Event
 
 @Composable

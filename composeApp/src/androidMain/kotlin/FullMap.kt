@@ -14,7 +14,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import kotlinx.coroutines.launch
 import ui.util.CameraPosition
 import ui.util.Consume
-import ui.util.Location
+import domain.util.Location
 import util.Event
 
 @Composable

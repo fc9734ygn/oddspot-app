@@ -1,7 +1,7 @@
 package ui.screen.submit
 
 import androidx.compose.runtime.Immutable
-import ui.util.Location
+import domain.util.Location
 import util.Event
 
 @Immutable

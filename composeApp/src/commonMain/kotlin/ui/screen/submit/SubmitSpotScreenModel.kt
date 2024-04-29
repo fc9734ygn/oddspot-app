@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
 import ui.base.BaseScreenModel
-import ui.util.Location
+import domain.util.Location
 import util.Event
 
 const val MIN_TITLE_LENGTH = 1

@@ -23,7 +23,7 @@ import platform.darwin.NSObject
 import ui.screen.explore.ExploreMarker
 import ui.util.CameraLocationBounds
 import ui.util.CameraPosition
-import ui.util.Location
+import domain.util.Location
 import util.Event
 
 @OptIn(ExperimentalForeignApi::class)

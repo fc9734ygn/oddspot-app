@@ -13,7 +13,7 @@ import kotlinx.cinterop.useContents
 import platform.CoreLocation.CLLocationCoordinate2DMake
 import platform.darwin.NSObject
 import ui.util.CameraPosition
-import ui.util.Location
+import domain.util.Location
 import util.Event
 
 @OptIn(ExperimentalForeignApi::class)

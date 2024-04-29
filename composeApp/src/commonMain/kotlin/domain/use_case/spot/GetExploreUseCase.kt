@@ -11,8 +11,8 @@ import domain.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.koin.core.annotation.Factory
-import ui.util.Location
-import ui.util.distanceInMetersTo
+import domain.util.Location
+import domain.util.distanceInMetersTo
 
 @Factory
 class GetExploreUseCase(

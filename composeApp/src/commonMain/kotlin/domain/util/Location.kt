@@ -1,6 +1,9 @@
-package ui.util
+package domain.util
 
+
+import JavaSerializable
 import kotlinx.serialization.Serializable
+import ui.util.LatLong
 import kotlin.math.PI
 import kotlin.math.atan2
 import kotlin.math.cos
@@ -10,7 +13,7 @@ import kotlin.math.sqrt
 
 // Define a data class to store latitude and longitude coordinates
 @Serializable
-data class Location(val latitude: Double, val longitude: Double)
+data class Location(val latitude: Double, val longitude: Double) : JavaSerializable
 
 fun Location.isLocationValid(): Boolean {
     return latitude != 0.0 && longitude != 0.0

@@ -1,4 +1,4 @@
-import ui.util.Location
+import domain.util.Location
 
 sealed class MapControlsEvent {
     data class AnimateToLocation(val location: Location) : MapControlsEvent()

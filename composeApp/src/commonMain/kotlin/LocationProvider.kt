@@ -1,6 +1,6 @@
 import com.github.michaelbull.result.Result
 import kotlinx.coroutines.flow.Flow
-import ui.util.Location
+import domain.util.Location
 
 expect class LocationProvider {
     suspend fun getUserLocation(): Result<Location, UserLocationError>
