@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -29,10 +30,12 @@ fun LineTextInput(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
+    capitalize: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions(
         keyboardType = KeyboardType.Text,
         imeAction = ImeAction.Next,
-        autoCorrect = false
+        autoCorrect = false,
+        capitalization = if (capitalize) KeyboardCapitalization.Sentences else KeyboardCapitalization.None
     ),
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     singleLine: Boolean = true,

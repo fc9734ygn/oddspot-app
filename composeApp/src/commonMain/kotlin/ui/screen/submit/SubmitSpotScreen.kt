@@ -37,6 +37,8 @@ import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import domain.use_case.spot.SPOT_RADIUS_METERS
+import domain.util.Location
+import domain.util.toLatLong
 import oddspot_app.composeapp.generated.resources.Res
 import oddspot_app.composeapp.generated.resources.ic_arrow_back
 import oddspot_app.composeapp.generated.resources.ic_info
@@ -73,10 +75,8 @@ import ui.screen.submit.location_picker.LocationPickerScreen
 import ui.util.CameraPosition
 import ui.util.Colors
 import ui.util.Consume
-import domain.util.Location
 import ui.util.footnote
 import ui.util.h3
-import domain.util.toLatLong
 
 class SubmitSpotScreen(
     private val selectedLocation: Location? = null
@@ -167,7 +167,8 @@ class SubmitSpotScreen(
                 value = state.title,
                 onValueChange = { screenModel.onTitleChange(it) },
                 placeholder = stringResource(Res.string.submit_spot_title_placeholder),
-                singleLine = false
+                singleLine = false,
+                capitalize = true
             )
             Spacer(modifier = Modifier.height(4.dp))
             Row(
@@ -204,7 +205,8 @@ class SubmitSpotScreen(
                 value = state.description,
                 onValueChange = { screenModel.onDescriptionChange(it) },
                 placeholder = stringResource(Res.string.submit_spot_description_placeholder),
-                singleLine = false
+                singleLine = false,
+                capitalize = true
             )
             Spacer(modifier = Modifier.height(4.dp))
             Row(
