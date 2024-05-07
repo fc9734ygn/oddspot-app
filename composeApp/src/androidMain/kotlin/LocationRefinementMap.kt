@@ -1,3 +1,4 @@
+
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -8,17 +9,16 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapProperties
-import com.google.maps.android.compose.MapType
 import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.rememberCameraPositionState
+import domain.util.Location
 import kotlinx.coroutines.launch
 import ui.util.CameraPosition
 import ui.util.Consume
-import domain.util.Location
 import util.Event
 
 @Composable
-actual fun FullMap(
+actual fun LocationRefinementMap(
     modifier: Modifier,
     initialCameraPosition: CameraPosition,
     onSelectionChange: (Location) -> Unit,
@@ -27,7 +27,7 @@ actual fun FullMap(
 ) {
     val scope = rememberCoroutineScope()
     val properties = remember {
-        mutableStateOf(MapProperties(isMyLocationEnabled = true, mapType = MapType.SATELLITE))
+        mutableStateOf(MapProperties(isMyLocationEnabled = true, mapType = initialMapType.toMapType()))
     }
 
     val cameraPositionState = rememberCameraPositionState()

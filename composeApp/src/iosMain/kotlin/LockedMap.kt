@@ -13,13 +13,14 @@ import ui.util.CameraPosition
 actual fun LockedMap(
     modifier: Modifier,
     cameraPosition: CameraPosition,
+    mapType: Int
 ) {
     val mapView = remember {
         GMSMapView().apply {
             setMyLocationEnabled(true)
             settings.setAllGesturesEnabled(false)
             settings.myLocationButton = false
-            setMapType(2u) //kGMSTypeSatellite = 2
+            setMapType(mapType.toULong())
         }
     }
 

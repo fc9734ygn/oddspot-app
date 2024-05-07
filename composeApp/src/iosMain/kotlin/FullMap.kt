@@ -14,11 +14,12 @@ import platform.CoreLocation.CLLocationCoordinate2DMake
 import platform.darwin.NSObject
 import ui.util.CameraPosition
 import domain.util.Location
+import kotlinx.coroutines.DefaultExecutor.delegate
 import util.Event
 
 @OptIn(ExperimentalForeignApi::class)
 @Composable
-actual fun FullMap(
+actual fun LocationRefinementMap(
     modifier: Modifier,
     initialCameraPosition: CameraPosition,
     onSelectionChange: (Location) -> Unit,

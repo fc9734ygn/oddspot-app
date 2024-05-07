@@ -9,7 +9,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapProperties
-import com.google.maps.android.compose.MapType
 import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.rememberCameraPositionState
 import ui.util.CameraPosition
@@ -18,6 +17,7 @@ import ui.util.CameraPosition
 actual fun LockedMap(
     modifier: Modifier,
     cameraPosition: CameraPosition,
+    mapType: Int
 ) {
     val cameraPositionState = rememberCameraPositionState()
 
@@ -39,7 +39,7 @@ actual fun LockedMap(
     ) {
         val properties = MapProperties(
             isMyLocationEnabled = true,
-            mapType = MapType.SATELLITE,
+            mapType = mapType.toMapType(),
         )
 
         val uiSettings = MapUiSettings(

@@ -1,6 +1,6 @@
 package ui.screen.submit.location_picker
 
-import FullMap
+import LocationRefinementMap
 import MapControlsEvent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -22,6 +22,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import domain.util.Location
+import domain.util.toLatLong
 import oddspot_app.composeapp.generated.resources.Res
 import oddspot_app.composeapp.generated.resources.ic_marker
 import oddspot_app.composeapp.generated.resources.ic_marker_button
@@ -33,8 +35,6 @@ import ui.screen.explore.OddSpotMapType
 import ui.screen.submit.SubmitSpotScreen
 import ui.util.CameraPosition
 import ui.util.Colors
-import domain.util.Location
-import domain.util.toLatLong
 import util.Event
 
 private const val DEFAULT_ZOOM = 17f
@@ -59,7 +59,7 @@ class LocationPickerScreen(
             Box(
                 modifier = Modifier.fillMaxSize()
             ) {
-                FullMap(
+                LocationRefinementMap(
                     modifier = Modifier.fillMaxSize(),
                     initialCameraPosition = CameraPosition(
                         userLocation.toLatLong(),
