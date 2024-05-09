@@ -142,6 +142,7 @@ class PolicyScreen : Screen {
     }
 }
 
+@Suppress("LongMethod", "MaxLineLength")
 private fun getPrivacyPolicyText() =
         "This privacy policy is applicable to the Oddspot app (hereinafter referred to as \"Application\") for mobile devices, which was developed by MB Homato (hereinafter referred to as \"Service Provider\") as a a Commercial service. This service is provided \"AS IS\".\n" +
         "\n" +
@@ -216,6 +217,7 @@ private fun getPrivacyPolicyText() =
         "\n" +
         "* * *\n"
 
+@Suppress("LongMethod", "MaxLineLength")
 private fun getTermsAndConditionsText() =
         "These terms and conditions applies to the Oddspot app (hereby referred to as \"Application\") for mobile devices that was created by MB Homato (hereby referred to as \"Service Provider\") as a Commercial service.\n" +
         "\n" +

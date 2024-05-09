@@ -295,14 +295,14 @@ class SubmitSpotScreen(
 
             location?.let {
                 Box(
-                    modifier = Modifier.clickable { navigator.push(LocationPickerScreen(it)) },
+                    modifier = Modifier.clickable { navigator.push(LocationPickerScreen()) },
                 ) {
                     LockedMap(
                         modifier = Modifier
                             .clip(RoundedCornerShape(24.dp))
                             .fillMaxWidth()
                             .aspectRatio(2f)
-                            .clickable { navigator.push(LocationPickerScreen(it)) },
+                            .clickable { navigator.push(LocationPickerScreen()) },
                         cameraPosition = CameraPosition(
                             target = location.toLatLong(),
                             zoom = 15f
@@ -321,7 +321,7 @@ class SubmitSpotScreen(
                         modifier = Modifier.align(
                             Alignment.BottomEnd
                         ).clickable {
-                            navigator.push(LocationPickerScreen(it))
+                            navigator.push(LocationPickerScreen())
                         }.padding(16.dp),
                         tint = Color.Unspecified
                     )

@@ -21,9 +21,10 @@ import platform.CoreLocation.CLLocationCoordinate2DMake
 import platform.UIKit.UIImage
 import platform.darwin.NSObject
 import ui.screen.explore.ExploreMarker
-import ui.util.CameraLocationBounds
 import ui.util.CameraPosition
 import domain.util.Location
+import kotlinx.coroutines.DefaultExecutor.delegate
+import org.intellij.markdown.html.entities.Entities.map
 import util.Event
 
 @OptIn(ExperimentalForeignApi::class)
@@ -32,14 +33,12 @@ actual fun ExploreMap(
     modifier: Modifier,
     markers: List<ExploreMarker>?,
     initialCameraPosition: CameraPosition?,
-    cameraLocationBounds: CameraLocationBounds?,
     userCurrentLocation: Location?,
     onPermissionsGranted: () -> Unit,
     onMarkerClick: (Int) -> Unit,
     event: Event<MapControlsEvent>?,
     initialMapType: Int
 ) {
-    val scope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
         onPermissionsGranted()
@@ -75,22 +74,6 @@ actual fun ExploreMap(
                         it.zoom
                     )
                 )
-            }
-
-            cameraLocationBounds?.let {
-                val bounds = GMSCoordinateBounds()
-                it.coordinates.forEach {
-                    bounds.includingCoordinate(
-                        CLLocationCoordinate2DMake(
-                            latitude = it.latitude,
-                            longitude = it.longitude
-                        )
-                    )
-                }
-                GMSCameraUpdate().apply {
-                    fitBounds(bounds, it.padding.toDouble())
-                    view.animateWithCameraUpdate(this)
-                }
             }
 
             event?.get()?.let {

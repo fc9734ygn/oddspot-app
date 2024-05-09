@@ -21,13 +21,17 @@ import util.Event
 @Composable
 actual fun LocationRefinementMap(
     modifier: Modifier,
-    initialCameraPosition: CameraPosition,
+    initialCameraPosition: CameraPosition?,
     onSelectionChange: (Location) -> Unit,
     event: Event<MapControlsEvent>?,
     initialMapType: Int
 ) {
     val mapViewDelegate = remember {
         FullMapViewDelegate(onCameraIdle = onSelectionChange)
+    }
+
+    if (initialCameraPosition == null) {
+        return
     }
 
     val mapView = remember {
@@ -40,7 +44,7 @@ actual fun LocationRefinementMap(
                 ),
                 initialCameraPosition.zoom.toFloat()
             )
-            setMyLocationEnabled(true)
+            setMyLocationEnabled(false)
             setMapType(initialMapType.toULong())
         }
     }

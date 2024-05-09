@@ -1,3 +1,4 @@
+
 import android.Manifest
 import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
@@ -16,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapProperties
 import com.google.maps.android.compose.MapType
@@ -25,16 +25,15 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
 import com.homato.oddspot.R
+import domain.util.Location
 import kotlinx.coroutines.launch
 import oddspot_app.composeapp.generated.resources.Res
 import oddspot_app.composeapp.generated.resources.permission_fine_location_rationale
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import ui.screen.explore.ExploreMarker
-import ui.util.CameraLocationBounds
 import ui.util.CameraPosition
 import ui.util.Consume
-import domain.util.Location
 import util.Event
 
 @OptIn(ExperimentalResourceApi::class)
@@ -43,7 +42,6 @@ actual fun ExploreMap(
     modifier: Modifier,
     markers: List<ExploreMarker>?,
     initialCameraPosition: CameraPosition?,
-    cameraLocationBounds: CameraLocationBounds?,
     userCurrentLocation: Location?,
     onPermissionsGranted: () -> Unit,
     onMarkerClick: (Int) -> Unit,
@@ -72,37 +70,21 @@ actual fun ExploreMap(
             Manifest.permission.ACCESS_FINE_LOCATION
         )
 
-    if (!allPermissionsGranted) {
+    if (!allPermissionsGranted || initialCameraPosition == null) {
         return
     }
 
     val cameraPositionState = rememberCameraPositionState()
 
-    LaunchedEffect(initialCameraPosition) {
-        initialCameraPosition?.let {
-            cameraPositionState.animate(
-                CameraUpdateFactory.newLatLngZoom(
-                    LatLng(
-                        it.target.latitude,
-                        it.target.longitude
-                    ), it.zoom
-                )
+    LaunchedEffect(Unit) {
+        cameraPositionState.animate(
+            CameraUpdateFactory.newLatLngZoom(
+                LatLng(
+                    initialCameraPosition.target.latitude,
+                    initialCameraPosition.target.longitude
+                ), initialCameraPosition.zoom
             )
-        }
-    }
-
-    LaunchedEffect(cameraLocationBounds) {
-        cameraLocationBounds?.let {
-            val latLngBounds = LatLngBounds.builder().apply {
-                it.coordinates.forEach { latLong ->
-                    include(LatLng(latLong.latitude, latLong.longitude))
-                }
-            }.build()
-
-            cameraPositionState.move(
-                CameraUpdateFactory.newLatLngBounds(latLngBounds, it.padding)
-            )
-        }
+        )
     }
 
     val properties = remember {
@@ -129,12 +111,14 @@ actual fun ExploreMap(
         when (it) {
             is MapControlsEvent.AnimateToLocation -> {
                 scope.launch {
+                    val currentPosition = cameraPositionState.position
+
                     cameraPositionState.animate(
                         CameraUpdateFactory.newLatLngZoom(
                             LatLng(
                                 it.location.latitude,
                                 it.location.longitude
-                            ), cameraPositionState.position.zoom
+                            ), currentPosition.zoom
                         )
                     )
                 }
@@ -176,6 +160,7 @@ actual fun ExploreMap(
     }
 }
 
+@Suppress("MagicNumber")
 fun Int.toMapType(): MapType {
     return when (this) {
         0 -> MapType.NONE

@@ -14,7 +14,7 @@ data class ExploreScreenState(
     val isLoading: Boolean,
     val event: Event<ExploreScreenEvent>?,
     val spotDetailsSheetState: SpotDetailSheetState = SpotDetailSheetState.Initial,
-    val cameraPosition: Location?,
+    val initialCameraPosition: Location?,
     val mapType: OddSpotMapType,
     val mapEvent: Event<MapControlsEvent>?
 ) {
@@ -24,7 +24,7 @@ data class ExploreScreenState(
             markers = emptyList(),
             isLoading = true,
             event = null,
-            cameraPosition = null,
+            initialCameraPosition = null,
             mapType = OddSpotMapType.SATELLITE,
             mapEvent = null
         )

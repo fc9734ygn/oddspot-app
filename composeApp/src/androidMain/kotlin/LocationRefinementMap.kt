@@ -20,7 +20,7 @@ import util.Event
 @Composable
 actual fun LocationRefinementMap(
     modifier: Modifier,
-    initialCameraPosition: CameraPosition,
+    initialCameraPosition: CameraPosition?,
     onSelectionChange: (Location) -> Unit,
     event: Event<MapControlsEvent>?,
     initialMapType: Int
@@ -32,7 +32,11 @@ actual fun LocationRefinementMap(
 
     val cameraPositionState = rememberCameraPositionState()
 
-    LaunchedEffect(initialCameraPosition) {
+    if (initialCameraPosition == null) {
+        return
+    }
+
+    LaunchedEffect(Unit) {
         cameraPositionState.animate(
             CameraUpdateFactory.newLatLngZoom(
                 LatLng(
@@ -51,7 +55,7 @@ actual fun LocationRefinementMap(
     val uiSettings = remember {
         mutableStateOf(
             MapUiSettings(
-                myLocationButtonEnabled = true,
+                myLocationButtonEnabled = false,
                 zoomControlsEnabled = false,
                 compassEnabled = true,
                 mapToolbarEnabled = false,
@@ -68,12 +72,14 @@ actual fun LocationRefinementMap(
         when (it) {
             is MapControlsEvent.AnimateToLocation -> {
                 scope.launch {
+                    val currentPosition = cameraPositionState.position
+
                     cameraPositionState.animate(
                         CameraUpdateFactory.newLatLngZoom(
                             LatLng(
                                 it.location.latitude,
                                 it.location.longitude
-                            ), cameraPositionState.position.zoom
+                            ), currentPosition.zoom
                         )
                     )
                 }

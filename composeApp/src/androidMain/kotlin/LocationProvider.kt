@@ -13,16 +13,16 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
+import domain.util.Location
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.suspendCancellableCoroutine
-import domain.util.Location
 
 actual class LocationProvider() {
     companion object{
-        const val LOCATION_REQUEST_INTERVAL = 10000L
+        const val LOCATION_REQUEST_INTERVAL = 5000L
     }
     @OptIn(ExperimentalCoroutinesApi::class)
     actual suspend fun getUserLocation(): Result<Location, UserLocationError> {

@@ -43,7 +43,7 @@ class ExploreScreenModel(
                         },
                         userCurrentLocation = domainModel.userCurrentLocation,
                         isLoading = false,
-                        cameraPosition = domainModel.userCurrentLocation
+                        initialCameraPosition = domainModel.userCurrentLocation
                     )
                 }
 
@@ -71,7 +71,7 @@ class ExploreScreenModel(
                         ),
                         event = Event(ExploreScreenEvent.OpenSpotDetailBottomSheet),
                         isLoading = false,
-                        cameraPosition = mutableState.value.markers.find { it.id == id }?.coordinates
+                        initialCameraPosition = mutableState.value.markers.find { it.id == id }?.coordinates
                     )
                 }
             },
@@ -194,9 +194,10 @@ class ExploreScreenModel(
     }
 
     fun onMyLocationButtonClick() {
+        val userLocation = mutableState.value.userCurrentLocation ?: return
         updateState {
             copy(
-                mapEvent = Event(MapControlsEvent.AnimateToLocation(mutableState.value.userCurrentLocation!!))
+                mapEvent = Event(MapControlsEvent.AnimateToLocation(userLocation))
             )
         }
     }

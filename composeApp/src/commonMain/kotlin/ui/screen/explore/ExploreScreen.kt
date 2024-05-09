@@ -13,6 +13,7 @@ import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.skydoves.flexible.core.rememberFlexibleBottomSheetState
+import domain.util.toLatLong
 import kotlinx.coroutines.launch
 import oddspot_app.composeapp.generated.resources.Res
 import oddspot_app.composeapp.generated.resources.spot_detail_report_snackbar
@@ -27,8 +28,6 @@ import ui.screen.explore.detail.SpotDetailSheet
 import ui.screen.submit.SubmitSpotScreen
 import ui.util.CameraPosition
 import ui.util.Consume
-import ui.util.LatLong
-import domain.util.toLatLong
 
 class ExploreScreen : BaseTabScreen() {
 
@@ -72,12 +71,11 @@ class ExploreScreen : BaseTabScreen() {
             ExploreMap(
                 modifier = Modifier.fillMaxSize(),
                 markers = state.markers,
-                initialCameraPosition = CameraPosition(
-                    state.cameraPosition?.toLatLong() ?: LatLong(
-                        0.0,
-                        0.0
-                    ), MAP_ZOOM_DEFAULT
-                ),
+                initialCameraPosition = state.initialCameraPosition?.toLatLong()?.let {
+                    CameraPosition(
+                        it, MAP_ZOOM_DEFAULT
+                    )
+                },
                 userCurrentLocation = state.userCurrentLocation,
                 onPermissionsGranted = { screenModel.getData() },
                 onMarkerClick = screenModel::onMarkerClick,

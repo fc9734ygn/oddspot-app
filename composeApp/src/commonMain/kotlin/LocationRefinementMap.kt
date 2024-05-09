@@ -8,7 +8,7 @@ import util.Event
 @Composable
 expect fun LocationRefinementMap(
     modifier: Modifier,
-    initialCameraPosition: CameraPosition,
+    initialCameraPosition: CameraPosition? = null,
     onSelectionChange: (Location) -> Unit,
     event: Event<MapControlsEvent>?,
     initialMapType: Int

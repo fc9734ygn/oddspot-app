@@ -1,7 +1,6 @@
 package ui.screen.submit.location_picker
 
 import LocationRefinementMap
-import MapControlsEvent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,12 +13,13 @@ import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import domain.util.Location
@@ -35,20 +35,17 @@ import ui.screen.explore.OddSpotMapType
 import ui.screen.submit.SubmitSpotScreen
 import ui.util.CameraPosition
 import ui.util.Colors
-import util.Event
 
 private const val DEFAULT_ZOOM = 17f
 
-class LocationPickerScreen(
-    private val userLocation: Location
-) : BaseScreen() {
+class LocationPickerScreen : BaseScreen() {
 
     @OptIn(ExperimentalResourceApi::class)
     @Composable
     override fun ScreenContent(snackbarHostState: SnackbarHostState) {
         val navigator = LocalNavigator.currentOrThrow
-        val location = remember { mutableStateOf(userLocation) }
-        val event = remember { mutableStateOf<Event<MapControlsEvent>?>(null) }
+        val screenModel = getScreenModel<LocationPickerScreenModel>()
+        val state by screenModel.state.collectAsState()
 
         Column(
             Modifier
@@ -61,14 +58,16 @@ class LocationPickerScreen(
             ) {
                 LocationRefinementMap(
                     modifier = Modifier.fillMaxSize(),
-                    initialCameraPosition = CameraPosition(
-                        userLocation.toLatLong(),
-                        DEFAULT_ZOOM
-                    ),
-                    onSelectionChange = { updatedLocation ->
-                        location.value = updatedLocation
+                    initialCameraPosition = state.userLocation?.toLatLong()?.let {
+                        CameraPosition(
+                            it,
+                            DEFAULT_ZOOM
+                        )
                     },
-                    event = event.value,
+                    onSelectionChange = { updatedLocation ->
+                        screenModel.onLocationRefined(updatedLocation)
+                    },
+                    event = state.event,
                     initialMapType = OddSpotMapType.HYBRID.value,
                 )
                 Image(
@@ -91,7 +90,9 @@ class LocationPickerScreen(
                             navigator.pop()
                             navigator.push(
                                 SubmitSpotScreen(
-                                    selectedLocation = location.value
+                                    selectedLocation = state.selectedLocation
+                                        ?: state.userLocation
+                                        ?: (Location(0.0, 0.0))
                                 )
                             )
                         },
@@ -107,7 +108,7 @@ class LocationPickerScreen(
                     Spacer(modifier = Modifier.height(8.dp))
                     FloatingActionButton(
                         onClick = {
-                            event.value = Event(MapControlsEvent.AnimateToLocation(userLocation))
+                            screenModel.onAnimateToUserLocationClick()
                         },
                         backgroundColor = Colors.lightGrey,
                         contentColor = Colors.black,
