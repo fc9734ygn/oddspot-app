@@ -181,9 +181,20 @@
     <string name="spot_detail_report_dialog_option_changed">The spot is gone/has changed</string>
     <string name="spot_detail_report_dialog_option_other">Other</string>
     <string name="spot_detail_report_snackbar">Thank you for your feedback!</string>
-    <string name="spot_detail_button_mark_visited">MARK AS VISITED</string>
+    <string name="spot_detail_button_primary_button">HEY, I’M HERE!</string>
     <string name="spot_detail_range_explanation">The spot unlocks when you're within %1$d meters of it.</string>
     <string name="spot_detail_tag_area">Area</string>
+
+    <!-- Visit screen -->
+    <string name="visit_screen_title">Congratulations!</string>
+    <string name="visit_screen_subtitle">You have now discovered something new in the city.</string>
+    <string name="visit_screen_rate_visit_title">Rate the spot</string>
+    <string name="visit_screen_total_visits_title">Your total visits</string>
+    <string name="visit_screen_rate_like">Cool</string>
+    <string name="visit_screen_rate_dislike">Wack</string>
+    <string name="visit_screen_button">MARK AS VISITED</string>
+    <string name="visit_screen_no_rating_error">Please provide a rating</string>
+    <string name="visit_screen_spot_visited_snackbar">Spot visited!</string>
 
     <!-- Visited spots-->
     <string name="visited_spots_title">My visited spots</string>

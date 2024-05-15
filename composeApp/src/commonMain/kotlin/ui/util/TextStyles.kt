@@ -1,5 +1,5 @@
 @file:OptIn(ExperimentalResourceApi::class, ExperimentalResourceApi::class)
-@file:Suppress("TooManyFunctions")
+@file:Suppress("TooManyFunctions", "MagicNumber")
 
 package ui.util
 

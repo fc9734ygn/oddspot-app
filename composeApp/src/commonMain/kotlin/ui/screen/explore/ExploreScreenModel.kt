@@ -67,9 +67,13 @@ class ExploreScreenModel(
                             visitImages = spotDetails.visitImages,
                             isWishlisted = spotDetails.isWishlisted,
                             isInRange = spotDetails.isInRange,
-                            isArea = spotDetails.isArea
+                            isArea = spotDetails.isArea,
+                            likes = spotDetails.likes,
+                            dislikes = spotDetails.dislikes
                         ),
-                        event = Event(ExploreScreenEvent.OpenSpotDetailBottomSheet),
+                        event = if (spotDetailsSheetState == SpotDetailSheetState.Initial) Event(
+                            ExploreScreenEvent.OpenSpotDetailBottomSheet
+                        ) else null,
                         isLoading = false,
                         initialCameraPosition = mutableState.value.markers.find { it.id == id }?.coordinates
                     )

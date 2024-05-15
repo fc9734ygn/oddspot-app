@@ -8,7 +8,9 @@ data class SpotDetail(
     val isWishlisted: Boolean,
     val amountOfVisits: Int,
     val accessibility: Accessibility,
-    val visitImages: List<String?>,
+    val visitImages: List<String>,
     val isInRange: Boolean,
-    val isArea: Boolean
+    val isArea: Boolean,
+    val likes: Int,
+    val dislikes: Int
 )

@@ -4,12 +4,13 @@ CREATE TABLE ExploreVisit (
     user_id TEXT NOT NULL,
     visit_time INTEGER NOT NULL,
     image_url TEXT,
+    rating INTEGER NOT NULL,
     FOREIGN KEY (spot_id) REFERENCES ExploreSpot(id)
 );
 
 insert:
-INSERT INTO ExploreVisit (spot_id, user_id, visit_time, image_url)
-VALUES (?, ?, ?, ?);
+INSERT INTO ExploreVisit (spot_id, user_id, visit_time, image_url, rating)
+VALUES (?, ?, ?, ?, ?);
 
 selectAllByUserId:
 SELECT * FROM ExploreVisit WHERE user_id = ?;
@@ -18,8 +19,8 @@ selectBySpotId:
 SELECT * FROM ExploreVisit WHERE spot_id = ?;
 
 insertOrReplaceVisit:
-INSERT OR REPLACE INTO ExploreVisit (id, spot_id, user_id, visit_time, image_url)
-VALUES (?, ?, ?, ?, ?);
+INSERT OR REPLACE INTO ExploreVisit (id, spot_id, user_id, visit_time, image_url, rating)
+VALUES (?, ?, ?, ?, ?, ?);
 
 selectAll:
 SELECT * FROM ExploreVisit;

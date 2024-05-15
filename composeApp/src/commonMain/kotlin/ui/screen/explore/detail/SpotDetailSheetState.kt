@@ -11,10 +11,12 @@ data class SpotDetailSheetState(
     val amountOfVisits: Int,
     val accessibility: Accessibility,
     val isLoading: Boolean,
-    val visitImages: List<String?>,
+    val visitImages: List<String>,
     val showReportDialog: Boolean,
     val isInRange: Boolean,
-    val isArea: Boolean
+    val isArea: Boolean,
+    val likes: Int,
+    val dislikes: Int,
 ) {
     companion object {
         val Initial = SpotDetailSheetState(
@@ -29,7 +31,9 @@ data class SpotDetailSheetState(
             visitImages = emptyList(),
             showReportDialog = false,
             isInRange = false,
-            isArea = false
+            isArea = false,
+            likes = 0,
+            dislikes = 0
         )
     }
 }

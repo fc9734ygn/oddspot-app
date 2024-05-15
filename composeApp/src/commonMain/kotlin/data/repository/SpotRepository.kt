@@ -3,6 +3,7 @@ package data.repository
 import API_BASE_URL
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
+import app.cash.sqldelight.coroutines.mapToOne
 import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.getOrThrow
 import com.github.michaelbull.result.runCatching
@@ -12,6 +13,7 @@ import data.ENDPOINT_REPORT_SPOT
 import data.ENDPOINT_SPOTS
 import data.ENDPOINT_SUBMITTED_SPOTS
 import data.ENDPOINT_SUBMIT_SPOT
+import data.ENDPOINT_VISIT_SPOT
 import data.MULTIPART_DATA_KEY
 import data.MULTIPART_IMAGE_KEY
 import data.MimeTypeMapper
@@ -20,9 +22,11 @@ import data.model.SpotWithVisits
 import data.model.VisitedSpot
 import data.request.ReportSpotRequest
 import data.request.SubmitSpotRequest
+import data.request.VisitSpotRequest
 import data.response.SpotsFeedResponse
 import data.response.SubmittedSpot
 import data.response.SubmittedSpotsResponse
+import domain.util.Location
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.forms.MultiPartFormDataContent
@@ -41,7 +45,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import org.koin.core.annotation.Singleton
-import domain.util.Location
 import util.toLong
 
 @Suppress("MagicNumber")
@@ -50,6 +53,23 @@ class SpotRepository(
     private val client: HttpClient,
     private val database: Database
 ) {
+
+
+    fun getSpotWithVisitsFlow(spotId: Int): Flow<SpotWithVisits> {
+        val spotFlow = database.exploreSpotQueries
+            .selectById(spotId.toLong())
+            .asFlow()
+            .mapToOne(Dispatchers.IO)
+
+        val visitsFlow = database.exploreVisitQueries
+            .selectBySpotId(spotId.toLong())
+            .asFlow()
+            .mapToList(Dispatchers.IO)
+
+        return combine(spotFlow, visitsFlow) { spot, visits ->
+            SpotWithVisits(spot, visits)
+        }
+    }
 
     suspend fun getSpotWithVisitsBySpotId(id: Int): Result<SpotWithVisits, Throwable> =
         withContext(Dispatchers.IO) {
@@ -88,13 +108,14 @@ class SpotRepository(
             }
         }
 
-    suspend fun getSubmittedSpots() : Result<List<SubmittedSpot>, Throwable> = withContext(Dispatchers.IO) {
-        runCatching {
-            val response = client.get(API_BASE_URL + ENDPOINT_SUBMITTED_SPOTS)
-                .body<SubmittedSpotsResponse>()
-            response.spots
+    suspend fun getSubmittedSpots(): Result<List<SubmittedSpot>, Throwable> =
+        withContext(Dispatchers.IO) {
+            runCatching {
+                val response = client.get(API_BASE_URL + ENDPOINT_SUBMITTED_SPOTS)
+                    .body<SubmittedSpotsResponse>()
+                response.spots
+            }
         }
-    }
 
     fun getExploreSpotsFlow(): Flow<List<SpotWithVisits>> {
 
@@ -152,7 +173,8 @@ class SpotRepository(
                         visit.spotId.toLong(),
                         visit.userId,
                         visit.visitTime,
-                        visit.imageUrl
+                        visit.imageUrl,
+                        visit.rating.toLong()
                     )
                 }
             }
@@ -165,7 +187,7 @@ class SpotRepository(
         location: Location,
         difficulty: Int,
         image: ByteArray,
-        isArea : Boolean
+        isArea: Boolean
     ): Result<Unit, Throwable> = runCatching {
         val mimeType = MimeTypeMapper.detectImageFormat(image).getOrThrow()
         val multipartData = MultiPartFormDataContent(
@@ -196,9 +218,51 @@ class SpotRepository(
         }
     }
 
-    suspend fun reportSpot(spotId: Int, reason: String) : Result<Unit, Throwable> = runCatching {
+    suspend fun reportSpot(spotId: Int, reason: String): Result<Unit, Throwable> = runCatching {
         client.post(API_BASE_URL + ENDPOINT_REPORT_SPOT) {
             setBody(ReportSpotRequest(spotId, reason))
+        }
+    }
+
+    suspend fun getUserTotalVisits(): Result<Int, Throwable> =
+        withContext(Dispatchers.IO) {
+            runCatching {
+                val userId = database.userQueries.selectUser().executeAsOne().userId
+                val amountOfVisits =
+                    database.exploreVisitQueries.selectAllByUserId(userId).executeAsList().size
+                amountOfVisits
+            }
+        }
+
+    suspend fun visitSpot(
+        spotId: Int,
+        rating: Boolean,
+        image: ByteArray?
+    ): Result<Unit, Throwable> = runCatching {
+        val multipartData = MultiPartFormDataContent(
+            formData {
+                append(
+                    MULTIPART_DATA_KEY, Json.encodeToString(
+                        VisitSpotRequest.serializer(),
+                        VisitSpotRequest(
+                            spotId,
+                            rating
+                        )
+                    )
+                )
+                image?.let {
+                    val mimeType = MimeTypeMapper.detectImageFormat(image).getOrThrow()
+                    append(MULTIPART_IMAGE_KEY, image, Headers.build {
+                        append(HttpHeaders.ContentDisposition, "filename=$UPLOAD_IMAGE_FILE_NAME")
+                        append(HttpHeaders.ContentType, mimeType)
+                    })
+                }
+            }
+        )
+
+        client.post(API_BASE_URL + ENDPOINT_VISIT_SPOT) {
+            contentType(ContentType.MultiPart.FormData)
+            setBody(multipartData)
         }
     }
 }
