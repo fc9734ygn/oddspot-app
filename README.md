@@ -2,9 +2,7 @@
 
 Oddspot is a Kotlin (Android + iOS + Backend) project that aims to provide a platform for sharing
 and discovering interesting spots around the world that aren't commercial establishments. The
-project is still in its early stages of development and has not been released yet. It is intended to
-become a commercial project in the future (if it works out) but also serves as a learning/portfolio
-project.
+project is still in its early stages of development and has not been released yet.
 
 The sharing of this repository is meant to showcase a real life project that is being developed with
 real problems/sacrifices. It may not be the cleanest architecturally or have the largest test
@@ -13,7 +11,12 @@ coverage. It is a real project that is being developed by a single developer (me
 ## Features (as of right now):
 
 - User registration and login
-- Spot discovery (map), submission, details, wishlist, etc.
+- Spot discovery (map)
+- Visiting spots based on user location
+- Submitting spots with photos and descriptions etc.
+- Wishlist
+- Visit history
+- Submitted spots
 - Tutorial
 - User profile, avatar and settings
 
@@ -106,4 +109,8 @@ approach to scale the feed/explore, add CI/CD, etc.
 4. Add `MAPS_API_KEY=DEFAULT_API_KEY` line to your `local.properties` file (project root directory).
 5. Build the app for Android or iOS following regular KMP project build procedures.
 
-Last update: 2024-04-17
+## DISCLAIMER:
+The iOS project doesn't build right now as I've made some changes to the map implementation that needs to be updated
+in the iosMain directory. But right now I have no access to a macOS machine to update and build the project.
+
+Last update: 2024-05-29
