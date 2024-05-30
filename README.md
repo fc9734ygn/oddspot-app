@@ -21,17 +21,17 @@ coverage. It is a real project that is being developed by a single developer (me
 - User profile, avatar and settings
 
 ## Screenshots
-![1.png](screenshots%2F1.png)
-![2.png](screenshots%2F2.png)
-![3.png](screenshots%2F3.png)
-![4.png](screenshots%2F4.png)
-![5.png](screenshots%2F5.png)
-![6.png](screenshots%2F6.png)
-![7.png](screenshots%2F7.png)
-![8.png](screenshots%2F8.png)
-![9.png](screenshots%2F9.png)
-![10.png](screenshots%2F10.png)
-![11.png](screenshots%2F11.png)
+<img src="screenshots/1.png" width="600">
+<img src="screenshots/2.png" width="600">
+<img src="screenshots/3.png" width="600">
+<img src="screenshots/4.png" width="600">
+<img src="screenshots/5.png" width="600">
+<img src="screenshots/6.png" width="600">
+<img src="screenshots/7.png" width="600">
+<img src="screenshots/8.png" width="600">
+<img src="screenshots/9.png" width="600">
+<img src="screenshots/10.png" width="600">
+<img src="screenshots/11.png" width="600">
 
 ## Architecture Overview:
 
