@@ -20,6 +20,19 @@ coverage. It is a real project that is being developed by a single developer (me
 - Tutorial
 - User profile, avatar and settings
 
+## Screenshots
+![1.png](screenshots%2F1.png)
+![2.png](screenshots%2F2.png)
+![3.png](screenshots%2F3.png)
+![4.png](screenshots%2F4.png)
+![5.png](screenshots%2F5.png)
+![6.png](screenshots%2F6.png)
+![7.png](screenshots%2F7.png)
+![8.png](screenshots%2F8.png)
+![9.png](screenshots%2F9.png)
+![10.png](screenshots%2F10.png)
+![11.png](screenshots%2F11.png)
+
 ## Architecture Overview:
 
 The project is built with Kotlin Multiplatform Mobile (KMM) and follows the MVVM (with a taste of
@@ -113,4 +126,4 @@ approach to scale the feed/explore, add CI/CD, etc.
 The iOS project doesn't build right now as I've made some changes to the map implementation that needs to be updated
 in the iosMain directory. But right now I have no access to a macOS machine to update and build the project.
 
-Last update: 2024-05-29
+Last update: 2024-05-30
