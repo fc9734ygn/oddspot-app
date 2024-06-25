@@ -8,6 +8,8 @@ The sharing of this repository is meant to showcase a real life project that is 
 real problems/sacrifices. It may not be the cleanest architecturally or have the largest test
 coverage. It is a real project that is being developed by a single developer (me) in my free time.
 
+Backend repository - https://github.com/fc9734ygn/oddspot-backend
+
 ## Features (as of right now):
 
 - User registration and login
@@ -31,7 +33,7 @@ coverage. It is a real project that is being developed by a single developer (me
 ## Architecture Overview:
 
 The project is built with Kotlin Multiplatform Mobile (KMM) and follows the MVVM (with a taste of
-MVI, I suppose) architecture pattern that's very common in modern Android development. The UI is
+MVI) architecture pattern that's very common in modern Android development. The UI is
 built for both Android and iOS with Compose Multiplatform, with just a few components built
 independently for each platform (e.g., Google Maps integration).
 
@@ -65,7 +67,7 @@ independently for each platform (e.g., Google Maps integration).
 
 ### Kermit
 
-- Simple and effective logging library. Can't remember why I chose it over Napier and others.
+- Simple and effective logging library.
 
 ### Kotlin-result by Michael Bull
 
@@ -86,7 +88,7 @@ Interesting read: [The Result Monad](https://adambennett.dev/2020/05/the-result-
 
 ### Other Small Libs for UI, etc.
 
-- When it comes to UI code, I don't want to spend too much time on it.
+- When it comes to the UI code, I would rather not spend too much time on it as it's not the point of this project.
 - I use small libraries that do the job and don't require me to write too much code.
 - As it is my own project, I can usually adjust the designs to fit the libraries I use.
 
@@ -104,9 +106,8 @@ presentation and data layers (ViewModels and Repositories).
 ## Future Enhancements:
 
 The project is still in its early stages, and there are a lot of things that need to be done.
-Unfortunately, the task board is private but for the most part right now it consists of additional
-features and some technical improvements - crashlytics, tests, introducing viewport loading or other
-approach to scale the feed/explore, add CI/CD, etc.
+Unfortunately, the task board is private but for the most part, it consists of additional
+features and some technical improvements - crashlytics, tests, introducing viewport loading or another approach to scale the feed/explore, add CI/CD, etc.
 
 ## How to Run:
 
@@ -118,7 +119,7 @@ approach to scale the feed/explore, add CI/CD, etc.
 5. Build the app for Android or iOS following regular KMP project build procedures.
 
 ## DISCLAIMER:
-The iOS project doesn't build right now as I've made some changes to the map implementation that needs to be updated
-in the iosMain directory. But right now I have no access to a macOS machine to update and build the project.
+The iOS project isn't building right now as I've made some changes to the map implementation that needs to be updated
+in the iosMain directory. But as of right now, I have no access to a macOS machine to update and build the project.
 
-Last update: 2024-05-30
+Last update: 2024-06-25
