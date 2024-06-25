@@ -98,7 +98,7 @@ Interesting read: [The Result Monad](https://adambennett.dev/2020/05/the-result-
 
 ## Tests:
 
-I haven't written any tests for the frontend as the features and designs have been changing a lot.
+I haven't written any tests for the frontend (but I did for the backend) as the features and designs have been changing a lot.
 Usually, in Android projects, I prioritize unit tests for the domain layer and E2E or integration
 tests (JUnit 4 or 5, Compose Rule/Espresso, MockK) and then I continue with unit tests for
 presentation and data layers (ViewModels and Repositories).
