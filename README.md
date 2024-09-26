@@ -1,12 +1,11 @@
 # Oddspot Frontend
 
 Oddspot is a Kotlin (Android + iOS + Backend) project that aims to provide a platform for sharing
-and discovering interesting spots around the world that aren't commercial establishments. The
-project is still in its early stages of development and has not been released yet.
+and discovering interesting spots around the world that aren't commercial establishments.
+The project is meant to be an experiment to learn about different use-cases of Kotlin programming language.
 
-The sharing of this repository is meant to showcase a real life project that is being developed with
-real problems/sacrifices. It may not be the cleanest architecturally or have the largest test
-coverage. It is a real project that is being developed by a single developer (me) in my free time.
+It may not be the cleanest architecturally or have the largest test
+coverage as it is being developed by a single developer (me) in my free time.
 
 Backend repository - https://github.com/fc9734ygn/oddspot-backend
 
@@ -117,9 +116,5 @@ features and some technical improvements - crashlytics, tests, introducing viewp
    content `MAPS_API_KEY=your-google-maps-api-key`.
 4. Add `MAPS_API_KEY=DEFAULT_API_KEY` line to your `local.properties` file (project root directory).
 5. Build the app for Android or iOS following regular KMP project build procedures.
-
-## DISCLAIMER:
-The iOS project isn't building right now as I've made some changes to the map implementation that needs to be updated
-in the iosMain directory. But as of right now, I have no access to a macOS machine to update and build the project.
 
 Last update: 2024-06-25
