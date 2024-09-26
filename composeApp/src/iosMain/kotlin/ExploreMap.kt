@@ -2,18 +2,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.interop.UIKitView
 import cocoapods.GoogleMaps.GMSCameraPosition
-import cocoapods.GoogleMaps.GMSCameraUpdate
-import cocoapods.GoogleMaps.GMSCameraUpdate.Companion.fitBounds
-import cocoapods.GoogleMaps.GMSCoordinateBounds
 import cocoapods.GoogleMaps.GMSMapView
 import cocoapods.GoogleMaps.GMSMapViewDelegateProtocol
 import cocoapods.GoogleMaps.GMSMarker
 import cocoapods.GoogleMaps.animateToCameraPosition
-import cocoapods.GoogleMaps.animateWithCameraUpdate
+import domain.util.Location
 import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.ExportObjCClass
@@ -22,9 +18,6 @@ import platform.UIKit.UIImage
 import platform.darwin.NSObject
 import ui.screen.explore.ExploreMarker
 import ui.util.CameraPosition
-import domain.util.Location
-import kotlinx.coroutines.DefaultExecutor.delegate
-import org.intellij.markdown.html.entities.Entities.map
 import util.Event
 
 @OptIn(ExperimentalForeignApi::class)
