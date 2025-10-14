@@ -9,6 +9,8 @@ coverage as it is being developed by a single developer (me) in my free time.
 
 Backend repository - https://github.com/fc9734ygn/oddspot-backend
 
+UPDATE 2025 - Some opinions on tech have changed, I wouldn't do it the way it's in this repository :D
+
 ## Features (as of right now):
 
 - User registration and login
