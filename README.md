@@ -1,5 +1,7 @@
 # Oddspot Frontend
 
+### No longer maintained
+
 Oddspot is a Kotlin (Android + iOS + Backend) project that aims to provide a platform for sharing
 and discovering interesting spots around the world that aren't commercial establishments.
 The project is meant to be an experiment to learn about different use-cases of Kotlin programming language.
@@ -9,7 +11,7 @@ coverage as it is being developed by a single developer (me) in my free time.
 
 Backend repository - https://github.com/fc9734ygn/oddspot-backend
 
-UPDATE 2025 - Some opinions on tech have changed, I wouldn't do it the way it's in this repository :D
+UPDATE 2025 - Some opinions on tech have changed, I wouldn't do it the way it's in this repository :D Also, the flow subscription code has issues with not unsubscribbign when UI is not visable, should be fixed by adjusting cold/hot flows but this project is no longer in development.
 
 ## Features (as of right now):
 
